@@ -1,0 +1,29 @@
+/* TODO convert to LESS */
+.screen {
+    display: flex;
+    height: 100vh;
+}
+
+.screen > .arena {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-image: url('./sprites/background.png');
+    background-repeat: no-repeat;
+    width: 250px; /* from background-image width */
+    height: 198px; /* from background-image height */
+}
+
+.screen > .arena > .field {
+    height: 60px;
+}
+
+.screen > .arena > .opponent {
+    align-self: flex-end;
+    margin-top: 25px;
+    margin-right: 25px;
+}
+
+.screen > .arena > .player {
+    margin-left: 25px;
+}
