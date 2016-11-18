@@ -6,9 +6,21 @@
     "type": "git"
   },
   "scripts": {
-    "less": "lessc src/styles/styles.less target/styles.css"
+    "install": "npm run less & npm run webpack",
+    "less": "lessc src/styles/styles.less target/styles.css",
+    "webpack": "webpack"
   },
   "devDependencies": {
-    "less": "^2.7.1"
+    "less": "^2.7.1",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.2.1",
+    "typescript": "^2.0.10",
+    "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "@types/react": "^0.14.49",
+    "@types/react-dom": "^0.14.18",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0"
   }
 }

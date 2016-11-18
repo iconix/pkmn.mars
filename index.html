@@ -1,18 +1,19 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="target/styles.css">
+        <meta charset="UTF-8" />
+        <title>pkmn.mars</title>
+        <link rel='shortcut icon' href='./src/sprites/favicon.ico' type='image/x-icon'/ >
+        <link rel="stylesheet" type="text/css" href="./target/styles.css">
     <head>
     <body>
-        <div class="screen">
-            <div class="arena">
-                <div class="opponent">
-                    <img src="src/sprites/gallade_norm_front.gif" />
-                </div>
-                <div class="field"></div>
-                <div class="player">
-                    <img src="src/sprites/absol_shiny_back.gif" />
-                </div>
-            </div>
-        </div>
+        <div id="screen"></div>
+
+        <!-- Dependencies -->
+        <script src="./node_modules/react/dist/react.js"></script>
+        <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+
+        <!-- Main -->
+        <script src="./target/bundle.js"></script>
     </body>
 </html>
