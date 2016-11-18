@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Screen } from "./components/screen";
+import {Arena} from "./components/arena";
 
 ReactDOM.render(
-    <Screen />,
+    <Arena />,
     document.getElementById("screen")
 );

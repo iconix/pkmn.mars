@@ -8,7 +8,7 @@
         "jsx": "react"
     },
     "files": [
-        "./src/scripts/components/screen.tsx",
+        "./src/scripts/components/arena.tsx",
         "./src/scripts/index.tsx"
     ]
 }
