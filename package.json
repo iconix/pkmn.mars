@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "name": "pkmn.mars",
+  "description": "Happy Christmas, Margaret",
+  "repository": {
+    "type": "git"
+  },
+  "scripts": {
+    "less": "lessc src/styles/styles.less target/styles.css"
+  },
+  "devDependencies": {
+    "less": "^2.7.1"
+  }
+}
