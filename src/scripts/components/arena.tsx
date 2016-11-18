@@ -7,6 +7,8 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
     // TODO is the "React way" to calculate these background-position inside the component, or pass it down as a props?
     private randomizeBackground(): string {
+        // TODO could flip selection of background to randomly (& evenly) pick a background first (1-48), then calculate its position in the matrix/sprite
+
         let backgroundPositionX = [0, -255, -506, -758, -1009, -1261, -1514, -1766];
         let backgroundPositionY = [0, -199, -398, -597, -793, -989]; // TODO -793px is messed up
 
@@ -21,13 +23,25 @@ export class Arena extends React.Component<ArenaProps, {}> {
         return randXPos + " " + randYPos;
     }
 
+    private createArenaBackground(): string {
+        // TODO update linear-gradient (tint) based on time of day
+        const backgroundColor = "linear-gradient(rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0.25))";
+        const backgroundImage = "url('src/sprites/background.png')";
+        const backgroundRepeat = "no-repeat";
+
+        return backgroundColor + ", " +
+                backgroundImage + ", " +
+                backgroundRepeat;
+    }
+
     render() {
-       const backgroundPosition = {
+        const arenaStyle = {
+            background: this.createArenaBackground(),
             backgroundPosition: this.randomizeBackground()
         };
 
         return (
-            <div className="arena" style={backgroundPosition}>
+            <div className="arena" style={arenaStyle}>
                 <div className="opponent">
                     <img src="src/sprites/gallade_norm_front.gif" />
                 </div>
