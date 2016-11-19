@@ -1,16 +1,17 @@
 import * as React from "react";
+
+import {Constants} from "../constants";
 import {Utils} from "../utils";
 
 export interface ArenaProps { }
 
 export class Arena extends React.Component<ArenaProps, {}> {
 
-    // TODO is the "React way" to calculate these background-position inside the component, or pass it down as a props?
     private randomizeBackground(): string {
         // TODO could flip selection of background to randomly (& evenly) pick a background first (1-48), then calculate its position in the matrix/sprite
 
-        let backgroundPositionX = [0, -255, -506, -758, -1009, -1261, -1514, -1766];
-        let backgroundPositionY = [0, -199, -398, -597, -793, -989]; // TODO -793px is messed up
+        const backgroundPositionX = Constants.Background.SpritePositions.XPositions;
+        const backgroundPositionY = Constants.Background.SpritePositions.YPositions;
 
         let randXIndex: number = Utils.getRandomInt(backgroundPositionX.length - 1 /* maxInt */);
         let randYIndex: number = Utils.getRandomInt(backgroundPositionY.length - 1 /* maxInt */);
@@ -24,9 +25,8 @@ export class Arena extends React.Component<ArenaProps, {}> {
     }
 
     private createArenaBackground(): string {
-        // TODO update linear-gradient (tint) based on time of day
-        const backgroundColor = "linear-gradient(rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0.25))";
-        const backgroundImage = "url('src/sprites/background.png')";
+        const backgroundColor = Constants.Background.Tints.placeholder; // TODO update tint based on time of day
+        const backgroundImage = "url(\"" + Constants.Resources.arenaBackground + "\")";
         const backgroundRepeat = "no-repeat";
 
         return backgroundColor + ", " +
@@ -41,13 +41,13 @@ export class Arena extends React.Component<ArenaProps, {}> {
         };
 
         return (
-            <div className="arena" style={arenaStyle}>
-                <div className="opponent">
-                    <img src="src/sprites/gallade_norm_front.gif" />
+            <div className={Constants.Classes.arena} style={arenaStyle}>
+                <div className={Constants.Classes.opponent}>
+                    <img src={Constants.Resources.opponentPokemonGif} />
                 </div>
-                <div className="field"></div>
-                <div className="player">
-                    <img src="src/sprites/absol_shiny_back.gif" />
+                <div className={Constants.Classes.field}></div>
+                <div className={Constants.Classes.player}>
+                    <img src={Constants.Resources.playerPokemonGif} />
                 </div>
             </div>
         );

@@ -3,7 +3,9 @@ import * as ReactDOM from "react-dom";
 
 import {Arena} from "./components/arena";
 
+import {Constants} from "./constants";
+
 ReactDOM.render(
     <Arena />,
-    document.getElementById("screen")
+    document.getElementById(Constants.Ids.screen)
 );
