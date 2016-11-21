@@ -8,11 +8,11 @@ export interface ArenaProps { }
 export class Arena extends React.Component<ArenaProps, {}> {
 
     render() {
-        const backgroundPosition: Background.Position = Background.randomizeBackground();
+        let background: Background.Styles = Background.createArenaBackground();
 
         const arenaStyle = {
-            background: Background.createArenaBackground(),
-            backgroundPosition: backgroundPosition.X + "px " + backgroundPosition.Y + "px"
+            background: background.Color + ", " + background.Image + ", " + background.Repeat,
+            backgroundPosition: background.Position.X + "px " + background.Position.Y + "px"
         };
 
         return (

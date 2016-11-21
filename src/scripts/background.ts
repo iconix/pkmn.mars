@@ -7,7 +7,24 @@ export module Background {
         Y: number
     }
 
-    export function randomizeBackground(): Position {
+    export interface Styles {
+        Position: Position,
+        Color: string,
+        Image: string,
+        Repeat: string
+    }
+
+    export function createArenaBackground(): Styles {
+        // TODO update tint based on time of day
+        return {
+            Position: randomizeBackground(),
+            Color: Constants.Background.Tints.placeholder,
+            Image: "url(\"" + Constants.Resources.arenaBackground + "\")",
+            Repeat: "no-repeat"
+        };
+    }
+
+    function randomizeBackground(): Position {
         const backgroundPositionX = Constants.Background.SpritePositions.XPositions;
         const backgroundPositionY = Constants.Background.SpritePositions.YPositions;
 
@@ -23,15 +40,5 @@ export module Background {
         let randYPos: number = backgroundPositionY[randYIndex];
 
         return { X: randXPos, Y: randYPos };
-    }
-
-    export function createArenaBackground(): string {
-        const backgroundColor = Constants.Background.Tints.placeholder; // TODO update tint based on time of day
-        const backgroundImage = "url(\"" + Constants.Resources.arenaBackground + "\")";
-        const backgroundRepeat = "no-repeat";
-
-        return backgroundColor + ", " +
-                backgroundImage + ", " +
-                backgroundRepeat;
     }
 }
