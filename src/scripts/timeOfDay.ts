@@ -4,12 +4,12 @@ import {Constants} from "./constants";
 import {Location} from "./location";
 
 export module TimeOfDay {
+    // TODO Tint an overlay instead of background (so pkmn are tinted too)
     export function getTint(coordinates: Location.Coordinates): string {
-        // TODO update tint based on time of day
         let tintsMap: { [ key: number]: string } = {
-            1 : Constants.Background.Tints.placeholder,
-            2 : Constants.Background.Tints.placeholder,
-            3 : Constants.Background.Tints.placeholder
+            1 : Constants.Background.Tints.yellow,
+            2 : Constants.Background.Tints.blue,
+            3 : Constants.Background.Tints.orange
         };
 
         return tintsMap[getTimeOfDay(new Date(), coordinates)];

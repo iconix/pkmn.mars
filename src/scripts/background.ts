@@ -35,7 +35,7 @@ export module Background {
         let randXIndex: number = randBackground % backgroundPositionX.length;
         let randYIndex: number = Math.floor(randBackground / backgroundPositionX.length);
 
-        console.log("Selected background", randBackground + 1, "of", numBackgrounds);
+        console.log("Selected", Constants.TimeOfDay[Constants.Background.timeOfDayMapping[randBackground]], "background", randBackground + 1, "of", numBackgrounds);
 
         let randXPos: number = backgroundPositionX[randXIndex];
         let randYPos: number = backgroundPositionY[randYIndex];
