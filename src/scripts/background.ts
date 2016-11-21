@@ -1,4 +1,5 @@
 import {Constants} from "./constants";
+import {TimeOfDay} from "./timeOfDay";
 import {Utils} from "./utils";
 
 export module Background {
@@ -15,10 +16,9 @@ export module Background {
     }
 
     export function createArenaBackground(): Styles {
-        // TODO update tint based on time of day
         return {
             Position: randomizeBackground(),
-            Color: Constants.Background.Tints.placeholder,
+            Color: TimeOfDay.getTint(),
             Image: "url(\"" + Constants.Resources.arenaBackground + "\")",
             Repeat: "no-repeat"
         };
