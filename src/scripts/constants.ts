@@ -38,6 +38,13 @@ export module Constants {
         export const screen = "screen";
     }
 
+    export module Numbers {
+        export const kingstonLatitude = 47.7987;
+        export const kingstonLongitude = -122.4982;
+        export const seattleLatitude = 47.6062;
+        export const seattleLongitude = -122.3321;
+    }
+
     export module Resources {
         export const opponentPokemonGif = "src/sprites/gallade_norm_front.gif";
         export const playerPokemonGif = "src/sprites/absol_shiny_back.gif";

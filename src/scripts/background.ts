@@ -1,4 +1,5 @@
 import {Constants} from "./constants";
+import {Location} from "./location";
 import {TimeOfDay} from "./timeOfDay";
 import {Utils} from "./utils";
 
@@ -15,10 +16,10 @@ export module Background {
         Repeat: string
     }
 
-    export function createArenaBackground(): Styles {
+    export function createArenaBackground(coordinates: Location.Coordinates): Styles {
         return {
             Position: randomizeBackground(),
-            Color: TimeOfDay.getTint(),
+            Color: TimeOfDay.getTint(coordinates),
             Image: "url(\"" + Constants.Resources.arenaBackground + "\")",
             Repeat: "no-repeat"
         };

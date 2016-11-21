@@ -1,9 +1,10 @@
 /// <reference path="../definitions/suncalc.d.ts"/>
 
 import {Constants} from "./constants";
+import {Location} from "./location";
 
 export module TimeOfDay {
-    export function getTint(): string {
+    export function getTint(coordinates: Location.Coordinates): string {
         // TODO update tint based on time of day
         let tintsMap: { [ key: number]: string } = {
             1 : Constants.Background.Tints.placeholder,
@@ -11,7 +12,7 @@ export module TimeOfDay {
             3 : Constants.Background.Tints.placeholder
         };
 
-        return tintsMap[getTimeOfDay(new Date())];
+        return tintsMap[getTimeOfDay(new Date(), coordinates)];
     }
 
     interface TimeBoundaries {
@@ -25,12 +26,8 @@ export module TimeOfDay {
      * Timeline of a calendar day:
      * [BEGIN] --> [Night] --> [EndOfNight] --> [Dawn] --> [StartOfDay] --> [Day] --> [EndOfDay] --> [Dusk] --> [StartOfNight] --> [Night] --> [END]
      */
-    function getTimeOfDay(date: Date): Constants.TimeOfDay {
-        // TODO update according to browser location - currently hardcoded to Seattle
-        let latitude = 47.6062;
-        let longitude = -122.3321;
-
-        let sunCalcTimes: SunCalc.Times = SunCalc.getTimes(date, latitude, longitude);
+    function getTimeOfDay(date: Date, coordinates: Location.Coordinates): Constants.TimeOfDay {
+        let sunCalcTimes: SunCalc.Times = SunCalc.getTimes(date, coordinates.latitude, coordinates.longitude);
 
         let boundaries: TimeBoundaries = {
             startOfDay: sunCalcTimes.goldenHourEnd, // TODO sunriseEnd instead?

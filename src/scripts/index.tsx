@@ -4,8 +4,13 @@ import * as ReactDOM from "react-dom";
 import {Arena} from "./components/arena";
 
 import {Constants} from "./constants";
+import {Location} from "./location";
 
-ReactDOM.render(
-    <Arena />,
-    document.getElementById(Constants.Ids.screen)
-);
+Location.getBrowserLocation().then((coordinates) => {
+    console.log("Location coordinates:", coordinates.latitude, ",", coordinates.longitude);
+
+    ReactDOM.render(
+        <Arena coordinates={coordinates} />,
+        document.getElementById(Constants.Ids.screen)
+    );
+});
