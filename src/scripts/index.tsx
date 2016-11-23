@@ -7,7 +7,7 @@ import {Constants} from "./constants";
 import {Location} from "./location";
 
 Location.getBrowserLocation().then((coordinates) => {
-    console.log("Location coordinates:", coordinates.latitude, ",", coordinates.longitude);
+    console.log("Using location coordinates:", coordinates.latitude, coordinates.longitude);
 
     ReactDOM.render(
         <Arena coordinates={coordinates} />,
