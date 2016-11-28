@@ -1,4 +1,4 @@
-/// <reference path="../definitions/suncalc.d.ts"/>
+import * as SunCalc from "suncalc";
 
 import {Constants} from "./constants";
 import {Location} from "./location";

@@ -1,10 +1,13 @@
 import * as React from "react";
+import {VelocityComponent} from "velocity-react";
 
 import {Background} from "../background";
 import {Constants} from "../constants";
 import {Location} from "../location";
 
-export interface ArenaProps {
+import {Character} from "./character";
+
+interface ArenaProps {
     coordinates: Location.Coordinates;
 }
 
@@ -20,13 +23,13 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
         return (
             <div className={Constants.Classes.arena} style={arenaStyle}>
-                <div className={Constants.Classes.opponent}>
-                    <img src={Constants.Resources.opponentPokemonGif} />
-                </div>
+                <VelocityComponent animation={"transition.slideRightIn"} duration={500} runOnMount={true}>
+                    <Character class={Constants.Classes.opponent} imgSrc={Constants.Resources.opponentPokemonGif} />
+                </VelocityComponent>
                 <div className={Constants.Classes.field}></div>
-                <div className={Constants.Classes.player}>
-                    <img src={Constants.Resources.playerPokemonGif} />
-                </div>
+                <VelocityComponent animation={"transition.slideLeftIn"} duration={500} runOnMount={true}>
+                    <Character class={Constants.Classes.player} imgSrc={Constants.Resources.playerPokemonGif} />
+                </VelocityComponent>
             </div>
         );
     }

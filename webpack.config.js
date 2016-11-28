@@ -33,5 +33,5 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM",
         "suncalc": "SunCalc"
-    },
+    }
 };

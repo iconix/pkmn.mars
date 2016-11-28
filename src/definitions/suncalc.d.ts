@@ -1,6 +1,6 @@
 // https://github.com/mourner/suncalc
 
-declare module SunCalc {
+declare module __SunCalc {
     interface Times {
         sunrise: Date; // sunrise (top edge of the sun appears on the horizon)
         sunriseEnd: Date; // sunrise ends (bottom edge of the sun touches the horizon)
@@ -18,5 +18,9 @@ declare module SunCalc {
         dawn: Date; // dawn (morning nautical twilight ends, morning civil twilight starts)
     }
 
-	function getTimes(date: Date, latitude: number, longitude: number): Times;
+    function getTimes(date: Date, latitude: number, longitude: number): Times;
+}
+
+declare module "suncalc" {
+    export = __SunCalc;
 }
