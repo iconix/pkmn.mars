@@ -7,7 +7,10 @@ declare namespace __VelocityReact {
         delay?: number;
         loop?: number;
         easing?: string | number[];
+        complete?: ElementCallback;
     }
+
+    type ElementCallback = (elements: NodeListOf<HTMLElement>) => void;
 
     type VelocityComponent = React.ComponentClass<VelocityComponentProps>;
     var VelocityComponent: VelocityComponent;

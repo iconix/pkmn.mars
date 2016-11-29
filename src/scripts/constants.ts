@@ -29,11 +29,26 @@ export module Constants {
         ];
     }
 
+    export module Battle {
+        export module Characters {
+            export const opponent = "Boosie";
+            export const opponentTrainer = "Nadja";
+            export const player = "Gotham";
+            export const playerTrainer = "Margaret";
+        }
+
+        export module DialogText {
+            export const init = Constants.Battle.Characters.opponent + " is {0} miles away."
+        }
+    }
+
     export module Classes {
         export const arena = "arena";
         export const field = "field";
         export const opponent = "opponent";
         export const player = "player";
+        export const scene = "scene";
+        export const dialog = "dialog";
     }
 
     export module Ids {

@@ -1,18 +1,16 @@
 import * as React from "react";
-import {VelocityComponent} from "velocity-react";
 
 import {Background} from "../background";
 import {Constants} from "../constants";
 import {Location} from "../location";
 
-import {Character} from "./character";
+import {Scene} from "./scene";
 
 interface ArenaProps {
     coordinates: Location.Coordinates;
 }
 
 export class Arena extends React.Component<ArenaProps, {}> {
-
     render() {
         let background: Background.Styles = Background.createArenaBackground(this.props.coordinates);
 
@@ -23,13 +21,7 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
         return (
             <div className={Constants.Classes.arena} style={arenaStyle}>
-                <VelocityComponent animation={"transition.slideRightIn"} duration={500} runOnMount={true}>
-                    <Character class={Constants.Classes.opponent} imgSrc={Constants.Resources.opponentPokemonGif} />
-                </VelocityComponent>
-                <div className={Constants.Classes.field}></div>
-                <VelocityComponent animation={"transition.slideLeftIn"} duration={500} runOnMount={true}>
-                    <Character class={Constants.Classes.player} imgSrc={Constants.Resources.playerPokemonGif} />
-                </VelocityComponent>
+                <Scene />
             </div>
         );
     }
