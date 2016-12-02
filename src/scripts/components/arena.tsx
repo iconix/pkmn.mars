@@ -1,5 +1,9 @@
 import * as React from "react";
 
+import {BattleManager} from "../battles/battleManager";
+
+import {Stage} from "../stages/stage";
+
 import {Background} from "../background";
 import {Constants} from "../constants";
 import {Location} from "../location";
@@ -11,6 +15,14 @@ interface ArenaProps {
 }
 
 export class Arena extends React.Component<ArenaProps, {}> {
+    constructor (props: ArenaProps) {
+        super(props);
+        this.state = {
+            currentStage: Stage.BattleStart
+        };
+    }
+
+
     render() {
         let background: Background.Styles = Background.createArenaBackground(this.props.coordinates);
 
@@ -21,7 +33,7 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
         return (
             <div className={Constants.Classes.arena} style={arenaStyle}>
-                <Scene />
+                <Scene battle={BattleManager.getBattle()} />
             </div>
         );
     }

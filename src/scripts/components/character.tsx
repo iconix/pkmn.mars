@@ -1,29 +1,32 @@
 import * as React from "react";
 import {VelocityComponent} from "velocity-react";
 
+import {Animation} from "../animation";
+
 interface CharacterProps {
     class: string;
     imgSrc: string;
-    animation: Character.CharacterAnimation;
+    animation?: Animation;
 }
 
 export class Character extends React.Component<CharacterProps, {}> {
-    render() {
+    private getCharacterDiv() {
         return (
-            <VelocityComponent animation={this.props.animation.animation} duration={this.props.animation.duration} runOnMount={this.props.animation.runOnMount} complete={this.props.animation.complete}>
-                <div className={this.props.class}>
-                    <img src={this.props.imgSrc} />
-                </div>
-            </VelocityComponent>
+            <div className={this.props.class}>
+                <img src={this.props.imgSrc} />
+            </div>
         );
     }
-}
 
-export module Character {
-    export interface CharacterAnimation {
-        animation: string;
-        duration: number;
-        runOnMount: boolean;
-        complete?: __VelocityReact.ElementCallback;
+    render() {
+        if (this.props.animation) {
+            return (
+                <VelocityComponent animation={this.props.animation.animation} duration={this.props.animation.duration} runOnMount={this.props.animation.runOnMount} complete={this.props.animation.complete}>
+                    {this.getCharacterDiv()}
+                </VelocityComponent>
+            );
+        } else {
+            return (this.getCharacterDiv());
+        }
     }
 }

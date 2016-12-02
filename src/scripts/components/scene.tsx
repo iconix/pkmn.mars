@@ -1,5 +1,12 @@
 import * as React from "react";
 
+import {Action} from "../battles/action";
+import {Battle} from "../battles/battle";
+import {BattleCharacter} from "../battles/character";
+
+import {Stage} from "../stages/stage";
+
+import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {Utils} from "../utils";
 
@@ -8,55 +15,50 @@ import {Dialog} from "./dialog";
 import {Field} from "./field";
 
 export interface SceneState {
-    stage: Scene.Stage;
+    stage: Stage;
+    subStage: number;
 }
 
-export class Scene extends React.Component<{}, SceneState> {
+interface SceneProps {
+    battle: Battle;
+}
+
+export class Scene extends React.Component<SceneProps, SceneState> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            stage: Scene.Stage.PageLoad
+            stage: Stage.BattleStart,
+            subStage: 0
         };
     }
 
     render() {
+        let currentAction: Action = this.props.battle.getCurrentAction(this.state.stage, this.state.subStage, this);
+
+        let opponentAnimation: Animation;
+        let playerAnimation: Animation;
+
+        if (currentAction.animations) {
+            opponentAnimation = currentAction.animations[BattleCharacter.Type.Opponent];
+            playerAnimation = currentAction.animations[BattleCharacter.Type.Player];
+        }
+
         return (
             <div className={Constants.Classes.scene}>
                 {/* TODO setup touch handlers when Stage === BattleStart */}
 
                 <Character class={Constants.Classes.opponent}
                     imgSrc={Constants.Resources.opponentPokemonGif}
-                    animation={{
-                        animation: "transition.slideRightIn",
-                        duration: 500,
-                        runOnMount: true
-                    }
-                } />
+                    animation={opponentAnimation} />
 
                 <Field />
 
                 <Character class={Constants.Classes.player}
                     imgSrc={Constants.Resources.playerPokemonGif}
-                    animation={{
-                        animation: "transition.slideLeftIn",
-                        duration: 500,
-                        runOnMount: true,
-                        complete: () => { this.setState({ stage: Scene.Stage.BattleStart }); }
-                    }
-                } />
+                    animation={playerAnimation} />
 
-                {/* TODO Replace "1000" with distance between browser coordinates and Boosie coordinates */}
-                { this.state.stage === Scene.Stage.BattleStart ? <Dialog text={Utils.formatString(Constants.Battle.DialogText.init, "1000")} /> : null }
+                { currentAction.dialogText ? <Dialog text={currentAction.dialogText} /> : null }
             </div>
         );
-    }
-}
-
-export module Scene {
-    export enum Stage {
-        PageLoad = 0,
-        BattleStart = 1,
-        BattleSequence = 2,
-        BattleEnd = 3
     }
 }
