@@ -6,6 +6,7 @@ import {Scene} from "../components/scene";
 
 import {Attack} from "../stages/attack";
 import {AttackReason} from "../stages/attackReason";
+import {Result} from "../stages/result";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
@@ -96,6 +97,19 @@ export module Stage {
             ];
 
             super(Stage.Type.Attack, actions);
+        }
+    }
+
+    export class ResultFactory extends Factory {
+        constructor(type: Result.Type, defender: BattleCharacter) {
+            let actions: Action[] = [
+                { dialog: {
+                    text: Result.getResultDialog(type, defender),
+                    waitForTouchAfter: true
+                }}
+            ];
+
+            super(Stage.Type.Result, actions);
         }
     }
 }

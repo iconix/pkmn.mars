@@ -7,4 +7,8 @@ export module Utils {
         return stringToFormat.replace(/{(\d+)}/g,
             (match, number) => { return typeof replacements[number] != "undefined" ? replacements[number] : match; });
     };
+
+    export function lowercaseFirstLetter(str: string) {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+    }
 }

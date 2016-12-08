@@ -5,6 +5,7 @@ import {Scene} from "../components/scene";
 import {Animation} from "../animation";
 
 import {AttackReason} from "./attackReason";
+import {Result} from "./result";
 import {Stage} from "./stage";
 
 export class Attack {
@@ -12,15 +13,16 @@ export class Attack {
     private animation: Animation;
 
     private attackReason: AttackReason.Type;
-    //private result: Result.Type;
+    private result: Result.Type;
     //private finalDialog: FinalDialog.Type;
 
     constructor(name: Attack.Name) {
         this.name = name;
 
         // TODO Map the animation
-        // TODO Map to proper Result, FinalDialog
+        // TODO Map to proper FinalDialog
         this.setAttackReasonType();
+        this.setResultType();
     }
 
     public getAttackAnimation(): Animation {
@@ -69,9 +71,57 @@ export class Attack {
         }
     }
 
-    //public getResultType(): Result.Type {
+    public getResultType(): Result.Type {
+        return this.result;
+    }
 
-    //}
+    private setResultType(): void {
+        switch (this.name) {
+            case Attack.Name.Bite:
+            case Attack.Name.HeartStamp:
+                this.result = Result.Type.Flinched;
+                break;
+            case Attack.Name.BodySlam:
+            case Attack.Name.Frustration:
+                this.result = Result.Type.Fainted;
+                break;
+            case Attack.Name.Lick:
+            case Attack.Name.Nuzzle:
+                this.result = Result.Type.Paralyzed;
+                break;
+            case Attack.Name.PlayRough:
+                this.result = Result.Type.AttackFell;
+                break;
+            case Attack.Name.WakeUpSlap:
+                this.result = Result.Type.WokeUp;
+                break;
+            case Attack.Name.Attract:
+                this.result = Result.Type.Infatuated;
+                break;
+            case Attack.Name.Outrage:
+                this.result = Result.Type.Confused;
+                break;
+            case Attack.Name.Present:
+                this.result = Result.Type.HpRestored;
+                break;
+            case Attack.Name.HeatWave:
+                this.result = Result.Type.Burned;
+                break;
+            case Attack.Name.SunnyDay:
+                this.result = Result.Type.HarshSunlight;
+                break;
+            case Attack.Name.FreezeDry:
+                this.result = Result.Type.Frozen;
+                break;
+            case Attack.Name.IcyWind:
+                this.result = Result.Type.SpeedFell;
+                break;
+            case Attack.Name.Emoji:
+            case Attack.Name.Mega:
+                // TODO animation only
+                break;
+        }
+    }
 
     //public getFinalDialogType(): FinalDialog.Type {
 

@@ -46,16 +46,33 @@ export module Constants {
             // Stage.BattleStart
             export const start = Constants.Battle.Characters.opponent + " is {0} miles away.";
 
+            export module AttackReason {
+                export const distanceClose = "{0} is {1} close!"; // "[Defender] is [so/pretty] close!"
+                export const distanceFar = "{0} is {1} far away..."; // "[Defender] is [so/pretty] far away..."
+                export const evolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
+                export const evolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
+                export const temperatureCold = Constants.Battle.Characters.opponent + " looks a little cold..."; // "Boosie looks a little cold..."
+                export const temperatureHot = Constants.Battle.Characters.player + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
+            }
+
             // Stage.Attack
             export const attack = "{0} used {1}!";
 
-            // Stage.AttackReason
-            export const attackReasonDistanceClose = "{0} is {1} close!"; // "[Defender] is [so/pretty] close!"
-            export const attackReasonDistanceFar = "{0} is {1} far away..."; // "[Defender] is [so/pretty] far away..."
-            export const attackReasonEvolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
-            export const attackReasonEvolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
-            export const attackReasonTemperatureCold = Constants.Battle.Characters.opponent + " looks a little cold..."; // "Boosie looks a little cold..."
-            export const attackReasonTemperatureHot = Constants.Battle.Characters.player + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
+            export module Result {
+                export const attackFell = "{0}'s attack fell!"; // TODO wording?
+                export const burned = "{0} is hurt by its burn!";
+                export const confused = "{0} is confused!"; // TODO wording?
+                export const fainted = "{0} fainted!";
+                export const flinched = "{0} flinched!";
+                export const frozen = "{0} is frozen solid!";
+                export const harshSunlight = "The sunlight turned harsh!";
+                export const hpRestored = "{0}'s HP was restored.";
+                export const infatuated = "{0} is infatuated!"; // TODO wording?
+                export const paralyzed = "{0} is paralyzed!";
+                export const speedFell = "{0}'s speed harshly fell!";
+                export const wokeUp = "{0} woke up!";
+            }
+
         }
     }
 

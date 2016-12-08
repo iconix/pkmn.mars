@@ -19,17 +19,17 @@ export module AttackReason {
 
         switch(type) {
             case AttackReason.Type.DistanceClose:
-                return Utils.formatString(Constants.Battle.DialogText.attackReasonDistanceClose, defender.getName(), distanceMagnitude);
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.distanceClose, defender.getName(), distanceMagnitude);
             case AttackReason.Type.DistanceFar:
-                return Utils.formatString(Constants.Battle.DialogText.attackReasonDistanceFar, defender.getName(), distanceMagnitude);
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.distanceFar, defender.getName(), distanceMagnitude);
             case AttackReason.Type.EvolutionEmoji:
-                return Utils.formatString(Constants.Battle.DialogText.attackReasonEvolutionEmoji, attacker.getName());
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.evolutionEmoji, attacker.getName());
             case AttackReason.Type.EvolutionMega:
-                return Utils.formatString(Constants.Battle.DialogText.attackReasonEvolutionMega, attacker.getName(), attacker.getEvoStoneName(), attacker.getTrainer());
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.evolutionMega, attacker.getName(), attacker.getEvoStoneName(), attacker.getTrainer());
             case AttackReason.Type.TemperatureCold:
-                return Constants.Battle.DialogText.attackReasonTemperatureCold;
+                return Constants.Battle.DialogText.AttackReason.temperatureCold;
             case AttackReason.Type.TemperatureHot:
-                return Utils.formatString(Constants.Battle.DialogText.attackReasonTemperatureHot, hotModifiers[0], hotModifiers[1]);
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotModifiers[0], hotModifiers[1]);
         }
     }
 }
