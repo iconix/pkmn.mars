@@ -1,7 +1,10 @@
 import {Scene} from "../components/scene";
 
-import {Stage} from "../stages/stage";
 import {Attack} from "../stages/attack";
+import {AttackReason} from "../stages/attackReason";
+import {FinalDialog} from "../stages/finalDialog";
+import {Result} from "../stages/result";
+import {Stage} from "../stages/stage";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
@@ -19,6 +22,15 @@ export class Battle {
         this.attacker = new BattleCharacter(attackerType);
         this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
         this.attack = new Attack(attackName);
+
+        console.log({
+            attacker: this.attacker.getName(),
+            defender: this.defender.getName(),
+            attackReason: AttackReason.Type[this.attack.getAttackReasonType()],
+            attack: this.attack.getAttackName(),
+            result: Result.Type[this.attack.getResultType()],
+            finalDialog: FinalDialog.Type[this.attack.getFinalDialogType()]
+        });
     }
 
     public getAttacker(): BattleCharacter {
