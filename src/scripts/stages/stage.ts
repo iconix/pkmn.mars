@@ -5,6 +5,7 @@ import {Dialog} from "../battles/dialog";
 import {Scene} from "../components/scene";
 
 import {Attack} from "../stages/attack";
+import {AttackReason} from "../stages/attackReason";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
@@ -63,12 +64,25 @@ export module Stage {
                 { animations: animations},
                 // TODO Replace "1000" with distance between browser coordinates and Boosie coordinates
                 { dialog: {
-                    text: Utils.formatString(Constants.Battle.DialogText.init, "1000"),
+                    text: Utils.formatString(Constants.Battle.DialogText.start, "1000"),
                     waitForTouchAfter: true
                 }}
             ];
 
             super(Stage.Type.BattleStart, actions);
+        }
+    }
+
+    export class AttackReasonFactory extends Factory {
+        constructor(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter) {
+            let actions: Action[] = [
+                { dialog: {
+                    text: AttackReason.getAttackReasonDialog(type, attacker, defender),
+                    waitForTouchAfter: true
+                }}
+            ];
+
+            super(Stage.Type.AttackReason, actions);
         }
     }
 

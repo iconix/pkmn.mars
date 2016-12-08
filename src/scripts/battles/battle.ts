@@ -21,10 +21,8 @@ export class Battle {
 
     constructor(attackerType: BattleCharacter.Type, attackName: Attack.Name) {
         this.attacker = new BattleCharacter(attackerType);
-        //this.defender = new BattleCharacter(defenderType);
+        this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
         this.attack = new Attack(attackName);
-
-        // TODO Map Attack to proper AttackReason, Result, FinalDialog
     }
 
     public getAttacker(): BattleCharacter {
@@ -43,6 +41,8 @@ export class Battle {
                 factory = new Stage.BattleStartFactory(scene);
                 break;
             case Stage.Type.AttackReason:
+                factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender);
+                break;
             case Stage.Type.Attack:
             case Stage.Type.Result:
             case Stage.Type.FinalDialog:

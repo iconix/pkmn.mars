@@ -31,15 +31,31 @@ export module Constants {
 
     export module Battle {
         export module Characters {
+            // opponent
             export const opponent = "Boosie";
+            export const opponentEvoStone = "Galladite";
             export const opponentTrainer = "Nadja";
+
+            // player
             export const player = "Gotham";
+            export const playerEvoStone = "Absolite";
             export const playerTrainer = "Margaret";
         }
 
         export module DialogText {
-            export const init = Constants.Battle.Characters.opponent + " is {0} miles away.";
+            // Stage.BattleStart
+            export const start = Constants.Battle.Characters.opponent + " is {0} miles away.";
+
+            // Stage.Attack
             export const attack = "{0} used {1}!";
+
+            // Stage.AttackReason
+            export const attackReasonDistanceClose = "{0} is {1} close!"; // "[Defender] is [so/pretty] close!"
+            export const attackReasonDistanceFar = "{0} is {1} far away..."; // "[Defender] is [so/pretty] far away..."
+            export const attackReasonEvolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
+            export const attackReasonEvolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
+            export const attackReasonTemperatureCold = Constants.Battle.Characters.opponent + " looks a little cold..."; // "Boosie looks a little cold..."
+            export const attackReasonTemperatureHot = Constants.Battle.Characters.player + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
         }
     }
 

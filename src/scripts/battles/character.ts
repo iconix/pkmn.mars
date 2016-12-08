@@ -24,11 +24,24 @@ export class BattleCharacter {
                 return Constants.Battle.Characters.opponentTrainer;
         }
     }
+
+    public getEvoStoneName(): string {
+        switch(this.type) {
+            case BattleCharacter.Type.Player:
+                return Constants.Battle.Characters.playerEvoStone;
+            case BattleCharacter.Type.Opponent:
+                return Constants.Battle.Characters.opponentEvoStone;
+        }
+    }
 }
 
 export module BattleCharacter {
     export enum Type {
         Player,
         Opponent
+    }
+
+    export function getOtherBattleCharater(type: BattleCharacter.Type): BattleCharacter.Type {
+        return Math.abs(type - 1);
     }
 }
