@@ -5,6 +5,7 @@ import {Scene} from "../components/scene";
 import {Animation} from "../animation";
 
 import {AttackReason} from "./attackReason";
+import {FinalDialog} from "./finalDialog";
 import {Result} from "./result";
 import {Stage} from "./stage";
 
@@ -14,15 +15,15 @@ export class Attack {
 
     private attackReason: AttackReason.Type;
     private result: Result.Type;
-    //private finalDialog: FinalDialog.Type;
+    private finalDialog: FinalDialog.Type;
 
     constructor(name: Attack.Name) {
         this.name = name;
 
         // TODO Map the animation
-        // TODO Map to proper FinalDialog
         this.setAttackReasonType();
         this.setResultType();
+        this.setFinalDialogType();
     }
 
     public getAttackAnimation(): Animation {
@@ -123,9 +124,39 @@ export class Attack {
         }
     }
 
-    //public getFinalDialogType(): FinalDialog.Type {
+    public getFinalDialogType(): FinalDialog.Type {
+        return this.finalDialog;
+    }
 
-    //}
+    private setFinalDialogType(): void {
+        switch (this.name) {
+            case Attack.Name.Present:
+                this.finalDialog = FinalDialog.Type.DidGood;
+                break;
+            case Attack.Name.Attract:
+            case Attack.Name.BodySlam:
+            case Attack.Name.FreezeDry:
+            case Attack.Name.Frustration:
+            case Attack.Name.HeartStamp:
+            case Attack.Name.HeatWave:
+            case Attack.Name.IcyWind:
+            case Attack.Name.Outrage:
+            case Attack.Name.SunnyDay:
+                this.finalDialog = FinalDialog.Type.MeantWell;
+                break;
+            case Attack.Name.Bite:
+            case Attack.Name.Lick:
+            case Attack.Name.Nuzzle:
+            case Attack.Name.PlayRough:
+            case Attack.Name.WakeUpSlap:
+                this.finalDialog = FinalDialog.Type.StillLiked;
+                break;
+            case Attack.Name.Emoji:
+            case Attack.Name.Mega:
+                this.finalDialog = FinalDialog.Type.EvolutionComplete;
+                break;
+        }
+    }
 }
 
 export module Attack {

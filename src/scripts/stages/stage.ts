@@ -6,6 +6,7 @@ import {Scene} from "../components/scene";
 
 import {Attack} from "../stages/attack";
 import {AttackReason} from "../stages/attackReason";
+import {FinalDialog} from "../stages/finalDialog";
 import {Result} from "../stages/result";
 
 import {Animation} from "../animation";
@@ -110,6 +111,19 @@ export module Stage {
             ];
 
             super(Stage.Type.Result, actions);
+        }
+    }
+
+    export class FinalDialogFactory extends Factory {
+        constructor(type: FinalDialog.Type, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
+            let actions: Action[] = [
+                { dialog: {
+                    text: FinalDialog.getFinalDialog(type, attacker, defender, attack.getAttackName()),
+                    waitForTouchAfter: true
+                }}
+            ];
+
+            super(Stage.Type.FinalDialog, actions);
         }
     }
 }

@@ -73,6 +73,12 @@ export module Constants {
                 export const wokeUp = "{0} woke up!";
             }
 
+            export module FinalDialog {
+                export const didGood = "{0} did good!"; // "[Attacker] did good!"
+                export const evolutionComplete = "{0} has {1} Evolved into {1} {0}!"; // "[Attacker] has [EvolutionType] Evolved into [EvolutionType] [Attacker]!"
+                export const meantWell = "{0} meant well..."; // "[Attacker] meant well..."
+                export const stillLiked = "{0} still liked it!"; // "[Defender] still liked it!"
+            }
         }
     }
 
