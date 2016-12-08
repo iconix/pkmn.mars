@@ -38,7 +38,8 @@ export module Constants {
         }
 
         export module DialogText {
-            export const init = Constants.Battle.Characters.opponent + " is {0} miles away."
+            export const init = Constants.Battle.Characters.opponent + " is {0} miles away.";
+            export const attack = "{0} used {1}!";
         }
     }
 

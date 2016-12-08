@@ -18,7 +18,7 @@ export class Arena extends React.Component<ArenaProps, {}> {
     constructor (props: ArenaProps) {
         super(props);
         this.state = {
-            currentStage: Stage.BattleStart
+            currentStage: Stage.Type.BattleStart
         };
     }
 
