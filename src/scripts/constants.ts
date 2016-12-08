@@ -31,28 +31,30 @@ export module Constants {
 
     export module Battle {
         export module Characters {
-            // opponent
-            export const opponent = "Boosie";
-            export const opponentEvoStone = "Galladite";
-            export const opponentTrainer = "Nadja";
+            export module Opponent {
+                export const name = "Boosie";
+                export const evoStone = "Galladite";
+                export const trainer = "Nadja";
+            }
 
-            // player
-            export const player = "Gotham";
-            export const playerEvoStone = "Absolite";
-            export const playerTrainer = "Margaret";
+            export module Player {
+                export const name = "Gotham";
+                export const evoStone = "Absolite";
+                export const trainer = "Margaret";
+            }
         }
 
         export module DialogText {
             // Stage.BattleStart
-            export const start = Constants.Battle.Characters.opponent + " is {0} miles away.";
+            export const start = Constants.Battle.Characters.Opponent.name + " is {0} miles away.";
 
             export module AttackReason {
                 export const distanceClose = "{0} is {1} close!"; // "[Defender] is [so/pretty] close!"
                 export const distanceFar = "{0} is {1} far away..."; // "[Defender] is [so/pretty] far away..."
                 export const evolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
                 export const evolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
-                export const temperatureCold = Constants.Battle.Characters.opponent + " looks a little cold..."; // "Boosie looks a little cold..."
-                export const temperatureHot = Constants.Battle.Characters.player + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
+                export const temperatureCold = Constants.Battle.Characters.Opponent.name + " looks a little cold..."; // "Boosie looks a little cold..."
+                export const temperatureHot = Constants.Battle.Characters.Player.name + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
             }
 
             // Stage.Attack

@@ -126,4 +126,11 @@ export module Stage {
             super(Stage.Type.FinalDialog, actions);
         }
     }
+
+    export class BattleEndFactory extends Factory {
+        constructor() {
+            let actions: Action[] = [];
+            super(Stage.Type.BattleEnd, actions);
+        }
+    }
 }

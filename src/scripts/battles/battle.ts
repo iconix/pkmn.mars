@@ -13,11 +13,7 @@ import {BattleCharacter} from "./character";
 export class Battle {
     private attacker: BattleCharacter;
     private defender: BattleCharacter;
-
-    //private attackReason: AttackReason; // reasonText
-    private attack: Attack; // attackText, attackAnimation
-    //private result: Result; // resultText, resultAnimation
-    //private finalDialog: FinalDialog; // finalText, character to populate in text
+    private attack: Attack;
 
     constructor(attackerType: BattleCharacter.Type, attackName: Attack.Name) {
         this.attacker = new BattleCharacter(attackerType);
@@ -53,6 +49,8 @@ export class Battle {
                 factory = new Stage.FinalDialogFactory(this.attack.getFinalDialogType(), this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.BattleEnd:
+                factory = new Stage.BattleEndFactory();
+                break;
         }
 
         return factory;

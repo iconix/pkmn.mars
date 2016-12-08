@@ -8,30 +8,20 @@ export class BattleCharacter {
     }
 
     public getName(): string {
-        switch(this.type) {
-            case BattleCharacter.Type.Player:
-                return Constants.Battle.Characters.player;
-            case BattleCharacter.Type.Opponent:
-                return Constants.Battle.Characters.opponent;
-        }
+        return this.getModuleForBattleCharacterType().name;
     }
 
     public getTrainer(): string {
-        switch(this.type) {
-            case BattleCharacter.Type.Player:
-                return Constants.Battle.Characters.playerTrainer;
-            case BattleCharacter.Type.Opponent:
-                return Constants.Battle.Characters.opponentTrainer;
-        }
+        return this.getModuleForBattleCharacterType().trainer;
     }
 
     public getEvoStoneName(): string {
-        switch(this.type) {
-            case BattleCharacter.Type.Player:
-                return Constants.Battle.Characters.playerEvoStone;
-            case BattleCharacter.Type.Opponent:
-                return Constants.Battle.Characters.opponentEvoStone;
-        }
+        return this.getModuleForBattleCharacterType().evoStone;
+    }
+
+    private getModuleForBattleCharacterType(): { name: string, trainer: string, evoStone: string } {
+        let battleCharacterTypeAsKey: string = BattleCharacter.Type[this.type];
+        return (<any>Constants.Battle.Characters)[battleCharacterTypeAsKey];
     }
 }
 

@@ -43,7 +43,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
         let opponentAnimation: Animation;
         let playerAnimation: Animation;
 
-        if (currentAction.animations) {
+        if (currentAction && currentAction.animations) {
             opponentAnimation = currentAction.animations[BattleCharacter.Type.Opponent];
             playerAnimation = currentAction.animations[BattleCharacter.Type.Player];
         }
@@ -56,7 +56,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
 
         return (
             // TODO <div className={Constants.Classes.scene} onTouchStart={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
-            <div className={Constants.Classes.scene} onTouchStart={(currentAction.dialog && currentAction.dialog.waitForTouchAfter) ? this.sceneTouchEvent : undefined}>
+            <div className={Constants.Classes.scene} onTouchStart={(currentAction && currentAction.dialog && currentAction.dialog.waitForTouchAfter) ? this.sceneTouchEvent : undefined}>
 
                 <Character class={Constants.Classes.opponent}
                     imgSrc={Constants.Resources.opponentPokemonGif}
@@ -68,7 +68,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                     imgSrc={Constants.Resources.playerPokemonGif}
                     animation={playerAnimation} />
 
-                { currentAction.dialog ? <DialogBox dialog={currentAction.dialog} scene={this} /> : undefined }
+                { currentAction && currentAction.dialog ? <DialogBox dialog={currentAction.dialog} scene={this} /> : undefined }
             </div>
         );
     }
