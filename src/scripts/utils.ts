@@ -1,6 +1,6 @@
 export module Utils {
     export function getRandomInt(maxInt: number): number {
-        return Math.floor(Math.random() * maxInt);
+        return Math.floor(Math.random() * (maxInt + 1));
     }
 
     export function formatString(stringToFormat: string, ...replacements: string[]) {

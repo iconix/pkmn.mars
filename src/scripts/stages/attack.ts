@@ -164,14 +164,14 @@ export module Attack {
         Attract,
         Bite,
         BodySlam,
-        Emoji,
+        Emoji, // TODO does not have Attack dialog
         FreezeDry,
         Frustration,
         HeartStamp,
         HeatWave,
         IcyWind,
         Lick,
-        Mega,
+        Mega, // TODO does not have Attack dialog
         Nuzzle,
         Outrage,
         PlayRough,

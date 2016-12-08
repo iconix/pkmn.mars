@@ -3,6 +3,8 @@ import {SceneState} from "../components/scene";
 import {Attack} from "../stages/attack";
 import {Stage} from "../stages/stage";
 
+import {Utils} from "../utils";
+
 import {Battle} from "./battle";
 import {BattleCharacter} from "./character";
 
@@ -40,10 +42,16 @@ export module BattleManager {
     }
 
     function getRandAttacker(): BattleCharacter.Type {
-        return BattleCharacter.Type.Player; // TODO randomize between Player and Opponent
+        return Utils.getRandomInt(1);
     }
 
     function getRandAttackName(): Attack.Name {
-        return Attack.Name.Attract; // TODO randomize name returned
+        let numAttacks = 0;
+        for(let name in Attack.Name) {
+            if (typeof Attack.Name[name] === "number") {
+                numAttacks++;
+            }
+        }
+        return Utils.getRandomInt(numAttacks - 1);
     }
 }
