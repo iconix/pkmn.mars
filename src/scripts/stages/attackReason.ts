@@ -5,7 +5,7 @@ import {Utils} from "../utils";
 
 export module AttackReason {
     export enum Type {
-        DistanceClose,
+        DistanceClose, // TODO DistanceClose vs DistanceFar should be available based on distance
         DistanceFar,
         EvolutionEmoji,
         EvolutionMega,
@@ -15,7 +15,12 @@ export module AttackReason {
 
     export function getAttackReasonDialog(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter): string {
         let distanceMagnitude: string = "pretty"; // TODO choose between "pretty"/"so" based on distance
-        let hotModifiers: string[] = ["super", "... ;)"]; // TODO randomize choice between this and ["really", "!"]
+
+        let randHotModifier: number = Utils.getRandomInt(1);
+        let hotModifiers: string[][] = [
+            ["super", "... ;)"],
+            ["really", "!"]
+        ];
 
         switch(type) {
             case AttackReason.Type.DistanceClose:
@@ -29,7 +34,7 @@ export module AttackReason {
             case AttackReason.Type.TemperatureCold:
                 return Constants.Battle.DialogText.AttackReason.temperatureCold;
             case AttackReason.Type.TemperatureHot:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotModifiers[0], hotModifiers[1]);
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotModifiers[randHotModifier][0], hotModifiers[randHotModifier][1]);
         }
     }
 }
