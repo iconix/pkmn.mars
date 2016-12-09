@@ -76,10 +76,10 @@ export module Stage {
     }
 
     export class AttackReasonFactory extends Factory {
-        constructor(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter) {
+        constructor(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
             let actions: Action[] = [
                 { dialog: {
-                    text: AttackReason.getAttackReasonDialog(type, attacker, defender),
+                    text: AttackReason.getAttackReasonDialog(type, attacker, defender, attack),
                     waitForTouchAfter: true
                 }}
             ];

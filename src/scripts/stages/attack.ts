@@ -45,7 +45,7 @@ export class Attack {
             case Attack.Name.Lick:
             case Attack.Name.Nuzzle:
             case Attack.Name.PlayRough:
-            case Attack.Name.WakeUpSlap: // TODO has ExtraAttackReason
+            case Attack.Name.WakeUpSlap:
                 this.attackReason = AttackReason.Type.DistanceClose;
                 break;
             case Attack.Name.Attract:

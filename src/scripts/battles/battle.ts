@@ -24,12 +24,12 @@ export class Battle {
         this.attack = new Attack(attackName);
 
         console.log({
-            attacker: this.attacker.getName(),
-            defender: this.defender.getName(),
-            attackReason: AttackReason.Type[this.attack.getAttackReasonType()],
-            attack: this.attack.getAttackName(),
-            result: Result.Type[this.attack.getResultType()],
-            finalDialog: FinalDialog.Type[this.attack.getFinalDialogType()]
+            attacker: this.attacker.getName() || "",
+            defender: this.defender.getName() || "",
+            attackReason: AttackReason.Type[this.attack.getAttackReasonType()] || "",
+            attack: this.attack.getAttackName() || "",
+            result: Result.Type[this.attack.getResultType()] || "",
+            finalDialog: FinalDialog.Type[this.attack.getFinalDialogType()] || ""
         });
     }
 
@@ -49,7 +49,7 @@ export class Battle {
                 factory = new Stage.BattleStartFactory(scene);
                 break;
             case Stage.Type.AttackReason:
-                factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender);
+                factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.Attack:
                 factory = new Stage.AttackFactory(this.attacker, this.attack);

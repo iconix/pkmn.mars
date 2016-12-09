@@ -49,10 +49,11 @@ export module Constants {
             export const start = Constants.Battle.Characters.Opponent.name + " is {0} miles away.";
 
             export module AttackReason {
-                export const distanceClose = "{0} is {1} close!"; // "[Defender] is [so/pretty] close!"
+                export const distanceClose = "{0} is {1} close{2}!"; // "[Defender] is [so/pretty] close!"
                 export const distanceFar = "{0} is {1} far away..."; // "[Defender] is [so/pretty] far away..."
                 export const evolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
                 export const evolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
+                export const extraSleeping = "... and sleeping";
                 export const temperatureCold = Constants.Battle.Characters.Opponent.name + " looks a little cold..."; // "Boosie looks a little cold..."
                 export const temperatureHot = Constants.Battle.Characters.Player.name + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
             }
@@ -79,7 +80,7 @@ export module Constants {
                 export const didGood = "{0} did good!"; // "[Attacker] did good!"
                 export const evolutionComplete = "{0} has {1} Evolved into {1} {0}!"; // "[Attacker] has [EvolutionType] Evolved into [EvolutionType] [Attacker]!"
                 export const meantWell = "{0} meant well..."; // "[Attacker] meant well..."
-                export const stillLiked = "... ...{0} still liked it!"; // "[Defender] still liked it!"
+                export const stillLiked = "... ...{0} still liked it!"; // "[Defender] still liked it!" // TODO animate the ellipsis as an extra dialog box
             }
         }
     }
