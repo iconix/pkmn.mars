@@ -91,7 +91,7 @@ export module Constants {
         export const opponent = "opponent";
         export const player = "player";
         export const scene = "scene";
-        export const dialog = "dialog";
+        export const dialogBox = "dialogBox";
     }
 
     export module Ids {

@@ -23,15 +23,6 @@ export class DialogBox extends React.Component<DialogBoxProps, {}> {
         complete: () => { this.props.scene.setState(this.getReadyForTouch); }
     };
 
-    private transitionLeaveProps = {
-        animation: "transition.fadeOut",
-        style: {
-            position: "absolute",
-            bottom: 0
-        },
-        duration: 100
-    };
-
     private getReadyForTouch = (prevState: SceneState, props: SceneProps) => {
         return { stage: prevState.stage, actionIndex: prevState.actionIndex, waitingForTouch: this.props.dialog.waitForTouchAfter }
     };
@@ -54,8 +45,8 @@ export class DialogBox extends React.Component<DialogBoxProps, {}> {
         const textToAnimate = React.cloneElement(textElement, { key });
 
         return (
-            <div className={Constants.Classes.dialog}>
-                <VelocityTransitionGroup component="div" enter={this.transitionEnterProps} leave={this.transitionLeaveProps} runOnMount>
+            <div className={Constants.Classes.dialogBox}>
+                <VelocityTransitionGroup component="div" enter={this.transitionEnterProps} runOnMount>
                     {textToAnimate}
                 </VelocityTransitionGroup>
             </div>
