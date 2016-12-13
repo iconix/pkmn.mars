@@ -50,6 +50,7 @@ export class DialogBox extends React.Component<DialogBoxProps, {}> {
 
         // add a unique key prop to the element to animate,
         // so that the transition group recognizes that the components are changing
+        // https://github.com/twitter-fabric/velocity-react/issues/29#issuecomment-148558624
         const textToAnimate = React.cloneElement(textElement, { key });
 
         return (

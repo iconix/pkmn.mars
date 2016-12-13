@@ -31,7 +31,7 @@ module.exports = {
     // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
         "react": "React",
-        "react/lib/ReactTransitionGroup": "React.addons.TransitionGroup",
+        "react/lib/ReactTransitionGroup": "React.addons.TransitionGroup", // https://github.com/webpack/webpack/issues/1275#issuecomment-239178108
         "react-dom": "ReactDOM",
         "suncalc": "SunCalc",
         "velocity-animate": "Velocity"
