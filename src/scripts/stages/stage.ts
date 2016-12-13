@@ -65,7 +65,8 @@ export module Stage {
             let actions: Action[] = [
                 { animations: animations},
                 // TODO Replace "1000" with distance between browser coordinates and Boosie coordinates
-                { dialog: {
+                { animations: animations,
+                    dialog: {
                     text: Utils.formatString(Constants.Battle.DialogText.start, "1000"),
                     waitForTouchAfter: true
                 }}
