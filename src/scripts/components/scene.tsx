@@ -55,9 +55,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
         };
 
         return (
-            // TODO <div className={Constants.Classes.scene} onTouchStart={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
-            <div className={Constants.Classes.scene} onTouchStart={(currentAction && currentAction.dialog && currentAction.dialog.waitForTouchAfter) ? this.sceneTouchEvent : undefined}>
-
+            <div className={Constants.Classes.scene} onTouchStart={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
                 <Character class={Constants.Classes.opponent}
                     imgSrc={Constants.Resources.opponentPokemonGif}
                     animation={opponentAnimation} />
