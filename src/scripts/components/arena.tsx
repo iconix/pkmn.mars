@@ -11,7 +11,7 @@ import {Location} from "../location";
 import {Scene} from "./scene";
 
 interface ArenaProps {
-    coordinates: Location.Coordinates;
+    locationPackage: Location.Package;
 }
 
 export class Arena extends React.Component<ArenaProps, {}> {
@@ -24,7 +24,7 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
 
     render() {
-        let background: Background.Styles = Background.createArenaBackground(this.props.coordinates);
+        let background: Background.Styles = Background.createArenaBackground(this.props.locationPackage.browserLocation);
 
         const arenaStyle = {
             background: background.Color + ", " + background.Image + ", " + background.Repeat,
@@ -33,7 +33,7 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
         return (
             <div className={Constants.Classes.arena} style={arenaStyle}>
-                <Scene battle={BattleManager.getBattle()} />
+                <Scene battle={BattleManager.getBattle(this.props.locationPackage)} />
             </div>
         );
     }

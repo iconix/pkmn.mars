@@ -3,14 +3,15 @@ import {SceneState} from "../components/scene";
 import {Attack} from "../stages/attack";
 import {Stage} from "../stages/stage";
 
+import {Location} from "../location";
 import {Utils} from "../utils";
 
 import {Battle} from "./battle";
 import {BattleCharacter} from "./character";
 
 export module BattleManager {
-    export function getBattle(): Battle {
-        return new Battle(getRandAttacker(), getRandAttackName());
+    export function getBattle(locationPackage: Location.Package): Battle {
+        return new Battle(locationPackage, getRandAttacker(), getRandAttackName());
     }
 
     export function getNextState(state: SceneState, numActions: number): SceneState {

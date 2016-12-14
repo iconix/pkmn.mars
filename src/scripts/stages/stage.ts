@@ -11,6 +11,7 @@ import {Result} from "../stages/result";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
+import {Location} from "../location";
 import {Utils} from "../utils";
 
 export module Stage {
@@ -45,7 +46,7 @@ export module Stage {
 
     export class BattleStartFactory extends Factory {
 
-        constructor(scene: Scene) {
+        constructor(scene: Scene, location: Location.Package) {
             let animations: { [target: number]: Animation } = {};
 
             animations[BattleCharacter.Type.Player] = {
@@ -64,10 +65,9 @@ export module Stage {
             // hardcoded: currently, all battles start in the same way
             let actions: Action[] = [
                 { animations: animations},
-                // TODO Replace "1000" with distance between browser coordinates and Boosie coordinates
                 { animations: animations,
                     dialog: {
-                    text: Utils.formatString(Constants.Battle.DialogText.start, "1000"),
+                    text: Utils.formatString(Constants.Battle.DialogText.start, location.distanceBetween.toString()),
                     waitForTouchAfter: true
                 }}
             ];

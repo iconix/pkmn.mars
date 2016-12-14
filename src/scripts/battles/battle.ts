@@ -8,20 +8,23 @@ import {Stage} from "../stages/stage";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
+import {Location} from "../location";
 import {Utils} from "../utils";
 
 import {Action} from "./action";
 import {BattleCharacter} from "./character";
 
 export class Battle {
+    private attack: Attack;
     private attacker: BattleCharacter;
     private defender: BattleCharacter;
-    private attack: Attack;
+    private location: Location.Package;
 
-    constructor(attackerType: BattleCharacter.Type, attackName: Attack.Name) {
+    constructor(location: Location.Package, attackerType: BattleCharacter.Type, attackName: Attack.Name) {
+        this.attack = new Attack(attackName);
         this.attacker = new BattleCharacter(attackerType);
         this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
-        this.attack = new Attack(attackName);
+        this.location = location;
 
         console.log({
             attacker: this.attacker.getName() || "",
@@ -46,7 +49,7 @@ export class Battle {
 
         switch(stage) {
             case Stage.Type.BattleStart:
-                factory = new Stage.BattleStartFactory(scene);
+                factory = new Stage.BattleStartFactory(scene, this.location);
                 break;
             case Stage.Type.AttackReason:
                 factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender, this.attack);
