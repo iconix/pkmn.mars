@@ -8,10 +8,10 @@ import {Location} from "./location";
 
 Location.getLocationPackage().then((locationPackage: Location.Package) => {
     console.log({
-        browserLocation: {
-            latitude: locationPackage.browserLocation.latitude,
-            longitude: locationPackage.browserLocation.longitude,
-            friendlyName: locationPackage.browserLocation.friendlyName
+        playerLocation: {
+            latitude: locationPackage.playerLocation.latitude,
+            longitude: locationPackage.playerLocation.longitude,
+            friendlyName: locationPackage.playerLocation.friendlyName
         },
         opponentLocation: {
             latitude: locationPackage.opponentLocation.latitude,
@@ -20,6 +20,12 @@ Location.getLocationPackage().then((locationPackage: Location.Package) => {
         },
         distanceBetween: locationPackage.distanceBetween
     });
+
+    /*console.log({
+        playerLocation: locationPackage.playerLocation.friendlyName + " (" + locationPackage.playerLocation.latitude + ", " + locationPackage.playerLocation.longitude + ")",
+        opponentLocation: locationPackage.opponentLocation.friendlyName + " (" + locationPackage.opponentLocation.latitude + ", " + locationPackage.opponentLocation.longitude + ")",
+        distanceBetween: locationPackage.distanceBetween
+    });*/
 
     ReactDOM.render(
         <Arena locationPackage={locationPackage} />,

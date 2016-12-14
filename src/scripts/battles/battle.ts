@@ -44,6 +44,10 @@ export class Battle {
         return this.defender;
     }
 
+    public getLocationPackage(): Location.Package {
+        return this.location;
+    }
+
     public getStageFactory(stage: Stage.Type, scene: Scene): Stage.Factory {
         let factory: Stage.Factory;
 

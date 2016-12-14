@@ -24,7 +24,7 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
 
     render() {
-        let background: Background.Styles = Background.createArenaBackground(this.props.locationPackage.browserLocation);
+        let background: Background.Styles = Background.createArenaBackground(this.props.locationPackage.playerLocation);
 
         const arenaStyle = {
             background: background.Color + ", " + background.Image + ", " + background.Repeat,

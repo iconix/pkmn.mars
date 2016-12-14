@@ -14,6 +14,7 @@ import {Utils} from "../utils";
 import {Character} from "./character";
 import {DialogBox} from "./dialogBox";
 import {Field} from "./field";
+import {Label} from "./label";
 
 export interface SceneState {
     stage: Stage.Type;
@@ -60,11 +61,15 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                     imgSrc={Constants.Resources.opponentPokemonGif}
                     animation={opponentAnimation} />
 
+                <Label text={this.props.battle.getLocationPackage().opponentLocation.friendlyName} id={Constants.Ids.opponent} />
+
                 <Field />
 
                 <Character class={Constants.Classes.player}
                     imgSrc={Constants.Resources.playerPokemonGif}
                     animation={playerAnimation} />
+
+                <Label text={this.props.battle.getLocationPackage().playerLocation.friendlyName} id={Constants.Ids.player} />
 
                 { currentAction && currentAction.dialog ? <DialogBox dialog={currentAction.dialog} scene={this} /> : undefined }
             </div>

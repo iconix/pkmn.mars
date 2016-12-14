@@ -87,14 +87,17 @@ export module Constants {
 
     export module Classes {
         export const arena = "arena";
+        export const dialogBox = "dialogBox";
         export const field = "field";
+        export const label = "label";
         export const opponent = "opponent";
         export const player = "player";
         export const scene = "scene";
-        export const dialogBox = "dialogBox";
     }
 
     export module Ids {
+        export const opponent = Classes.opponent;
+        export const player = Classes.player;
         export const screen = "screen";
     }
 
@@ -111,4 +114,6 @@ export module Constants {
         export const playerPokemonGif = "src/sprites/absol_shiny_back.gif";
         export const arenaBackground = "src/sprites/background.png";
     }
+
+    export const unknownLocation = "<Unknown>";
 }
