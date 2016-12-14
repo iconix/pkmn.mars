@@ -40,15 +40,17 @@ export module TimeOfDay {
         if (date < boundaries.startOfDay) {
             if (date > boundaries.endOfNight) {
                 timeOfDay = Constants.TimeOfDay.DDK; // Dawn
+            } else {
+                timeOfDay = Constants.TimeOfDay.NHT; // Night
             }
-            timeOfDay = Constants.TimeOfDay.NHT; // Night
         } else {
             if (date < boundaries.endOfDay) {
                 timeOfDay = Constants.TimeOfDay.DAY; // Day
             } else if (date < boundaries.startOfNight) {
                 timeOfDay = Constants.TimeOfDay.DDK; // Dusk
+            } else {
+                timeOfDay = Constants.TimeOfDay.NHT; // Night
             }
-            timeOfDay = Constants.TimeOfDay.NHT; // Night
         }
 
         console.log(date.toTimeString(), "at", Constants.TimeOfDay[timeOfDay]);
