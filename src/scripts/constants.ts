@@ -101,6 +101,7 @@ export module Constants {
     export module Numbers {
         export const kingstonLatitude = 47.7987;
         export const kingstonLongitude = -122.4982;
+        export const metersToMilesFactor = 0.000621371;
         export const seattleLatitude = 47.6062;
         export const seattleLongitude = -122.3321;
     }

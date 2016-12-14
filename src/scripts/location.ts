@@ -28,8 +28,13 @@ export module Location {
         });
     }
 
-    function calculateDistanceBetween(coord1: Location.Coordinates, coord2: Location.Coordinates): number {
-        return 500; // TODO
+    function calculateDistanceBetween(coord1: Location.Coordinates, coord2: Location.Coordinates): number {;
+        let distanceInMeters: number = google.maps.geometry.spherical.computeDistanceBetween(
+            new google.maps.LatLng(coord1.latitude, coord1.longitude),
+            new google.maps.LatLng(coord2.latitude, coord2.longitude)
+        );
+
+        return Math.round(distanceInMeters * Constants.Numbers.metersToMilesFactor);
     }
 
     function getOpponentLocation(): Promise<Location.Coordinates> {
