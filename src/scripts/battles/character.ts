@@ -7,6 +7,10 @@ export class BattleCharacter {
         this.type = type;
     }
 
+    public getType(): BattleCharacter.Type {
+        return this.type;
+    }
+
     public getName(): string {
         return this.getModuleForBattleCharacterType().name;
     }

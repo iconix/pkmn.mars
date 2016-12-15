@@ -59,7 +59,7 @@ export class Battle {
                 factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.Attack:
-                factory = new Stage.AttackFactory(this.attacker, this.attack);
+                factory = new Stage.AttackFactory(scene, this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.Result:
                 factory = new Stage.ResultFactory(this.attack.getResultType(), this.defender);

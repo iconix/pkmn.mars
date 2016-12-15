@@ -91,14 +91,31 @@ export module Stage {
     }
 
     export class AttackFactory extends Factory {
-        constructor(attacker: BattleCharacter, attack: Attack) {
+        constructor(scene: Scene, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
+            let attackerAnimation: { [target: number]: Animation } = {};
+            attackerAnimation[attacker.getType()] = {
+                animation: "callout.shake",
+                duration: 500,
+                runOnMount: true,
+                complete: () => { scene.setState({ stage: Stage.Type.Attack, actionIndex: 2 }); }
+            };
+
+            let defenderAnimation: { [target: number]: Animation } = {};
+            defenderAnimation[defender.getType()] = {
+                animation: "callout.flash",
+                duration: 500,
+                runOnMount: true,
+                complete: () => { setTimeout(() => { scene.setState({ stage: Stage.Type.Result, actionIndex: 0 }); }, 500); }
+            };
+
             let actions: Action[] = [
                 { dialog: {
                     text: Utils.formatString(Constants.Battle.DialogText.attack, attacker.getName(), attack.getAttackName()),
                     waitForTouchAfter: true
-                }}
+                }},
+                { animations: attackerAnimation },
+                { animations: defenderAnimation }
             ];
-            // TODO add animation: on touch, Attacker lunges towards Defender. Defender flashes. dialog box should be hidden during this.
 
             super(Stage.Type.Attack, actions);
         }
