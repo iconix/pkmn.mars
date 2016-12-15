@@ -48,7 +48,7 @@ export module Location {
 
     function getOpponentLocation(): Promise<Location.Coordinates> {
         // TODO get coordinates from database
-        return createCoordinates(39.490054, -76.3390968);
+        return createCoordinates(47.625748, -122.344557);
     }
 
     function createCoordinates(lat: number, lng: number, friendlyName?: string): Promise<Location.Coordinates> {

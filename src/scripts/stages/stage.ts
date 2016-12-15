@@ -84,6 +84,7 @@ export module Stage {
                     waitForTouchAfter: true
                 }}
             ];
+            // TODO (optional) animate the reason (e.g., cold === shivering, or maybe add something to the field?)
 
             super(Stage.Type.AttackReason, actions);
         }
@@ -97,6 +98,7 @@ export module Stage {
                     waitForTouchAfter: true
                 }}
             ];
+            // TODO add animation: on touch, Attacker lunges towards Defender. Defender flashes. dialog box should be hidden during this.
 
             super(Stage.Type.Attack, actions);
         }
@@ -104,6 +106,7 @@ export module Stage {
 
     export class ResultFactory extends Factory {
         constructor(type: Result.Type, defender: BattleCharacter) {
+            // TODO add result animation, depending on result (e.g., fainted === defender disappears)
             let actions: Action[] = [
                 { dialog: {
                     text: Result.getResultDialog(type, defender),
