@@ -1,6 +1,13 @@
+@font-face {
+    font-family: pokemon;
+    src: url(../src/styles/pokemon.ttf);
+} /* TODO copy .ttf into target */
+
 #screen {
     display: flex;
     height: 100vh;
+    font-family: pokemon;
+    font-size: unit(8/.75, px);
 
     > .arena {
         display: flex;
@@ -39,15 +46,15 @@
             }
 
             > .label {
-                font-size: 10px;
+                font-size: 6px;
 
                 &#opponent {
                     align-self: flex-end;
-                    margin-right: 30px;
+                    margin-right: 20px;
                 }
 
                 &#player {
-                    margin-left: 40px;
+                    margin-left: 20px;
                 }
             }
         }

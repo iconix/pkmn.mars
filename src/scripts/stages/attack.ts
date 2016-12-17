@@ -31,7 +31,7 @@ export class Attack {
     }
 
     public getAttackName(): string {
-        return Attack.Name[this.name]; // TODO spacing of returned name
+        return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
     }
 
     public getAttackReasonType(): AttackReason.Type {

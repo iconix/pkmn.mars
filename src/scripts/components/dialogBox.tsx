@@ -5,6 +5,7 @@ import {Dialog} from "../battles/dialog";
 
 import {Constants} from "../constants";
 
+import {DialogText} from "./dialogText";
 import {Scene, SceneState, SceneProps} from "./scene";
 
 interface DialogBoxProps {
@@ -13,6 +14,10 @@ interface DialogBoxProps {
 }
 
 export class DialogBox extends React.Component<DialogBoxProps, {}> {
+    private getReadyForTouch = (prevState: SceneState, props: SceneProps) => {
+        return { stage: prevState.stage, actionIndex: prevState.actionIndex, waitingForTouch: this.props.dialog.waitForTouchAfter }
+    };
+
     private transitionEnterProps = {
         animation: "transition.slideLeftIn",
         style: {
@@ -23,21 +28,9 @@ export class DialogBox extends React.Component<DialogBoxProps, {}> {
         complete: () => { this.props.scene.setState(this.getReadyForTouch); }
     };
 
-    private getReadyForTouch = (prevState: SceneState, props: SceneProps) => {
-        return { stage: prevState.stage, actionIndex: prevState.actionIndex, waitingForTouch: this.props.dialog.waitForTouchAfter }
-    };
-
-    private getDialogText() {
-        return (
-            <div>
-                {this.props.dialog.text}
-            </div>
-        );
-    }
-
     render() {
         const key = this.props.dialog.text;
-        const textElement = this.getDialogText();
+        const textElement = <DialogText text={key} />;
 
         // add a unique key prop to the element to animate,
         // so that the transition group recognizes that the components are changing
@@ -46,7 +39,7 @@ export class DialogBox extends React.Component<DialogBoxProps, {}> {
 
         return (
             <div className={Constants.Classes.dialogBox}>
-                <VelocityTransitionGroup component="div" enter={this.transitionEnterProps} runOnMount>
+                <VelocityTransitionGroup enter={this.transitionEnterProps} runOnMount>
                     {textToAnimate}
                 </VelocityTransitionGroup>
             </div>

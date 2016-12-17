@@ -80,7 +80,7 @@ export module Constants {
                 export const didGood = "{0} did good!"; // "[Attacker] did good!"
                 export const evolutionComplete = "{0} has {1} Evolved into {1} {0}!"; // "[Attacker] has [EvolutionType] Evolved into [EvolutionType] [Attacker]!"
                 export const meantWell = "{0} meant well..."; // "[Attacker] meant well..."
-                export const stillLiked = "... ...{0} still liked it!"; // "[Defender] still liked it!" // TODO animate the ellipsis as an extra dialog box
+                export const stillLiked = "... ...\n\n{0} still liked it!"; // "[Defender] still liked it!" // TODO animate the ellipsis as an extra dialog box?
             }
         }
     }
@@ -88,6 +88,7 @@ export module Constants {
     export module Classes {
         export const arena = "arena";
         export const dialogBox = "dialogBox";
+        export const dialogText = "dialogText";
         export const field = "field";
         export const label = "label";
         export const opponent = "opponent";
