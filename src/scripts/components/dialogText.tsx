@@ -7,6 +7,8 @@ interface DialogTextProps {
 }
 
 export class DialogText extends React.Component<DialogTextProps, {}> {
+    // TODO enforce max character limit of 64
+
     render() {
         return (
             <div id={Constants.Classes.dialogText}>
