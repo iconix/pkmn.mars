@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "express": "^4.14.0",
-    "morgan": "^1.7.0", // TODO logging?
+    "morgan": "^1.7.0",
     "suncalc": "^1.7.0"
   },
   "peerDependencies": {
