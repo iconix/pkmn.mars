@@ -1,4 +1,5 @@
 const express = require('express');
+const forceSSL = require('express-force-ssl');
 const morgan = require('morgan');
 const path = require('path');
 
@@ -9,6 +10,10 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'target')));
+
+app.use(forceSSL, {
+  trustXFPHeader: true
+});
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
