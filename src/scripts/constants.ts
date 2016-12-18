@@ -77,7 +77,7 @@ export module Constants {
             }
 
             export module FinalDialog {
-                export const didGood = "{0} did good!"; // "[Attacker] did good!"
+                export const didGood = "{0} did some good!"; // "[Attacker] did some good!"
                 export const evolutionComplete = "{0} has {1} Evolved into {1} {0}!"; // "[Attacker] has [EvolutionType] Evolved into [EvolutionType] [Attacker]!"
                 export const meantWell = "{0} meant well..."; // "[Attacker] meant well..."
                 export const stillLiked = "... ...\n\n{0} still liked it!"; // "[Defender] still liked it!" // TODO animate the ellipsis as an extra dialog box?
@@ -111,9 +111,9 @@ export module Constants {
     }
 
     export module Resources {
-        export const opponentPokemonGif = "src/sprites/gallade_norm_front.gif";
-        export const playerPokemonGif = "src/sprites/absol_shiny_back.gif";
-        export const arenaBackground = "src/sprites/background.png";
+        export const opponentPokemonGif = "assets/gallade_norm_front.gif";
+        export const playerPokemonGif = "assets/absol_shiny_back.gif";
+        export const arenaBackground = "assets/background.png";
     }
 
     export const unknownLocation = "<Unknown>";

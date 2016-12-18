@@ -1,7 +1,13 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+
 module.exports = {
-    entry: "./src/scripts/app.tsx",
+    entry: [
+        "./src/scripts/app.tsx",
+        './src/styles/styles.less'
+    ],
     output: {
-        filename: "bundle.js",
+        filename: "static/js/bundle.js",
         path: __dirname + "/target"
     },
 
@@ -16,7 +22,9 @@ module.exports = {
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.less$/, loader: "style!css!autoprefixer!less" },
+            { test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/, loader: 'url-loader' }
         ],
 
         preLoaders: [
@@ -24,6 +32,18 @@ module.exports = {
             { test: /\.js$/, loader: "source-map-loader" }
         ]
     },
+    plugins: [
+        new WebpackCleanupPlugin(),
+        new CopyWebpackPlugin([
+            { from: 'src/index.html' },
+            { from: 'node_modules/suncalc/suncalc.js', to: 'static/js' },
+            {
+                context: 'src/sprites',
+                from: '**/*',
+                to: 'assets'
+            },
+        ])
+    ],
 
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.
