@@ -59,7 +59,7 @@ export module Stage {
                 animation: "transition.slideLeftIn",
                 duration: 500,
                 runOnMount: true,
-                complete: () => { scene.setState({ stage: Stage.Type.BattleStart, actionIndex: 1 }); }
+                advanceStage: true
             };
 
             // hardcoded: currently, all battles start in the same way
@@ -98,31 +98,53 @@ export module Stage {
             let defenderAnimation: { [target: number]: Animation } = {};
             defenderAnimation[defender.getType()] = attack.getDefenderAnimation(scene);
 
+            let attackDialog: string = Utils.formatString(Constants.Battle.DialogText.attack, attacker.getName(), attack.getAttackName());
+
             let actions: Action[] = [];
-            if (attack.getAttack() !== Attack.Name.Mega && attack.getAttack() !== Attack.Name.Emoji) {
+
+            if (attackDialog && attack.getAttack() !== Attack.Name.Emoji && attack.getAttack() !== Attack.Name.Mega) {
                 actions.push({ dialog: {
-                    text: Utils.formatString(Constants.Battle.DialogText.attack, attacker.getName(), attack.getAttackName()),
+                    text: attackDialog,
                     waitForTouchAfter: true
                 }});
             }
 
-            actions.push(
-                { animations: attackerAnimation },
-                { animations: defenderAnimation }
-            );
+            if (attackerAnimation[attacker.getType()]) {
+                actions.push({ animations: attackerAnimation });
+            }
+
+            if (defenderAnimation[defender.getType()]) {
+                actions.push({ animations: defenderAnimation });
+            }
 
             super(Stage.Type.Attack, actions);
         }
     }
 
     export class ResultFactory extends Factory {
-        constructor(type: Result.Type, defender: BattleCharacter) {
+        constructor(scene: Scene, type: Result.Type, attacker: BattleCharacter, defender: BattleCharacter) {
+            let attackerAnimation: { [target: number]: Animation } = {};
+            attackerAnimation[attacker.getType()] = Result.getAttackerAnimation(scene, type);
+
+            let defenderAnimation: { [target: number]: Animation } = {};
+            defenderAnimation[defender.getType()] = Result.getDefenderAnimation(scene, type);
+
+            let resultDialog: string = Result.getResultDialog(type, defender);
+
             // TODO add result animation, depending on result (e.g., fainted === defender disappears)
             let actions: Action[] = [];
 
-            if (type) {
+            if (attackerAnimation[attacker.getType()]) {
+                actions.push({ animations: attackerAnimation });
+            }
+
+            if (defenderAnimation[defender.getType()]) {
+                actions.push({ animations: defenderAnimation });
+            }
+
+            if (resultDialog) {
                 actions.push({ dialog: {
-                    text: Result.getResultDialog(type, defender),
+                    text: resultDialog,
                     waitForTouchAfter: true
                 }});
             }

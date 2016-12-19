@@ -59,7 +59,9 @@ export class Scene extends React.Component<SceneProps, SceneState> {
             <div className={Constants.Classes.scene} onTouchStart={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
                 <Character class={Constants.Classes.opponent}
                     imgSrc={Constants.Resources.opponentPokemonGif}
-                    animation={opponentAnimation} />
+                    animation={opponentAnimation}
+                    numActions={stageFactory.getNumActions()}
+                    scene={this} />
 
                 <Label text={this.props.battle.getLocationPackage().opponentLocation.friendlyName} id={Constants.Ids.opponent} />
 
@@ -67,7 +69,9 @@ export class Scene extends React.Component<SceneProps, SceneState> {
 
                 <Character class={Constants.Classes.player}
                     imgSrc={Constants.Resources.playerPokemonGif}
-                    animation={playerAnimation} />
+                    animation={playerAnimation}
+                    numActions={stageFactory.getNumActions()}
+                    scene={this} />
 
                 <Label text={this.props.battle.getLocationPackage().playerLocation.friendlyName} id={Constants.Ids.player} />
 

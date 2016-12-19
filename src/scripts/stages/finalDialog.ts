@@ -5,10 +5,10 @@ import {Utils} from "../utils";
 
 export module FinalDialog {
     export enum Type {
-        DidGood,
-        EvolutionComplete,
+        DidGood, // TODO animation: defender "callout.bounce"
+        EvolutionComplete, // TODO animation: attacker "callout.bounce"
         MeantWell,
-        StillLiked
+        StillLiked // TODO animation: defender "callout.bounce"
     }
 
     export function getFinalDialog(type: FinalDialog.Type, attacker: BattleCharacter, defender: BattleCharacter, attackName: string): string {

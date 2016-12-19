@@ -62,7 +62,7 @@ export class Battle {
                 factory = new Stage.AttackFactory(scene, this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.Result:
-                factory = new Stage.ResultFactory(this.attack.getResultType(), this.defender);
+                factory = new Stage.ResultFactory(scene, this.attack.getResultType(), this.attacker, this.defender);
                 break;
             case Stage.Type.FinalDialog:
                 factory = new Stage.FinalDialogFactory(this.attack.getFinalDialogType(), this.attacker, this.defender, this.attack);

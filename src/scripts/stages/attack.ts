@@ -35,11 +35,13 @@ export class Attack {
 
     public getAttackerAnimation(scene: Scene): Animation {
         let animationName: string;
+        let advanceStageDelay: number;
 
         switch (this.name) {
             case Attack.Name.Mega:
             case Attack.Name.Emoji:
                 animationName = "callout.pulse"; // TODO loop this animation 3x?
+                advanceStageDelay = 500;
                 break;
             default:
                 animationName = "callout.shake";
@@ -49,27 +51,27 @@ export class Attack {
             animation: animationName,
             duration: 500,
             runOnMount: true,
-            complete: () => { scene.setState({ stage: Stage.Type.Attack, actionIndex: 2 }); }
+            advanceStage: true,
+            advanceStageDelay: advanceStageDelay
         };
     }
 
     public getDefenderAnimation(scene: Scene): Animation {
-        let animationName: string;
-
         switch (this.name) {
             case Attack.Name.Mega:
             case Attack.Name.Emoji:
-                break; // TODO this might be a problem...
+                return;
             default:
-                animationName = "callout.flash";
+                return {
+                    animation: "callout.flash",
+                    duration: 500,
+                    runOnMount: true,
+                    advanceStage: true,
+                    advanceStageDelay: 500
+                };
         }
 
-        return {
-            animation: animationName,
-            duration: 500,
-            runOnMount: true,
-            complete: () => { setTimeout(() => { scene.setState({ stage: Stage.Type.Result, actionIndex: 0 }); }, 500); }
-        };
+
     }
 
     public getAttackReasonType(): AttackReason.Type {
@@ -156,8 +158,10 @@ export class Attack {
                 this.result = Result.Type.SpeedFell;
                 break;
             case Attack.Name.Emoji:
+                this.result = Result.Type.EmojiEvolved;
+                break;
             case Attack.Name.Mega:
-                // TODO animation only
+                this.result = Result.Type.MegaEvolved;
                 break;
         }
     }
