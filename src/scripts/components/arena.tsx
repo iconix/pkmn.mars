@@ -15,13 +15,23 @@ interface ArenaProps {
 }
 
 export class Arena extends React.Component<ArenaProps, {}> {
-    constructor (props: ArenaProps) {
+    constructor(props: ArenaProps) {
         super(props);
         this.state = {
             currentStage: Stage.Type.BattleStart
         };
     }
 
+    componentDidMount() {
+        let backgroundImgWidth = 250;
+        let scale = (screen.width/backgroundImgWidth);
+
+        let metaTag=document.createElement('meta');
+        metaTag.name = 'viewport';
+        metaTag.content = 'initial-scale=' + scale;
+
+        document.getElementsByTagName('head')[0].appendChild(metaTag);
+    }
 
     render() {
         let background: Background.Styles = Background.createArenaBackground(this.props.locationPackage.playerLocation);
