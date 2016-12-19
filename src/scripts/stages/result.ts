@@ -29,7 +29,7 @@ export module Result {
             case Result.Type.EmojiEvolved:
             case Result.Type.MegaEvolved:
                 return {
-                    animation: "callout.flash", // TODO VelocityComponent doesn't support two "callout.bounce" in a row - make character use VelocityTransitionGroup, then switch this back to bounce
+                    animation: "callout.flash",
                     duration: 500,
                     runOnMount: true,
                     advanceStage: true

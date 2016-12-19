@@ -1,6 +1,8 @@
 import {Action} from "../battles/action";
+import {BattleCharacter} from "../battles/character";
 
 import {Animation} from "../animation";
+import {Constants} from "../constants";
 
 import {AttackReason} from "./attackReason";
 import {FinalDialog} from "./finalDialog";
@@ -29,6 +31,59 @@ export class Attack {
 
     public getAttackName(): string {
         return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
+    }
+
+    // TODO collapse get___ImageSrc(...) functions into one
+    public getOpponentImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): string {
+        // defender is always non-evo
+        if (BattleCharacter.Type.Opponent !== attackerType) {
+            return Constants.Resources.opponentPokemonGif;
+        }
+
+        // early stages are always non-evo
+        switch (stageType) {
+            case Stage.Type.BattleStart:
+            case Stage.Type.AttackReason:
+            case Stage.Type.Attack:
+                return Constants.Resources.opponentPokemonGif;
+            default:
+                break;
+        }
+
+        // only the Emoji and Mego Evolution attacks can provide evo
+        switch (this.getAttack()) {
+            case Attack.Name.Emoji: // TODO emoji opponent resource
+            case Attack.Name.Mega:
+                return Constants.Resources.opponentMegaImg;
+            default:
+                return Constants.Resources.opponentPokemonGif;
+        }
+    }
+
+    public getPlayerImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): string {
+        // defender is always non-evo
+        if (BattleCharacter.Type.Player !== attackerType) {
+            return Constants.Resources.playerPokemonGif;
+        }
+
+        // early stages are always non-evo
+        switch (stageType) {
+            case Stage.Type.BattleStart:
+            case Stage.Type.AttackReason:
+            case Stage.Type.Attack:
+                return Constants.Resources.playerPokemonGif;
+            default:
+                break;
+        }
+
+        // only the Emoji and Mego Evolution attacks can provide evo
+        switch (this.getAttack()) {
+            case Attack.Name.Emoji: // TODO emoji opponent resource
+            case Attack.Name.Mega:
+                return Constants.Resources.playerMegaImg;
+            default:
+                return Constants.Resources.playerPokemonGif;
+        }
     }
 
     public getAttackerAnimation(): Animation {

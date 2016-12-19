@@ -38,6 +38,9 @@ export class Scene extends React.Component<SceneProps, SceneState> {
     private sceneTouchEvent: React.EventHandler<React.TouchEvent<HTMLDivElement>>;
 
     render() {
+        let opponentImageSrc: string = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Opponent, this.state.stage);
+        let playerImageSrc: string = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Player, this.state.stage);
+
         let stageFactory: Stage.Factory = this.props.battle.getStageFactory(this.state.stage);
         let currentAction: Action = stageFactory.getAction(this.state.actionIndex);
 
@@ -58,7 +61,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
         return (
             <div className={Constants.Classes.scene} onTouchStart={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
                 <Character class={Constants.Classes.opponent}
-                    imgSrc={Constants.Resources.opponentPokemonGif}
+                    imgSrc={opponentImageSrc}
                     animation={opponentAnimation}
                     numActions={stageFactory.getNumActions()}
                     scene={this} />
@@ -68,7 +71,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                 <Field />
 
                 <Character class={Constants.Classes.player}
-                    imgSrc={Constants.Resources.playerPokemonGif}
+                    imgSrc={playerImageSrc}
                     animation={playerAnimation}
                     numActions={stageFactory.getNumActions()}
                     scene={this} />

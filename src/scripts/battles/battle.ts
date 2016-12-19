@@ -46,6 +46,14 @@ export class Battle {
         return this.location;
     }
 
+    public getCharacterImgSrc(characterType: BattleCharacter.Type, stageType: Stage.Type): string {
+        if (characterType === BattleCharacter.Type.Opponent) {
+            return this.attack.getOpponentImageSrc(stageType, this.attacker.getType());
+        } else {
+            return this.attack.getPlayerImageSrc(stageType, this.attacker.getType());
+        }
+    }
+
     public getStageFactory(stage: Stage.Type): Stage.Factory {
         let factory: Stage.Factory;
 

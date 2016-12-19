@@ -24,7 +24,7 @@ export module Stage {
     }
 
     export abstract class Factory {
-        protected actions: Action[];
+        private actions: Action[];
 
         constructor(type: Stage.Type, actions: Action[]) {
             this.type = type;
