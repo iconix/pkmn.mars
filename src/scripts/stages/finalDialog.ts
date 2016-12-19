@@ -1,14 +1,54 @@
 import {BattleCharacter} from "../battles/character";
 
+import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {Utils} from "../utils";
 
 export module FinalDialog {
     export enum Type {
-        DidGood, // TODO animation: defender "callout.bounce"
-        EvolutionComplete, // TODO animation: attacker "callout.bounce"
+        DidGood,
+        EvolutionComplete,
         MeantWell,
-        StillLiked // TODO animation: defender "callout.bounce"
+        StillLiked
+    }
+
+    export function getAttackerAnimation(type: FinalDialog.Type): Animation {
+        let animationName: string;
+        let duration: number = 500;
+
+        switch (type) {
+            case FinalDialog.Type.DidGood:
+            case FinalDialog.Type.EvolutionComplete:
+                animationName = "callout.bounce";
+                break;
+            case FinalDialog.Type.MeantWell:
+                animationName = "callout.tada"; // TODO delay this animation
+                duration = 100;
+                break;
+            default:
+                return;
+        }
+
+        return {
+            animation: animationName,
+            duration: duration,
+            runOnMount: true,
+            advanceStage: true
+        };
+    }
+
+    export function getDefenderAnimation(type: FinalDialog.Type): Animation {
+        switch (type) {
+            case FinalDialog.Type.StillLiked:
+                return {
+                    animation: "callout.bounce",
+                    duration: 500,
+                    runOnMount: true,
+                    advanceStage: true
+                };
+            default:
+                return;
+        }
     }
 
     export function getFinalDialog(type: FinalDialog.Type, attacker: BattleCharacter, defender: BattleCharacter, attackName: string): string {

@@ -1,7 +1,5 @@
 import {Action} from "../battles/action";
 
-import {Scene} from "../components/scene";
-
 import {Animation} from "../animation";
 
 import {AttackReason} from "./attackReason";
@@ -33,7 +31,7 @@ export class Attack {
         return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
     }
 
-    public getAttackerAnimation(scene: Scene): Animation {
+    public getAttackerAnimation(): Animation {
         let animationName: string;
         let advanceStageDelay: number;
 
@@ -56,7 +54,7 @@ export class Attack {
         };
     }
 
-    public getDefenderAnimation(scene: Scene): Animation {
+    public getDefenderAnimation(): Animation {
         switch (this.name) {
             case Attack.Name.Mega:
             case Attack.Name.Emoji:

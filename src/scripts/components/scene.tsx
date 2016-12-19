@@ -38,7 +38,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
     private sceneTouchEvent: React.EventHandler<React.TouchEvent<HTMLDivElement>>;
 
     render() {
-        let stageFactory: Stage.Factory = this.props.battle.getStageFactory(this.state.stage, this);
+        let stageFactory: Stage.Factory = this.props.battle.getStageFactory(this.state.stage);
         let currentAction: Action = stageFactory.getAction(this.state.actionIndex);
 
         let opponentAnimation: Animation;

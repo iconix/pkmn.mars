@@ -1,7 +1,5 @@
 import {BattleCharacter} from "../battles/character";
 
-import {Scene} from "../components/scene";
-
 import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {Utils} from "../utils";
@@ -23,15 +21,15 @@ export module Result {
         MegaEvolved,
         Paralyzed,
         SpeedFell,
-        WokeUp
+        WokeUp // TODO defender animation "callout.bounce"
     }
 
-    export function getAttackerAnimation(scene: Scene, type: Result.Type): Animation {
+    export function getAttackerAnimation(type: Result.Type): Animation {
         switch (type) {
             case Result.Type.EmojiEvolved:
             case Result.Type.MegaEvolved:
                 return {
-                    animation: "callout.bounce",
+                    animation: "callout.flash", // TODO VelocityComponent doesn't support two "callout.bounce" in a row - make character use VelocityTransitionGroup, then switch this back to bounce
                     duration: 500,
                     runOnMount: true,
                     advanceStage: true
@@ -41,7 +39,7 @@ export module Result {
         }
     }
 
-    export function getDefenderAnimation(scene: Scene, type: Result.Type): Animation {
+    export function getDefenderAnimation(type: Result.Type): Animation {
         switch (type) {
             case Result.Type.EmojiEvolved:
             case Result.Type.MegaEvolved:

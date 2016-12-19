@@ -1,5 +1,3 @@
-import {Scene} from "../components/scene";
-
 import {Attack} from "../stages/attack";
 import {AttackReason} from "../stages/attackReason";
 import {FinalDialog} from "../stages/finalDialog";
@@ -48,21 +46,21 @@ export class Battle {
         return this.location;
     }
 
-    public getStageFactory(stage: Stage.Type, scene: Scene): Stage.Factory {
+    public getStageFactory(stage: Stage.Type): Stage.Factory {
         let factory: Stage.Factory;
 
         switch(stage) {
             case Stage.Type.BattleStart:
-                factory = new Stage.BattleStartFactory(scene, this.location);
+                factory = new Stage.BattleStartFactory(this.location);
                 break;
             case Stage.Type.AttackReason:
                 factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.Attack:
-                factory = new Stage.AttackFactory(scene, this.attacker, this.defender, this.attack);
+                factory = new Stage.AttackFactory(this.attacker, this.defender, this.attack);
                 break;
             case Stage.Type.Result:
-                factory = new Stage.ResultFactory(scene, this.attack.getResultType(), this.attacker, this.defender);
+                factory = new Stage.ResultFactory(this.attack.getResultType(), this.attacker, this.defender);
                 break;
             case Stage.Type.FinalDialog:
                 factory = new Stage.FinalDialogFactory(this.attack.getFinalDialogType(), this.attacker, this.defender, this.attack);

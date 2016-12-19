@@ -2,10 +2,9 @@ import {Action} from "../battles/action";
 import {BattleCharacter} from "../battles/character";
 import {Dialog} from "../battles/dialog";
 
-import {Scene} from "../components/scene";
-
 import {Attack} from "../stages/attack";
 import {AttackReason} from "../stages/attackReason";
+import {BattleStart} from "../stages/battleStart";
 import {FinalDialog} from "../stages/finalDialog";
 import {Result} from "../stages/result";
 
@@ -46,21 +45,10 @@ export module Stage {
 
     export class BattleStartFactory extends Factory {
 
-        constructor(scene: Scene, location: Location.Package) {
+        constructor(location: Location.Package) {
             let animations: { [target: number]: Animation } = {};
-
-            animations[BattleCharacter.Type.Player] = {
-                animation: "transition.slideRightIn",
-                duration: 500,
-                runOnMount: true
-            };
-
-            animations[BattleCharacter.Type.Opponent] = {
-                animation: "transition.slideLeftIn",
-                duration: 500,
-                runOnMount: true,
-                advanceStage: true
-            };
+            animations[BattleCharacter.Type.Player] = BattleStart.getPlayerAnimation();
+            animations[BattleCharacter.Type.Opponent] = BattleStart.getOpponentAnimation();
 
             // hardcoded: currently, all battles start in the same way
             let actions: Action[] = [
@@ -91,12 +79,12 @@ export module Stage {
     }
 
     export class AttackFactory extends Factory {
-        constructor(scene: Scene, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
+        constructor(attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
             let attackerAnimation: { [target: number]: Animation } = {};
-            attackerAnimation[attacker.getType()] = attack.getAttackerAnimation(scene);
+            attackerAnimation[attacker.getType()] = attack.getAttackerAnimation();
 
             let defenderAnimation: { [target: number]: Animation } = {};
-            defenderAnimation[defender.getType()] = attack.getDefenderAnimation(scene);
+            defenderAnimation[defender.getType()] = attack.getDefenderAnimation();
 
             let attackDialog: string = Utils.formatString(Constants.Battle.DialogText.attack, attacker.getName(), attack.getAttackName());
 
@@ -122,12 +110,12 @@ export module Stage {
     }
 
     export class ResultFactory extends Factory {
-        constructor(scene: Scene, type: Result.Type, attacker: BattleCharacter, defender: BattleCharacter) {
+        constructor(type: Result.Type, attacker: BattleCharacter, defender: BattleCharacter) {
             let attackerAnimation: { [target: number]: Animation } = {};
-            attackerAnimation[attacker.getType()] = Result.getAttackerAnimation(scene, type);
+            attackerAnimation[attacker.getType()] = Result.getAttackerAnimation(type);
 
             let defenderAnimation: { [target: number]: Animation } = {};
-            defenderAnimation[defender.getType()] = Result.getDefenderAnimation(scene, type);
+            defenderAnimation[defender.getType()] = Result.getDefenderAnimation(type);
 
             let resultDialog: string = Result.getResultDialog(type, defender);
 
@@ -155,12 +143,30 @@ export module Stage {
 
     export class FinalDialogFactory extends Factory {
         constructor(type: FinalDialog.Type, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
-            let actions: Action[] = [
-                { dialog: {
-                    text: FinalDialog.getFinalDialog(type, attacker, defender, attack.getAttackName()),
+            let attackerAnimation: { [target: number]: Animation } = {};
+            attackerAnimation[attacker.getType()] = FinalDialog.getAttackerAnimation(type);
+
+            let defenderAnimation: { [target: number]: Animation } = {};
+            defenderAnimation[defender.getType()] = FinalDialog.getDefenderAnimation(type);
+
+            let finalDialog: string = FinalDialog.getFinalDialog(type, attacker, defender, attack.getAttackName());
+
+            let actions: Action[] = [];
+
+            if (attackerAnimation[attacker.getType()]) {
+                actions.push({ animations: attackerAnimation });
+            }
+
+            if (defenderAnimation[defender.getType()]) {
+                actions.push({ animations: defenderAnimation });
+            }
+
+            if (finalDialog) {
+                actions.push({ dialog: {
+                    text: finalDialog,
                     waitForTouchAfter: true
-                }}
-            ];
+                }});
+            }
 
             super(Stage.Type.FinalDialog, actions);
         }
