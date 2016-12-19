@@ -113,8 +113,10 @@ export module Constants {
     export module Resources {
         export const opponentPokemonGif = "assets/gallade_norm_front.gif";
         export const opponentMegaImg = "assets/nadja_drawing.jpg"
+        export const opponentEmojiImg = "assets/emoji/emoji_n.png";
         export const playerPokemonGif = "assets/absol_shiny_back.gif";
         export const playerMegaImg = "assets/velma_dinkley.png";
+        export const playerEmojiImg = "assets/emoji/emoji_m_{0}-{1}.png";
         export const arenaBackground = "assets/background.png";
     }
 

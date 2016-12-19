@@ -3,6 +3,7 @@ import {BattleCharacter} from "../battles/character";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
+import {EmojiHelper} from "../emojiHelper";
 
 import {AttackReason} from "./attackReason";
 import {FinalDialog} from "./finalDialog";
@@ -52,7 +53,8 @@ export class Attack {
 
         // only the Emoji and Mego Evolution attacks can provide evo
         switch (this.getAttack()) {
-            case Attack.Name.Emoji: // TODO emoji opponent resource
+            case Attack.Name.Emoji:
+                return EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Opponent);
             case Attack.Name.Mega:
                 return Constants.Resources.opponentMegaImg;
             default:
@@ -78,7 +80,8 @@ export class Attack {
 
         // only the Emoji and Mego Evolution attacks can provide evo
         switch (this.getAttack()) {
-            case Attack.Name.Emoji: // TODO emoji opponent resource
+            case Attack.Name.Emoji:
+                return EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Player);
             case Attack.Name.Mega:
                 return Constants.Resources.playerMegaImg;
             default:
@@ -93,7 +96,7 @@ export class Attack {
         switch (this.name) {
             case Attack.Name.Mega:
             case Attack.Name.Emoji:
-                animationName = "callout.pulse"; // TODO loop this animation 3x?
+                animationName = "callout.pulse";
                 advanceStageDelay = 500;
                 break;
             default:

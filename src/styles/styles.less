@@ -1,3 +1,14 @@
+@arenaBackgroundImgWidth: 250;
+@arenaBackgroundImgHeight: 198;
+
+@fontSize: 8/.75;
+
+@opponentGifWidth: 61;
+@opponentGifHeight: 74;
+
+@playerGifWidth: 68;
+@playerGifHeight: 59;
+
 @font-face {
     font-family: pokemon;
     src: url(pokemon.ttf);
@@ -7,15 +18,15 @@
     display: flex;
     height: 100vh;
     font-family: pokemon;
-    font-size: unit(8/.75, px);
+    font-size: unit(@fontSize, px);
 
     > .arena {
         display: flex;
         flex-direction: column;
         margin: auto;
 
-        width: 250px; /* from background-image width */
-        height: 198px; /* from background-image height */
+        width: unit(@arenaBackgroundImgWidth, px);
+        height: unit(@arenaBackgroundImgHeight, px);
 
         > .scene {
             display: flex;
@@ -40,18 +51,28 @@
                 margin-top: 25px;
                 margin-right: 25px;
 
+                width: unit(@opponentGifWidth, px);
+                height: unit(@opponentGifHeight, px);
+                display: flex;
+
                 > img {
-                    width: 61px; /* opponent gif width */
-                    height: 74px; /* opponent gif height */
+                    max-width: unit(@opponentGifWidth, px);
+                    max-height: unit(@opponentGifHeight, px);
+                    align-self: center;
                 }
             }
 
             > .player {
                 margin-left: 25px;
 
+                width: unit(@playerGifWidth, px);
+                height: unit(@playerGifHeight, px);
+                display: flex;
+
                 > img {
-                    width: 68px; /* player gif width */
-                    height: 59px; /* player gif height */
+                    max-width: unit(@playerGifWidth, px);
+                    max-height: unit(@playerGifHeight, px);
+                    align-self: center;
                 }
             }
 
