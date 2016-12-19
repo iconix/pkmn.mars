@@ -93,29 +93,23 @@ export module Stage {
     export class AttackFactory extends Factory {
         constructor(scene: Scene, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
             let attackerAnimation: { [target: number]: Animation } = {};
-            attackerAnimation[attacker.getType()] = {
-                animation: "callout.shake",
-                duration: 500,
-                runOnMount: true,
-                complete: () => { scene.setState({ stage: Stage.Type.Attack, actionIndex: 2 }); }
-            };
+            attackerAnimation[attacker.getType()] = attack.getAttackerAnimation(scene);
 
             let defenderAnimation: { [target: number]: Animation } = {};
-            defenderAnimation[defender.getType()] = {
-                animation: "callout.flash",
-                duration: 500,
-                runOnMount: true,
-                complete: () => { setTimeout(() => { scene.setState({ stage: Stage.Type.Result, actionIndex: 0 }); }, 500); }
-            };
+            defenderAnimation[defender.getType()] = attack.getDefenderAnimation(scene);
 
-            let actions: Action[] = [
-                { dialog: {
+            let actions: Action[] = [];
+            if (attack.getAttack() !== Attack.Name.Mega && attack.getAttack() !== Attack.Name.Emoji) {
+                actions.push({ dialog: {
                     text: Utils.formatString(Constants.Battle.DialogText.attack, attacker.getName(), attack.getAttackName()),
                     waitForTouchAfter: true
-                }},
+                }});
+            }
+
+            actions.push(
                 { animations: attackerAnimation },
                 { animations: defenderAnimation }
-            ];
+            );
 
             super(Stage.Type.Attack, actions);
         }
@@ -124,12 +118,14 @@ export module Stage {
     export class ResultFactory extends Factory {
         constructor(type: Result.Type, defender: BattleCharacter) {
             // TODO add result animation, depending on result (e.g., fainted === defender disappears)
-            let actions: Action[] = [
-                { dialog: {
+            let actions: Action[] = [];
+
+            if (type) {
+                actions.push({ dialog: {
                     text: Result.getResultDialog(type, defender),
                     waitForTouchAfter: true
-                }}
-            ];
+                }});
+            }
 
             super(Stage.Type.Result, actions);
         }

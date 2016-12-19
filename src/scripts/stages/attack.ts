@@ -20,18 +20,56 @@ export class Attack {
     constructor(name: Attack.Name) {
         this.name = name;
 
-        // TODO Map the animation
         this.setAttackReasonType();
         this.setResultType();
         this.setFinalDialogType();
     }
 
-    public getAttackAnimation(): Animation {
-        return this.animation;
+    public getAttack(): Attack.Name {
+        return this.name;
     }
 
     public getAttackName(): string {
         return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
+    }
+
+    public getAttackerAnimation(scene: Scene): Animation {
+        let animationName: string;
+
+        switch (this.name) {
+            case Attack.Name.Mega:
+            case Attack.Name.Emoji:
+                animationName = "callout.pulse"; // TODO loop this animation 3x?
+                break;
+            default:
+                animationName = "callout.shake";
+        }
+
+        return {
+            animation: animationName,
+            duration: 500,
+            runOnMount: true,
+            complete: () => { scene.setState({ stage: Stage.Type.Attack, actionIndex: 2 }); }
+        };
+    }
+
+    public getDefenderAnimation(scene: Scene): Animation {
+        let animationName: string;
+
+        switch (this.name) {
+            case Attack.Name.Mega:
+            case Attack.Name.Emoji:
+                break; // TODO this might be a problem...
+            default:
+                animationName = "callout.flash";
+        }
+
+        return {
+            animation: animationName,
+            duration: 500,
+            runOnMount: true,
+            complete: () => { setTimeout(() => { scene.setState({ stage: Stage.Type.Result, actionIndex: 0 }); }, 500); }
+        };
     }
 
     public getAttackReasonType(): AttackReason.Type {
@@ -164,14 +202,14 @@ export module Attack {
         Attract,
         Bite,
         BodySlam,
-        Emoji, // TODO does not have Attack dialog
+        Emoji,
         FreezeDry,
         Frustration,
         HeartStamp,
         HeatWave,
         IcyWind,
         Lick,
-        Mega, // TODO does not have Attack dialog
+        Mega,
         Nuzzle,
         Outrage,
         PlayRough,
