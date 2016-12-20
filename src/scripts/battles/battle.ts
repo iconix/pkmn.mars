@@ -20,8 +20,8 @@ export class Battle {
     private defender: BattleCharacter;
     private location: Location.Package;
 
-    constructor(location: Location.Package, attackerType: BattleCharacter.Type, attackName: Attack.Name) {
-        this.attack = new Attack(attackName);
+    constructor(location: Location.Package, attackerType: BattleCharacter.Type, attackReasonType: AttackReason.Type) {
+        this.attack = new Attack(attackReasonType);
         this.attacker = new BattleCharacter(attackerType);
         this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
         this.location = location;

@@ -45,4 +45,54 @@ export module AttackReason {
                 return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotModifiers[randHotModifier][0], hotModifiers[randHotModifier][1]);
         }
     }
+
+    export function getAttackNamesByReasonType(reasonType: AttackReason.Type): Attack.Name[] {
+        let attackNames: Attack.Name[];
+
+        switch (reasonType) {
+            case AttackReason.Type.DistanceClose:
+                attackNames = [
+                    Attack.Name.Bite,
+                    Attack.Name.BodySlam,
+                    Attack.Name.Lick,
+                    Attack.Name.Nuzzle,
+                    Attack.Name.PlayRough,
+                    Attack.Name.WakeUpSlap
+                ];
+                break;
+            case AttackReason.Type.DistanceFar:
+                attackNames = [
+                    Attack.Name.Attract,
+                    Attack.Name.Frustration,
+                    Attack.Name.HeartStamp,
+                    Attack.Name.Outrage,
+                    Attack.Name.Present
+                ];
+                break;
+            case AttackReason.Type.EvolutionEmoji:
+                attackNames = [
+                    Attack.Name.Emoji
+                ];
+                break;
+            case AttackReason.Type.EvolutionMega:
+                attackNames = [
+                    Attack.Name.Mega
+                ];
+                break;
+            case AttackReason.Type.TemperatureCold:
+                attackNames = [
+                    Attack.Name.HeatWave,
+                    Attack.Name.SunnyDay
+                ];
+                break;
+            case AttackReason.Type.TemperatureHot:
+                attackNames = [
+                    Attack.Name.FreezeDry,
+                    Attack.Name.IcyWind
+                ];
+                break;
+        }
+
+        return attackNames;
+    }
 }

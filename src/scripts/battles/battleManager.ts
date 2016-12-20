@@ -1,6 +1,6 @@
 import {SceneState} from "../components/scene";
 
-import {Attack} from "../stages/attack";
+import {AttackReason} from "../stages/attackReason";
 import {Stage} from "../stages/stage";
 
 import {Location} from "../location";
@@ -11,7 +11,7 @@ import {BattleCharacter} from "./character";
 
 export module BattleManager {
     export function getBattle(locationPackage: Location.Package): Battle {
-        return new Battle(locationPackage, getRandAttacker(), getRandAttackName());
+        return new Battle(locationPackage, getRandAttacker(), getRandAttackReasonType());
     }
 
     export function getNextState(state: SceneState, numActions: number): SceneState {
@@ -46,13 +46,13 @@ export module BattleManager {
         return Utils.getRandomInt(1);
     }
 
-    function getRandAttackName(): Attack.Name {
-        let numAttacks = 0;
-        for(let name in Attack.Name) {
-            if (typeof Attack.Name[name] === "number") {
-                numAttacks++;
+    function getRandAttackReasonType(): AttackReason.Type {
+        let numReasons = 0;
+        for(let name in AttackReason.Type) {
+            if (typeof AttackReason.Type[name] === "number") {
+                numReasons++;
             }
         }
-        return Utils.getRandomInt(numAttacks - 1);
+        return Utils.getRandomInt(numReasons - 1);
     }
 }

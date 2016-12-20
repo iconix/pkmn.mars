@@ -6,6 +6,7 @@ import {CharacterImage} from "../components/character";
 import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {EmojiHelper} from "../emojiHelper";
+import {Utils} from "../utils";
 
 import {AttackReason} from "./attackReason";
 import {FinalDialog} from "./finalDialog";
@@ -16,20 +17,29 @@ export class Attack {
     private name: Attack.Name;
     private animation: Animation;
 
-    private attackReason: AttackReason.Type;
-    private result: Result.Type;
-    private finalDialog: FinalDialog.Type;
+    private attackReasonType: AttackReason.Type;
+    private resultType: Result.Type;
+    private finalDialogType: FinalDialog.Type;
 
-    constructor(name: Attack.Name) {
-        this.name = name;
+    constructor(reasonType: AttackReason.Type) {
+        this.attackReasonType = reasonType;
 
-        this.setAttackReasonType();
+        this.setAttack();
         this.setResultType();
         this.setFinalDialogType();
     }
 
     public getAttack(): Attack.Name {
         return this.name;
+    }
+
+    private setAttack(): void {
+        this.name = this.getRandAttackName();
+    }
+
+    private getRandAttackName(): Attack.Name {
+        let availableAttacks: Attack.Name[] = AttackReason.getAttackNamesByReasonType(this.attackReasonType);
+        return availableAttacks[Utils.getRandomInt(availableAttacks.length - 1)];
     }
 
     public getAttackName(): string {
@@ -46,7 +56,7 @@ export class Attack {
                 case Stage.Type.Attack:
                     return { src: Constants.Resources.opponentPokemonGif };
                 default:
-                    if (this.result === Result.Type.Fainted) {
+                    if (this.resultType === Result.Type.Fainted) {
                         return { src: Constants.Resources.opponentPokemonGif, hidden: true }
                     }
                     return { src: Constants.Resources.opponentPokemonGif };
@@ -83,7 +93,7 @@ export class Attack {
                 case Stage.Type.Attack:
                     return { src: Constants.Resources.playerPokemonGif };
                 default:
-                    if (this.result === Result.Type.Fainted) {
+                    if (this.resultType === Result.Type.Fainted) {
                         return { src: Constants.Resources.playerPokemonGif, hidden: true }
                     }
                     return { src: Constants.Resources.playerPokemonGif };
@@ -153,106 +163,72 @@ export class Attack {
     }
 
     public getAttackReasonType(): AttackReason.Type {
-        return this.attackReason;
-    }
-
-    private setAttackReasonType(): void {
-        switch (this.name) {
-            case Attack.Name.Bite:
-            case Attack.Name.BodySlam:
-            case Attack.Name.Lick:
-            case Attack.Name.Nuzzle:
-            case Attack.Name.PlayRough:
-            case Attack.Name.WakeUpSlap:
-                this.attackReason = AttackReason.Type.DistanceClose;
-                break;
-            case Attack.Name.Attract:
-            case Attack.Name.Frustration:
-            case Attack.Name.HeartStamp:
-            case Attack.Name.Outrage:
-            case Attack.Name.Present:
-                this.attackReason = AttackReason.Type.DistanceFar;
-                break;
-            case Attack.Name.Emoji:
-                this.attackReason = AttackReason.Type.EvolutionEmoji;
-                break;
-            case Attack.Name.Mega:
-                this.attackReason = AttackReason.Type.EvolutionMega;
-                break;
-            case Attack.Name.HeatWave:
-            case Attack.Name.SunnyDay:
-                this.attackReason = AttackReason.Type.TemperatureCold;
-                break;
-            case Attack.Name.FreezeDry:
-            case Attack.Name.IcyWind:
-                this.attackReason = AttackReason.Type.TemperatureHot;
-                break;
-        }
+        return this.attackReasonType;
     }
 
     public getResultType(): Result.Type {
-        return this.result;
+        return this.resultType;
     }
 
     private setResultType(): void {
         switch (this.name) {
             case Attack.Name.Bite:
             case Attack.Name.HeartStamp:
-                this.result = Result.Type.Flinched;
+                this.resultType = Result.Type.Flinched;
                 break;
             case Attack.Name.BodySlam:
             case Attack.Name.Frustration:
-                this.result = Result.Type.Fainted;
+                this.resultType = Result.Type.Fainted;
                 break;
             case Attack.Name.Lick:
             case Attack.Name.Nuzzle:
-                this.result = Result.Type.Paralyzed;
+                this.resultType = Result.Type.Paralyzed;
                 break;
             case Attack.Name.PlayRough:
-                this.result = Result.Type.AttackFell;
+                this.resultType = Result.Type.AttackFell;
                 break;
             case Attack.Name.WakeUpSlap:
-                this.result = Result.Type.WokeUp;
+                this.resultType = Result.Type.WokeUp;
                 break;
             case Attack.Name.Attract:
-                this.result = Result.Type.Infatuated;
+                this.resultType = Result.Type.Infatuated;
                 break;
             case Attack.Name.Outrage:
-                this.result = Result.Type.Confused;
+                this.resultType = Result.Type.Confused;
                 break;
             case Attack.Name.Present:
-                this.result = Result.Type.HpRestored;
+                this.resultType = Result.Type.HpRestored;
                 break;
             case Attack.Name.HeatWave:
-                this.result = Result.Type.Burned;
+                this.resultType = Result.Type.Burned;
                 break;
             case Attack.Name.SunnyDay:
-                this.result = Result.Type.HarshSunlight;
+                this.resultType = Result.Type.HarshSunlight;
                 break;
             case Attack.Name.FreezeDry:
-                this.result = Result.Type.Frozen;
+                this.resultType = Result.Type.Frozen;
                 break;
             case Attack.Name.IcyWind:
-                this.result = Result.Type.SpeedFell;
+                this.resultType = Result.Type.SpeedFell;
                 break;
             case Attack.Name.Emoji:
-                this.result = Result.Type.EmojiEvolved;
+                this.resultType = Result.Type.EmojiEvolved;
                 break;
             case Attack.Name.Mega:
-                this.result = Result.Type.MegaEvolved;
+                this.resultType = Result.Type.MegaEvolved;
                 break;
         }
     }
 
     public getFinalDialogType(): FinalDialog.Type {
-        return this.finalDialog;
+        return this.finalDialogType;
     }
 
     private setFinalDialogType(): void {
         switch (this.name) {
             case Attack.Name.Attract:
             case Attack.Name.Present:
-                this.finalDialog = FinalDialog.Type.DidGood;
+                this.finalDialogType = FinalDialog.Type.DidGood;
                 break;
             case Attack.Name.BodySlam:
             case Attack.Name.FreezeDry:
@@ -262,18 +238,18 @@ export class Attack {
             case Attack.Name.IcyWind:
             case Attack.Name.Outrage:
             case Attack.Name.SunnyDay:
-                this.finalDialog = FinalDialog.Type.MeantWell;
+                this.finalDialogType = FinalDialog.Type.MeantWell;
                 break;
             case Attack.Name.Bite:
             case Attack.Name.Lick:
             case Attack.Name.Nuzzle:
             case Attack.Name.PlayRough:
             case Attack.Name.WakeUpSlap:
-                this.finalDialog = FinalDialog.Type.StillLiked;
+                this.finalDialogType = FinalDialog.Type.StillLiked;
                 break;
             case Attack.Name.Emoji:
             case Attack.Name.Mega:
-                this.finalDialog = FinalDialog.Type.EvolutionComplete;
+                this.finalDialogType = FinalDialog.Type.EvolutionComplete;
                 break;
         }
     }
