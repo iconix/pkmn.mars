@@ -18,12 +18,14 @@ export class Attack {
     private animation: Animation;
 
     private attackReasonType: AttackReason.Type;
+    private attackReasonModifiers: AttackReason.Modifiers;
     private resultType: Result.Type;
     private finalDialogType: FinalDialog.Type;
 
-    constructor(reasonType: AttackReason.Type) {
+    constructor(reasonType: AttackReason.Type, distance: number) {
         this.attackReasonType = reasonType;
 
+        this.attackReasonModifiers = AttackReason.getModifiers(distance);
         this.setAttack();
         this.setResultType();
         this.setFinalDialogType();
@@ -164,6 +166,10 @@ export class Attack {
 
     public getAttackReasonType(): AttackReason.Type {
         return this.attackReasonType;
+    }
+
+    public getAttackReasonModifiers(): AttackReason.Modifiers {
+        return this.attackReasonModifiers;
     }
 
     public getResultType(): Result.Type {

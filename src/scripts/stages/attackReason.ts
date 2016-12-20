@@ -7,7 +7,7 @@ import {Attack} from "./attack";
 
 export module AttackReason {
     export enum Type {
-        DistanceClose, // TODO DistanceClose vs DistanceFar should be available based on distance
+        DistanceClose,
         DistanceFar,
         EvolutionEmoji,
         EvolutionMega,
@@ -15,14 +15,34 @@ export module AttackReason {
         TemperatureHot
     }
 
-    export function getAttackReasonDialog(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack): string {
-        let distanceMagnitude: string = "pretty"; // TODO choose between "pretty"/"so" based on distance
+    export interface Modifiers {
+        distanceMagnitude: string;
+        hotnessMagnitude: string[];
+    }
+
+    export function getModifiers(distance: number): Modifiers {
+        let distanceMagnitude: string;
+        if (distance < Constants.Numbers.maxSoCloseInMiles || distance >= Constants.Numbers.maxPrettyFarInMiles) {
+            distanceMagnitude = Constants.Battle.DialogText.AttackReason.Modifiers.distanceExtreme;
+        } else {
+            distanceMagnitude = Constants.Battle.DialogText.AttackReason.Modifiers.distanceModerate;
+        }
 
         let randHotModifier: number = Utils.getRandomInt(1);
         let hotModifiers: string[][] = [
-            ["super", "... ;)"],
-            ["really", "!"]
+            Constants.Battle.DialogText.AttackReason.Modifiers.hotness1,
+            Constants.Battle.DialogText.AttackReason.Modifiers.hotness2
         ];
+
+        return {
+            distanceMagnitude: distanceMagnitude,
+            hotnessMagnitude: hotModifiers[randHotModifier]
+        }
+    }
+
+    export function getAttackReasonDialog(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack): string {
+        let distanceMagnitude: string = attack.getAttackReasonModifiers().distanceMagnitude;
+        let hotnessMagnitude: string[] = attack.getAttackReasonModifiers().hotnessMagnitude;
 
         let extraReasonForWakeUpSlap: string = "";
         if (attack.getAttackName() === Attack.Name[Attack.Name.WakeUpSlap]) {
@@ -42,7 +62,7 @@ export module AttackReason {
             case AttackReason.Type.TemperatureCold:
                 return Constants.Battle.DialogText.AttackReason.temperatureCold;
             case AttackReason.Type.TemperatureHot:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotModifiers[randHotModifier][0], hotModifiers[randHotModifier][1]);
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotnessMagnitude[0], hotnessMagnitude[1]);
         }
     }
 

@@ -3,6 +3,7 @@ import {SceneState} from "../components/scene";
 import {AttackReason} from "../stages/attackReason";
 import {Stage} from "../stages/stage";
 
+import {Constants} from "../constants";
 import {Location} from "../location";
 import {Utils} from "../utils";
 
@@ -11,7 +12,7 @@ import {BattleCharacter} from "./character";
 
 export module BattleManager {
     export function getBattle(locationPackage: Location.Package): Battle {
-        return new Battle(locationPackage, getRandAttacker(), getRandAttackReasonType());
+        return new Battle(locationPackage, getRandAttacker(), getRandAttackReasonType(locationPackage.distanceBetween));
     }
 
     export function getNextState(state: SceneState, numActions: number): SceneState {
@@ -46,13 +47,20 @@ export module BattleManager {
         return Utils.getRandomInt(1);
     }
 
-    function getRandAttackReasonType(): AttackReason.Type {
-        let numReasons = 0;
-        for(let name in AttackReason.Type) {
-            if (typeof AttackReason.Type[name] === "number") {
-                numReasons++;
-            }
+    function getRandAttackReasonType(distance: number): AttackReason.Type {
+        let availableAttackReasonTypes: AttackReason.Type[] = [
+            AttackReason.Type.EvolutionEmoji,
+            AttackReason.Type.EvolutionMega,
+            AttackReason.Type.TemperatureCold,
+            AttackReason.Type.TemperatureHot
+        ];
+
+        if (distance < Constants.Numbers.maxPrettyCloseInMiles) {
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
+        } else {
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
         }
-        return Utils.getRandomInt(numReasons - 1);
+
+        return availableAttackReasonTypes[Utils.getRandomInt(availableAttackReasonTypes.length - 1)];
     }
 }

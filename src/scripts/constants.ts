@@ -56,6 +56,13 @@ export module Constants {
                 export const extraSleeping = "... and sleeping";
                 export const temperatureCold = Constants.Battle.Characters.Opponent.name + " looks a little cold..."; // "Boosie looks a little cold..."
                 export const temperatureHot = Constants.Battle.Characters.Player.name + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
+
+                export module Modifiers {
+                    export const distanceExtreme = "so";
+                    export const distanceModerate = "pretty";
+                    export const hotness1 = ["super", "... ;)"];
+                    export const hotness2 = ["really", "!"];
+                }
             }
 
             // Stage.Attack
@@ -108,6 +115,10 @@ export module Constants {
         export const metersToMilesFactor = 0.000621371;
         export const seattleLatitude = 47.6062;
         export const seattleLongitude = -122.3321;
+
+        export const maxSoCloseInMiles = 5;
+        export const maxPrettyCloseInMiles = 30;
+        export const maxPrettyFarInMiles = 2000;
     }
 
     export module Resources {

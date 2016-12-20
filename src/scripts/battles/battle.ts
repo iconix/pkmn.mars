@@ -21,7 +21,7 @@ export class Battle {
     private location: Location.Package;
 
     constructor(location: Location.Package, attackerType: BattleCharacter.Type, attackReasonType: AttackReason.Type) {
-        this.attack = new Attack(attackReasonType);
+        this.attack = new Attack(attackReasonType, location.distanceBetween);
         this.attacker = new BattleCharacter(attackerType);
         this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
         this.location = location;
