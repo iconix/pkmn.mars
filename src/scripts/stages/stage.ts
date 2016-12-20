@@ -20,7 +20,7 @@ export module Stage {
         Attack = 2,
         Result = 3,
         FinalDialog = 4,
-        BattleEnd = 5 // TODO this can go away if the final dialog goes away on its own after a few seconds
+        BattleEnd = 5
     }
 
     export abstract class Factory {
@@ -72,7 +72,6 @@ export module Stage {
                     waitForTouchAfter: true
                 }}
             ];
-            // TODO (optional) animate the reason (e.g., cold === shivering, or maybe add something to the field?)
 
             super(Stage.Type.AttackReason, actions);
         }
@@ -119,7 +118,6 @@ export module Stage {
 
             let resultDialog: string = Result.getResultDialog(type, defender);
 
-            // TODO add result animation, depending on result (e.g., fainted === defender disappears)
             let actions: Action[] = [];
 
             if (attackerAnimation[attacker.getType()]) {

@@ -21,7 +21,7 @@ export module Result {
         MegaEvolved,
         Paralyzed,
         SpeedFell,
-        WokeUp // TODO defender animation "callout.bounce"
+        WokeUp
     }
 
     export function getAttackerAnimation(type: Result.Type): Animation {

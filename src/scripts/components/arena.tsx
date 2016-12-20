@@ -38,7 +38,9 @@ export class Arena extends React.Component<ArenaProps, {}> {
 
         const arenaStyle = {
             background: background.Color + ", " + background.Image + ", " + background.Repeat,
-            backgroundPosition: background.Position.X + "px " + background.Position.Y + "px"
+            backgroundPosition: background.Position.X + "px " + background.Position.Y + "px",
+            // backgrounds on row corresponding to -796px have a smaller height than all others
+            height: background.Position.Y === -796 ? "192px" : ""
         };
 
         return (

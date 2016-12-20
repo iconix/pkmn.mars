@@ -22,7 +22,7 @@ export module FinalDialog {
                 animationName = "callout.bounce";
                 break;
             case FinalDialog.Type.MeantWell:
-                animationName = "callout.tada"; // TODO delay this animation
+                animationName = "callout.tada";
                 duration = 100;
                 break;
             default:

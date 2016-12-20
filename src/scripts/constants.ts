@@ -9,7 +9,7 @@ export module Constants {
     export module Background {
         export module SpritePositions {
             export const XPositions = [0, -255, -506, -758, -1009, -1261, -1514, -1766];
-            export const YPositions = [0, -199, -398, -597, -793, -989]; // TODO -793px is messed up
+            export const YPositions = [0, -199, -398, -597, -796, -989];
         }
 
         export module Tints {
@@ -87,7 +87,7 @@ export module Constants {
                 export const didGood = "{0} did some good!"; // "[Attacker] did some good!"
                 export const evolutionComplete = "{0} has {1}-evolved into {1} {0}!"; // "[Attacker] has [EvolutionType]-evolved into [EvolutionType] [Attacker]!"
                 export const meantWell = "{0} meant well..."; // "[Attacker] meant well..."
-                export const stillLiked = "... ...\n{0} still liked it!"; // "[Defender] still liked it!" // TODO animate the ellipsis as an extra dialog box?
+                export const stillLiked = "... ...\n{0} still liked it!"; // "[Defender] still liked it!"
             }
         }
     }
