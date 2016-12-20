@@ -51,28 +51,22 @@
                 margin-top: 25px;
                 margin-right: 25px;
 
-                width: unit(@opponentGifWidth, px);
-                height: unit(@opponentGifHeight, px);
-                display: flex;
-
+                min-width: unit(@opponentGifWidth, px);
+                min-height: unit(@opponentGifHeight, px);
                 > img {
                     max-width: unit(@opponentGifWidth, px);
                     max-height: unit(@opponentGifHeight, px);
-                    align-self: center;
                 }
             }
 
             > .player {
                 margin-left: 25px;
 
-                width: unit(@playerGifWidth, px);
-                height: unit(@playerGifHeight, px);
-                display: flex;
-
+                min-width: unit(@playerGifWidth, px);
+                min-height: unit(@playerGifHeight, px);
                 > img {
                     max-width: unit(@playerGifWidth, px);
                     max-height: unit(@playerGifHeight, px);
-                    align-self: center;
                 }
             }
 
