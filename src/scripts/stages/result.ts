@@ -40,18 +40,40 @@ export module Result {
     }
 
     export function getDefenderAnimation(type: Result.Type): Animation {
+        let animationName: string;
+        let duration: number = 500;
+
         switch (type) {
             case Result.Type.EmojiEvolved:
             case Result.Type.MegaEvolved:
                 return;
+            case Result.Type.Fainted:
+                animationName = "transition.fadeOut";
+                break;
+            case Result.Type.WokeUp:
+            case Result.Type.Infatuated:
+            case Result.Type.HpRestored:
+                animationName = "callout.bounce";
+                break;
+            case Result.Type.Flinched:
+                animationName = "callout.tada";
+                break;
+            case Result.Type.Frozen:
+            case Result.Type.Paralyzed:
+                animationName = "callout.tada";
+                duration = 100;
+                break;
             default:
-                return {
-                    animation: "callout.bounce",
-                    duration: 500,
-                    runOnMount: true,
-                    advanceStage: true
-                };
+                animationName = "callout.swing";
+                break;
         }
+
+        return {
+            animation: animationName,
+            duration: duration,
+            runOnMount: true,
+            advanceStage: true
+        };
     }
 
     export function getResultDialog(type: Result.Type, defender: BattleCharacter): string {

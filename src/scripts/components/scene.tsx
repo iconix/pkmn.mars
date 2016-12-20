@@ -11,7 +11,7 @@ import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {Utils} from "../utils";
 
-import {Character} from "./character";
+import {Character, CharacterImage} from "./character";
 import {DialogBox} from "./dialogBox";
 import {Field} from "./field";
 import {Label} from "./label";
@@ -38,8 +38,8 @@ export class Scene extends React.Component<SceneProps, SceneState> {
     private sceneTouchEvent: React.EventHandler<React.TouchEvent<HTMLDivElement>>;
 
     render() {
-        let opponentImageSrc: string = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Opponent, this.state.stage);
-        let playerImageSrc: string = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Player, this.state.stage);
+        let opponentImage: CharacterImage = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Opponent, this.state.stage);
+        let playerImage: CharacterImage = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Player, this.state.stage);
 
         let stageFactory: Stage.Factory = this.props.battle.getStageFactory(this.state.stage);
         let currentAction: Action = stageFactory.getAction(this.state.actionIndex);
@@ -61,7 +61,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
         return (
             <div className={Constants.Classes.scene} onTouchStart={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
                 <Character class={Constants.Classes.opponent}
-                    imgSrc={opponentImageSrc}
+                    image={opponentImage}
                     animation={opponentAnimation}
                     numActions={stageFactory.getNumActions()}
                     scene={this} />
@@ -71,7 +71,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                 <Field />
 
                 <Character class={Constants.Classes.player}
-                    imgSrc={playerImageSrc}
+                    image={playerImage}
                     animation={playerAnimation}
                     numActions={stageFactory.getNumActions()}
                     scene={this} />

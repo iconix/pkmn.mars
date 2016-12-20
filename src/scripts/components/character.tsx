@@ -7,9 +7,14 @@ import {Animation} from "../animation";
 
 import {Scene, SceneState, SceneProps} from "./scene";
 
+export interface CharacterImage {
+    src: string;
+    hidden?: boolean;
+}
+
 interface CharacterProps {
     class: string;
-    imgSrc: string;
+    image: CharacterImage;
     animation: Animation;
     numActions: number;
     scene: Scene;
@@ -21,9 +26,11 @@ export class Character extends React.Component<CharacterProps, {}> {
     };
 
     private getCharacterDiv() {
+        let hiddenStyle = this.props.image.hidden ? { visibility: "hidden" } : undefined;
+
         return (
-            <div className={this.props.class}>
-                <img src={this.props.imgSrc} />
+            <div className={this.props.class} style={hiddenStyle}>
+                <img src={this.props.image.src} />
             </div>
         );
     }

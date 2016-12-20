@@ -1,6 +1,8 @@
 import {Action} from "../battles/action";
 import {BattleCharacter} from "../battles/character";
 
+import {CharacterImage} from "../components/character";
+
 import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {EmojiHelper} from "../emojiHelper";
@@ -35,10 +37,20 @@ export class Attack {
     }
 
     // TODO collapse get___ImageSrc(...) functions into one
-    public getOpponentImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): string {
+    public getOpponentImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
         // defender is always non-evo
         if (BattleCharacter.Type.Opponent !== attackerType) {
-            return Constants.Resources.opponentPokemonGif;
+            switch (stageType) {
+                case Stage.Type.BattleStart:
+                case Stage.Type.AttackReason:
+                case Stage.Type.Attack:
+                    return { src: Constants.Resources.opponentPokemonGif };
+                default:
+                    if (this.result === Result.Type.Fainted) {
+                        return { src: Constants.Resources.opponentPokemonGif, hidden: true }
+                    }
+                    return { src: Constants.Resources.opponentPokemonGif };
+            }
         }
 
         // early stages are always non-evo
@@ -46,7 +58,7 @@ export class Attack {
             case Stage.Type.BattleStart:
             case Stage.Type.AttackReason:
             case Stage.Type.Attack:
-                return Constants.Resources.opponentPokemonGif;
+                return { src: Constants.Resources.opponentPokemonGif };
             default:
                 break;
         }
@@ -54,18 +66,28 @@ export class Attack {
         // only the Emoji and Mego Evolution attacks can provide evo
         switch (this.getAttack()) {
             case Attack.Name.Emoji:
-                return EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Opponent);
+                return { src: EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Opponent) };
             case Attack.Name.Mega:
-                return Constants.Resources.opponentMegaImg;
+                return { src: Constants.Resources.opponentMegaImg };
             default:
-                return Constants.Resources.opponentPokemonGif;
+                return { src: Constants.Resources.opponentPokemonGif };
         }
     }
 
-    public getPlayerImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): string {
+    public getPlayerImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
         // defender is always non-evo
         if (BattleCharacter.Type.Player !== attackerType) {
-            return Constants.Resources.playerPokemonGif;
+            switch (stageType) {
+                case Stage.Type.BattleStart:
+                case Stage.Type.AttackReason:
+                case Stage.Type.Attack:
+                    return { src: Constants.Resources.playerPokemonGif };
+                default:
+                    if (this.result === Result.Type.Fainted) {
+                        return { src: Constants.Resources.playerPokemonGif, hidden: true }
+                    }
+                    return { src: Constants.Resources.playerPokemonGif };
+            }
         }
 
         // early stages are always non-evo
@@ -73,7 +95,7 @@ export class Attack {
             case Stage.Type.BattleStart:
             case Stage.Type.AttackReason:
             case Stage.Type.Attack:
-                return Constants.Resources.playerPokemonGif;
+                return { src: Constants.Resources.playerPokemonGif };
             default:
                 break;
         }
@@ -81,11 +103,11 @@ export class Attack {
         // only the Emoji and Mego Evolution attacks can provide evo
         switch (this.getAttack()) {
             case Attack.Name.Emoji:
-                return EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Player);
+                return { src: EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Player) };
             case Attack.Name.Mega:
-                return Constants.Resources.playerMegaImg;
+                return { src: Constants.Resources.playerMegaImg };
             default:
-                return Constants.Resources.playerPokemonGif;
+                return { src: Constants.Resources.playerPokemonGif };
         }
     }
 
@@ -228,10 +250,10 @@ export class Attack {
 
     private setFinalDialogType(): void {
         switch (this.name) {
+            case Attack.Name.Attract:
             case Attack.Name.Present:
                 this.finalDialog = FinalDialog.Type.DidGood;
                 break;
-            case Attack.Name.Attract:
             case Attack.Name.BodySlam:
             case Attack.Name.FreezeDry:
             case Attack.Name.Frustration:

@@ -1,3 +1,5 @@
+import {CharacterImage} from "../components/character";
+
 import {Attack} from "../stages/attack";
 import {AttackReason} from "../stages/attackReason";
 import {FinalDialog} from "../stages/finalDialog";
@@ -46,7 +48,7 @@ export class Battle {
         return this.location;
     }
 
-    public getCharacterImgSrc(characterType: BattleCharacter.Type, stageType: Stage.Type): string {
+    public getCharacterImgSrc(characterType: BattleCharacter.Type, stageType: Stage.Type): CharacterImage {
         if (characterType === BattleCharacter.Type.Opponent) {
             return this.attack.getOpponentImageSrc(stageType, this.attacker.getType());
         } else {
