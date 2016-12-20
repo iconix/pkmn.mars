@@ -71,7 +71,7 @@ export module Constants {
             export module Result {
                 export const attackFell = "{0}'s attack fell!"; // TODO wording?
                 export const burned = "{0} is hurt by its burn!";
-                export const confused = "{0} is confused!\nIt hurt itself in its confusion!"; // TODO wording?
+                export const confused = "{0} is confused and hurt itself in its confusion!";
                 export const fainted = "{0} fainted!";
                 export const flinched = "{0} flinched!";
                 export const frozen = "{0} is frozen solid!";

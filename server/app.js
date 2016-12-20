@@ -10,10 +10,12 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'target')));
 
+app.set('trust proxy', true);
+
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
-  if (req.get('X-Forwarded-Protocol') !== 'https') {
-    res.redirect('https://' + req.get('host') + req.originalUrl);
+  if (req.protocol !== 'https') {
+    res.redirect(301, 'https://' + req.host + req.originalUrl);
   } else {
     res.sendFile(path.resolve(__dirname, '..', 'target', 'index.html'));
   }
