@@ -13,7 +13,7 @@ import {Scene} from "./scene";
 export class Arena extends React.Component<{}, Location.State> {
     constructor(props: {}) {
         super(props);
-        Location.initializeBrowserLocation(this);
+        Location.initLocationData(this);
     }
 
     componentDidMount() {

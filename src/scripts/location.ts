@@ -19,7 +19,7 @@ export module Location {
         distanceBetween: number;
     }
 
-    export function initializeBrowserLocation(component: React.Component<{}, Location.State>): void {
+    export function initLocationData(component: React.Component<{}, Location.State>): void {
         component.state = {};
 
         getLocationPackage().then((locationPackage: Location.Package) => {
