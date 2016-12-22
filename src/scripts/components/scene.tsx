@@ -38,6 +38,14 @@ export class Scene extends React.Component<SceneProps, SceneState> {
     private sceneTouchEvent: React.EventHandler<React.TouchEvent<HTMLDivElement>>;
 
     render() {
+        if (!this.props.battle) {
+            return (
+                <div className={Constants.Classes.scene}>
+                    <p>Loading...</p> {/* TODO add loading icons of absol, gallade */}
+                </div>
+            );
+        }
+
         let opponentImage: CharacterImage = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Opponent, this.state.stage);
         let playerImage: CharacterImage = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Player, this.state.stage);
 

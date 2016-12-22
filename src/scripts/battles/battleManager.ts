@@ -12,7 +12,9 @@ import {BattleCharacter} from "./character";
 
 export module BattleManager {
     export function getBattle(locationPackage: Location.Package): Battle {
-        return new Battle(locationPackage, getRandAttacker(), getRandAttackReasonType(locationPackage.distanceBetween));
+        if (locationPackage) {
+            return new Battle(locationPackage, getRandAttacker(), getRandAttackReasonType(locationPackage.distanceBetween));
+        }
     }
 
     export function getNextState(state: SceneState, numActions: number): SceneState {

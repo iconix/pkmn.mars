@@ -1,6 +1,12 @@
+import * as React from "react";
+
 import {Constants} from "./constants";
 
 export module Location {
+    export interface State {
+        locationPackage?: Location.Package;
+    }
+
     export interface Coordinates {
         friendlyName: string;
         latitude: number;
@@ -13,7 +19,35 @@ export module Location {
         distanceBetween: number;
     }
 
-    export function getLocationPackage(): Promise<Location.Package> {
+    export function initializeBrowserLocation(component: React.Component<{}, Location.State>): void {
+        component.state = {};
+
+        getLocationPackage().then((locationPackage: Location.Package) => {
+            console.log({
+                playerLocation: {
+                    latitude: locationPackage.playerLocation.latitude,
+                    longitude: locationPackage.playerLocation.longitude,
+                    friendlyName: locationPackage.playerLocation.friendlyName
+                },
+                opponentLocation: {
+                    latitude: locationPackage.opponentLocation.latitude,
+                    longitude: locationPackage.opponentLocation.longitude,
+                    friendlyName: locationPackage.opponentLocation.friendlyName
+                },
+                distanceBetween: locationPackage.distanceBetween
+            });
+
+            /*console.log({
+                playerLocation: locationPackage.playerLocation.friendlyName + " (" + locationPackage.playerLocation.latitude + ", " + locationPackage.playerLocation.longitude + ")",
+                opponentLocation: locationPackage.opponentLocation.friendlyName + " (" + locationPackage.opponentLocation.latitude + ", " + locationPackage.opponentLocation.longitude + ")",
+                distanceBetween: locationPackage.distanceBetween
+            });*/
+
+            component.setState({ locationPackage: locationPackage })
+        });
+    }
+
+    function getLocationPackage(): Promise<Location.Package> {
         let playerLocation: Promise<Location.Coordinates> = getBrowserLocation();
         let opponentLocation: Promise<Location.Coordinates> = getOpponentLocation();
 

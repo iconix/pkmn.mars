@@ -10,16 +10,10 @@ import {Location} from "../location";
 
 import {Scene} from "./scene";
 
-interface ArenaProps {
-    locationPackage: Location.Package;
-}
-
-export class Arena extends React.Component<ArenaProps, {}> {
-    constructor(props: ArenaProps) {
+export class Arena extends React.Component<{}, Location.State> {
+    constructor(props: {}) {
         super(props);
-        this.state = {
-            currentStage: Stage.Type.BattleStart
-        };
+        Location.initializeBrowserLocation(this);
     }
 
     componentDidMount() {
@@ -34,18 +28,21 @@ export class Arena extends React.Component<ArenaProps, {}> {
     }
 
     render() {
-        let background: Background.Styles = Background.createArenaBackground(this.props.locationPackage.playerLocation);
+        let arenaStyle: React.CSSProperties;
+        if (this.state.locationPackage) {
+            let background: Background.Styles = Background.createArenaBackground(this.state.locationPackage.playerLocation);
 
-        const arenaStyle = {
-            background: background.Color + ", " + background.Image + ", " + background.Repeat,
-            backgroundPosition: background.Position.X + "px " + background.Position.Y + "px",
-            // backgrounds on row corresponding to -796px have a smaller height than all others
-            height: background.Position.Y === -796 ? "192px" : ""
-        };
+            arenaStyle = {
+                background: background.Color + ", " + background.Image + ", " + background.Repeat,
+                backgroundPosition: background.Position.X + "px " + background.Position.Y + "px",
+                // backgrounds on row corresponding to -796px have a smaller height than all others
+                height: background.Position.Y === -796 ? "192px" : ""
+            };
+        }
 
         return (
             <div className={Constants.Classes.arena} style={arenaStyle}>
-                <Scene battle={BattleManager.getBattle(this.props.locationPackage)} />
+                <Scene battle={BattleManager.getBattle(this.state.locationPackage)} />
             </div>
         );
     }
