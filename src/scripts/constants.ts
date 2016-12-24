@@ -46,7 +46,7 @@ export module Constants {
 
         export module DialogText {
             // Stage.BattleStart
-            export const start = Constants.Battle.Characters.Opponent.name + " is {0} miles away.";
+            export const start = "{0} is {1} miles away."; // "[Defender] is [X] miles away."
 
             export module AttackReason {
                 export const distanceClose = "{0} is {1} close{2}!"; // "[Defender] is [so/pretty] close!"
@@ -55,13 +55,13 @@ export module Constants {
                 export const evolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
                 export const extraSleeping = "... and sleeping";
                 export const temperatureCold = Constants.Battle.Characters.Opponent.name + " looks a little cold..."; // "Boosie looks a little cold..."
-                export const temperatureHot = Constants.Battle.Characters.Player.name + " looks {0} hot{1}"; // "Gotham looks really hot!" / "Gotham looks super hot... ;)"
+                export const temperatureHot = Constants.Battle.Characters.Player.name + " looks {0}"; // "Gotham looks really warm!" / "Gotham looks super hot... ;)"
 
                 export module Modifiers {
                     export const distanceExtreme = "so";
                     export const distanceModerate = "pretty";
-                    export const hotness1 = ["super", "... ;)"];
-                    export const hotness2 = ["really", "!"];
+                    export const hotness1 = "super hot... ;)";
+                    export const hotness2 = "a little warm...";
                 }
             }
 

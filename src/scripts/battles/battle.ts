@@ -61,7 +61,7 @@ export class Battle {
 
         switch(stage) {
             case Stage.Type.BattleStart:
-                factory = new Stage.BattleStartFactory(this.location);
+                factory = new Stage.BattleStartFactory(this.defender, this.location);
                 break;
             case Stage.Type.AttackReason:
                 factory = new Stage.AttackReasonFactory(this.attack.getAttackReasonType(), this.attacker, this.defender, this.attack);

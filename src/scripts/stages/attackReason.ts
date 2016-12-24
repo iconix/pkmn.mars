@@ -17,7 +17,7 @@ export module AttackReason {
 
     export interface Modifiers {
         distanceMagnitude: string;
-        hotnessMagnitude: string[];
+        hotnessMagnitude: string;
     }
 
     export function getModifiers(distance: number): Modifiers {
@@ -29,7 +29,7 @@ export module AttackReason {
         }
 
         let randHotModifier: number = Utils.getRandomInt(1);
-        let hotModifiers: string[][] = [
+        let hotModifiers: string[] = [
             Constants.Battle.DialogText.AttackReason.Modifiers.hotness1,
             Constants.Battle.DialogText.AttackReason.Modifiers.hotness2
         ];
@@ -42,7 +42,7 @@ export module AttackReason {
 
     export function getAttackReasonDialog(type: AttackReason.Type, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack): string {
         let distanceMagnitude: string = attack.getAttackReasonModifiers().distanceMagnitude;
-        let hotnessMagnitude: string[] = attack.getAttackReasonModifiers().hotnessMagnitude;
+        let hotnessMagnitude: string = attack.getAttackReasonModifiers().hotnessMagnitude;
 
         let extraReasonForWakeUpSlap: string = "";
         if (attack.getAttackName() === Attack.Name[Attack.Name.WakeUpSlap]) {
@@ -62,7 +62,7 @@ export module AttackReason {
             case AttackReason.Type.TemperatureCold:
                 return Constants.Battle.DialogText.AttackReason.temperatureCold;
             case AttackReason.Type.TemperatureHot:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotnessMagnitude[0], hotnessMagnitude[1]);
+                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotnessMagnitude);
         }
     }
 

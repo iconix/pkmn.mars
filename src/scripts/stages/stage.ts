@@ -45,7 +45,7 @@ export module Stage {
 
     export class BattleStartFactory extends Factory {
 
-        constructor(location: Location.Package) {
+        constructor(defender: BattleCharacter, location: Location.Package) {
             let animations: { [target: number]: Animation } = {};
             animations[BattleCharacter.Type.Player] = BattleStart.getPlayerAnimation();
             animations[BattleCharacter.Type.Opponent] = BattleStart.getOpponentAnimation();
@@ -55,7 +55,7 @@ export module Stage {
                 { animations: animations},
                 { animations: animations,
                     dialog: {
-                    text: Utils.formatString(Constants.Battle.DialogText.start, location.distanceBetween.toString()),
+                    text: Utils.formatString(Constants.Battle.DialogText.start, defender.getName(), location.distanceBetween.toString()),
                     waitForTouchAfter: true
                 }}
             ];
