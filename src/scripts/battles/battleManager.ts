@@ -68,7 +68,12 @@ export module BattleManager {
         if (distance < Constants.Numbers.maxPrettyCloseInMiles) {
             availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
             availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
-        } else {
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
+        }
+         else {
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
             availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
             availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
         }
