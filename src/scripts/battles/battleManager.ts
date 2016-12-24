@@ -13,7 +13,9 @@ import {BattleCharacter} from "./character";
 export module BattleManager {
     export function getBattle(locationPackage: Location.Package): Battle {
         if (locationPackage) {
-            return new Battle(locationPackage, getRandAttacker(), getRandAttackReasonType(locationPackage.distanceBetween));
+            let attackerType: BattleCharacter.Type = getRandAttacker();
+
+            return new Battle(locationPackage, attackerType, getRandAttackReasonType(attackerType, locationPackage.distanceBetween));
         }
     }
 
@@ -49,17 +51,25 @@ export module BattleManager {
         return Utils.getRandomInt(1);
     }
 
-    function getRandAttackReasonType(distance: number): AttackReason.Type {
+    function getRandAttackReasonType(attackerType: BattleCharacter.Type, distance: number): AttackReason.Type {
         let availableAttackReasonTypes: AttackReason.Type[] = [
             AttackReason.Type.EvolutionEmoji,
-            AttackReason.Type.EvolutionMega,
-            AttackReason.Type.TemperatureCold,
-            AttackReason.Type.TemperatureHot
+            AttackReason.Type.EvolutionMega
         ];
+
+        if (attackerType === BattleCharacter.Type.Player) {
+            // defender/opponent is Cold
+            availableAttackReasonTypes.push(AttackReason.Type.TemperatureCold);
+        } else {
+            // defender/player is Hot
+            availableAttackReasonTypes.push(AttackReason.Type.TemperatureHot);
+        }
 
         if (distance < Constants.Numbers.maxPrettyCloseInMiles) {
             availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
         } else {
+            availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
             availableAttackReasonTypes.push(AttackReason.Type.DistanceFar);
         }
 
