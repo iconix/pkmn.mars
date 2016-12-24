@@ -45,17 +45,22 @@ export module Stage {
 
     export class BattleStartFactory extends Factory {
 
-        constructor(defender: BattleCharacter, location: Location.Package) {
+        constructor(location: Location.Package, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
             let animations: { [target: number]: Animation } = {};
             animations[BattleCharacter.Type.Player] = BattleStart.getPlayerAnimation();
             animations[BattleCharacter.Type.Opponent] = BattleStart.getOpponentAnimation();
+
+            let character: BattleCharacter = defender;
+            if (attack.getAttack() === Attack.Name.Emoji || attack.getAttack() === Attack.Name.Mega) {
+                character = attacker;
+            }
 
             // hardcoded: currently, all battles start in the same way
             let actions: Action[] = [
                 { animations: animations},
                 { animations: animations,
                     dialog: {
-                    text: Utils.formatString(Constants.Battle.DialogText.start, defender.getName(), location.distanceBetween.toString()),
+                    text: Utils.formatString(Constants.Battle.DialogText.start, character.getName(), location.distanceBetween.toString()),
                     waitForTouchAfter: true
                 }}
             ];
