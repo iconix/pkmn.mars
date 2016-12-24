@@ -45,7 +45,7 @@ export module AttackReason {
         let hotnessMagnitude: string = attack.getAttackReasonModifiers().hotnessMagnitude;
 
         let extraReasonForWakeUpSlap: string = "";
-        if (attack.getAttackName() === Attack.Name[Attack.Name.WakeUpSlap]) {
+        if (attack.getAttack() === Attack.Name.WakeUpSlap) {
             // has ExtraAttackReason
             extraReasonForWakeUpSlap = Constants.Battle.DialogText.AttackReason.extraSleeping;
         }

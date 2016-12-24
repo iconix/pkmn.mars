@@ -69,7 +69,7 @@ export module Constants {
             export const attack = "{0} used {1}!";
 
             export module Result {
-                export const attackFell = "{0}'s attack harshly fell!";
+                export const attackFell = "{0}'s attack fell!";
                 export const burned = "{0} is hurt by its burn!";
                 export const confused = "{0} is confused and hurt itself in its confusion!";
                 export const fainted = "{0} fainted!";
