@@ -25,18 +25,26 @@ export module Result {
     }
 
     export function getAttackerAnimation(type: Result.Type): Animation {
+        let animationName: string;
+
         switch (type) {
             case Result.Type.EmojiEvolved:
             case Result.Type.MegaEvolved:
-                return {
-                    animation: "callout.flash",
-                    duration: 500,
-                    runOnMount: true,
-                    advanceStage: true
-                };
+                animationName = "callout.flash";
+                break;
+            case Result.Type.HarshSunlight:
+                animationName = "callout.swing";
+                break;
             default:
                 return;
         }
+
+        return {
+            animation: animationName,
+            duration: 500,
+            runOnMount: true,
+            advanceStage: true
+        };
     }
 
     export function getDefenderAnimation(type: Result.Type): Animation {

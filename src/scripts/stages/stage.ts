@@ -120,12 +120,12 @@ export module Stage {
 
             let actions: Action[] = [];
 
-            if (attackerAnimation[attacker.getType()]) {
-                actions.push({ animations: attackerAnimation });
-            }
-
             if (defenderAnimation[defender.getType()]) {
                 actions.push({ animations: defenderAnimation });
+            }
+
+            if (attackerAnimation[attacker.getType()]) {
+                actions.push({ animations: attackerAnimation });
             }
 
             if (resultDialog) {

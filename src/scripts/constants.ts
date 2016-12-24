@@ -14,7 +14,7 @@ export module Constants {
 
         export module Tints {
             export const yellow = "linear-gradient(rgba(255, 255, 170, 0.25), rgba(255, 255, 170, 0.25))";
-            export const orange = "linear-gradient(rgba(239, 165, 57, 0.25), rgba(239, 165, 57, 0.25))";
+            export const orange = "linear-gradient(rgba(238, 160, 43, 0.25), rgba(238, 160, 43, 0.25))";
             export const blue = "linear-gradient(rgba(120, 112, 192, 0.75), rgba(120, 112, 192, 0.75))";
         }
 
