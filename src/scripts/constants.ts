@@ -53,7 +53,7 @@ export module Constants {
                 export const distanceFar = "{0} is {1} far away..."; // "[Defender] is [so/pretty] far away..."
                 export const evolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
                 export const evolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
-                export const extraSleeping = "... and sleeping";
+                export const extraSleeping = "... and fast asleep";
                 export const temperatureCold = Constants.Battle.Characters.Opponent.name + " looks a little cold..."; // "Boosie looks a little cold..."
                 export const temperatureHot = Constants.Battle.Characters.Player.name + " looks {0}"; // "Gotham looks really warm!" / "Gotham looks super hot... ;)"
 
@@ -69,7 +69,7 @@ export module Constants {
             export const attack = "{0} used {1}!";
 
             export module Result {
-                export const attackFell = "{0}'s attack fell!"; // TODO wording?
+                export const attackFell = "{0}'s attack harshly fell!";
                 export const burned = "{0} is hurt by its burn!";
                 export const confused = "{0} is confused and hurt itself in its confusion!";
                 export const fainted = "{0} fainted!";
@@ -77,7 +77,7 @@ export module Constants {
                 export const frozen = "{0} is frozen solid!";
                 export const harshSunlight = "The sunlight turned harsh!";
                 export const hpRestored = "{0}'s HP was restored.";
-                export const infatuated = "{0} is infatuated!"; // TODO wording?
+                export const infatuated = "{0} fell in love!";
                 export const paralyzed = "{0} is paralyzed!";
                 export const speedFell = "{0}'s speed harshly fell!";
                 export const wokeUp = "{0} woke up!";
