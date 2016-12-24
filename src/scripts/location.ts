@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import {Constants} from "./constants";
+import {Datastore} from "./datastore";
 
 export module Location {
     export interface State {
@@ -47,10 +48,22 @@ export module Location {
         });
     }
 
+    export function createCoordinates(lat: number, lng: number, friendlyName?: string): Promise<Location.Coordinates> {
+        if (friendlyName) {
+            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName });
+        }
+
+        return getFriendlyName(lat, lng).then((friendlyName: string) => {
+            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName });
+        });
+    }
+
     function getLocationPackage(): Promise<Location.Package> {
         let playerLocation: Promise<Location.Coordinates> = getBrowserLocation();
         let opponentLocation: Promise<Location.Coordinates> = getOpponentLocation();
 
+        // TODO this breaks if the datastore throws an AWSError, even though this code should never see that...
+        // (try removing region in Datastore.getDb() to see this)
         return Promise.all([playerLocation, opponentLocation]).then((values: Location.Coordinates[]) => {
             return Promise.resolve({
                 playerLocation: values[0],
@@ -81,18 +94,7 @@ export module Location {
     }
 
     function getOpponentLocation(): Promise<Location.Coordinates> {
-        // TODO get coordinates from database
-        return createCoordinates(47.625748, -122.344557);
-    }
-
-    function createCoordinates(lat: number, lng: number, friendlyName?: string): Promise<Location.Coordinates> {
-        if (friendlyName) {
-            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName });
-        }
-
-        return getFriendlyName(lat, lng).then((friendlyName: string) => {
-            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName });
-        });
+        return Datastore.getLastLocation();
     }
 
     function getFriendlyName(lat: number, lng: number): Promise<string> {

@@ -23,6 +23,7 @@ module.exports = {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.json$/, loader: "json" },
             { test: /\.less$/, loader: "style!css!less" },
             { test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/, loader: 'url-loader' }
         ],
