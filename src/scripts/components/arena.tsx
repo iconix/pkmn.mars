@@ -18,7 +18,12 @@ export class Arena extends React.Component<{}, Location.State> {
 
     componentDidMount() {
         let backgroundImgWidth = 250;
-        let scale = (screen.width/backgroundImgWidth);
+        let backgroundImgHeight = 198;
+
+        let horizontalScale = (screen.availWidth/backgroundImgWidth);
+        let verticalScale = (screen.availHeight/backgroundImgHeight);
+
+        let scale: number = (horizontalScale <= verticalScale) ? horizontalScale : verticalScale;
 
         let metaTag=document.createElement('meta');
         metaTag.name = 'viewport';
