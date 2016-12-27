@@ -5,7 +5,7 @@ import {CharacterImage} from "../components/character";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
-import {EmojiHelper} from "../emojiHelper";
+import {ImageHelper} from "../imageHelper";
 import {Utils} from "../utils";
 
 import {AttackReason} from "./attackReason";
@@ -48,57 +48,27 @@ export class Attack {
         return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
     }
 
-    // TODO collapse get___ImageSrc(...) functions into one
     public getOpponentImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
-        // defender is always non-evo
-        if (BattleCharacter.Type.Opponent !== attackerType) {
-            switch (stageType) {
-                case Stage.Type.BattleStart:
-                case Stage.Type.AttackReason:
-                case Stage.Type.Attack:
-                    return { src: Constants.Resources.opponentPokemonGif };
-                default:
-                    if (this.resultType === Result.Type.Fainted) {
-                        return { src: Constants.Resources.opponentPokemonGif, hidden: true }
-                    }
-                    return { src: Constants.Resources.opponentPokemonGif };
-            }
-        }
-
-        // early stages are always non-evo
-        switch (stageType) {
-            case Stage.Type.BattleStart:
-            case Stage.Type.AttackReason:
-            case Stage.Type.Attack:
-                return { src: Constants.Resources.opponentPokemonGif };
-            default:
-                break;
-        }
-
-        // only the Emoji and Mego Evolution attacks can provide evo
-        switch (this.getAttack()) {
-            case Attack.Name.Emoji:
-                return { src: EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Opponent) };
-            case Attack.Name.Mega:
-                return { src: Constants.Resources.opponentMegaImg };
-            default:
-                return { src: Constants.Resources.opponentPokemonGif };
-        }
+        return this.getImageSrc(BattleCharacter.Type.Opponent, stageType, attackerType);
     }
 
     public getPlayerImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+        return this.getImageSrc(BattleCharacter.Type.Player, stageType, attackerType);
+    }
+
+    private getImageSrc(characterType: BattleCharacter.Type, stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
         // defender is always non-evo
-        if (BattleCharacter.Type.Player !== attackerType) {
+        if (characterType !== attackerType) {
             switch (stageType) {
                 case Stage.Type.BattleStart:
                 case Stage.Type.AttackReason:
                 case Stage.Type.Attack:
-                    return { src: Constants.Resources.playerPokemonGif };
+                    return ImageHelper.getGifImage(characterType);
                 default:
                     if (this.resultType === Result.Type.Fainted) {
-                        return { src: Constants.Resources.playerPokemonGif, hidden: true }
+                        return ImageHelper.getGifImage(characterType, true);
                     }
-                    return { src: Constants.Resources.playerPokemonGif };
+                    return ImageHelper.getGifImage(characterType);
             }
         }
 
@@ -107,7 +77,7 @@ export class Attack {
             case Stage.Type.BattleStart:
             case Stage.Type.AttackReason:
             case Stage.Type.Attack:
-                return { src: Constants.Resources.playerPokemonGif };
+                return ImageHelper.getGifImage(characterType);
             default:
                 break;
         }
@@ -115,11 +85,11 @@ export class Attack {
         // only the Emoji and Mego Evolution attacks can provide evo
         switch (this.getAttack()) {
             case Attack.Name.Emoji:
-                return { src: EmojiHelper.getEmojiImageSrc(BattleCharacter.Type.Player) };
+                return ImageHelper.getEmojiImage(characterType);
             case Attack.Name.Mega:
-                return { src: Constants.Resources.playerMegaImg };
+                return ImageHelper.getMegaImage(characterType);
             default:
-                return { src: Constants.Resources.playerPokemonGif };
+                return ImageHelper.getGifImage(characterType);
         }
     }
 
