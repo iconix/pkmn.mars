@@ -97,25 +97,32 @@ export module Location {
         return Datastore.getLastLocation();
     }
 
+    interface ParsedGeocoderResult {
+        neighborhood?: string;
+        locality?: string; // city or town
+        administrative_area_level_1?: string; // state name (in US)
+        country?: string;
+    }
+
     function getFriendlyName(lat: number, lng: number): Promise<string> {
-        const targetedTypes: string[] = [
-            "neighborhood",
-            "locality", // city or town
-            "administrative_area_level_1", // state name (in US)
-            "country"
-        ]
         let friendlyName = Constants.unknownLocation;
 
         return new Promise<string>((resolve) => {
             var latlng: google.maps.LatLngLiteral = {lat: lat, lng: lng};
             resolveGeocoding(latlng).then((results: google.maps.GeocoderResult[]) => {
 
-                for (let targetedType of targetedTypes) {
-                    let targetedResult: google.maps.GeocoderResult = results.find((result) => { return !!result.types.find((type) => { return type === targetedType} ) });
-                    if (targetedResult) {
-                        friendlyName = targetedResult.address_components[0].short_name;
-                        break;
+                let parsedResults: ParsedGeocoderResult = parseGeocoderResults(results);
+
+                if (parsedResults.administrative_area_level_1) {
+                    friendlyName = parsedResults.administrative_area_level_1;
+
+                    if (parsedResults.neighborhood) {
+                        friendlyName = parsedResults.neighborhood + ", " + friendlyName;
+                    } else if (parsedResults.locality) {
+                        friendlyName = parsedResults.locality + ", " + friendlyName;
                     }
+                } else if (parsedResults.country) {
+                    friendlyName = parsedResults.country;
                 }
 
                 resolve(friendlyName);
@@ -125,6 +132,39 @@ export module Location {
                 resolve(friendlyName);
             }));
         });
+    }
+
+    function parseGeocoderResults(results: google.maps.GeocoderResult[]): ParsedGeocoderResult {
+        let targetedTypes: ParsedGeocoderResult = {};
+
+        for (let result of results) {
+            for (let component of result.address_components) {
+                for (let type of component.types) {
+                    switch (type) {
+                        case "neighborhood":
+                            if (!targetedTypes.neighborhood) {
+                                targetedTypes.neighborhood = component.short_name;
+                            }
+                            break;
+                        case "locality":
+                            if (!targetedTypes.locality) {
+                                targetedTypes.locality = component.short_name;
+                            }
+                            break;
+                        case "administrative_area_level_1":
+                            if (!targetedTypes.administrative_area_level_1) {
+                                targetedTypes.administrative_area_level_1 = component.short_name;
+                            }
+                            return targetedTypes;
+                        case "country":
+                            if (!targetedTypes.country) {
+                                targetedTypes.country = component.short_name;
+                            }
+                            return targetedTypes;
+                    }
+                }
+            }
+        }
     }
 
     // converting callback -> Promise
