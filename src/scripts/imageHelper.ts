@@ -6,6 +6,11 @@ import {Constants} from "./constants";
 import {Utils} from "./utils";
 
 export module ImageHelper {
+    interface PlayerEmojiDate {
+        month: number;
+        day: number;
+    }
+
     export function getEmojiImage(characterType: BattleCharacter.Type): CharacterImage {
         let imageSrc: string;
 
@@ -14,13 +19,38 @@ export module ImageHelper {
                 imageSrc = Constants.Resources.opponentEmojiImg;
                 break;
             case BattleCharacter.Type.Player:
-                imageSrc = Utils.formatString(Constants.Resources.playerEmojiImg, "12", "1"); // TODO generate correct month and day depending on current date
+                let emojiDate: PlayerEmojiDate = getPlayerEmojiDate(new Date());
+                imageSrc = Utils.formatString(Constants.Resources.playerEmojiImg, emojiDate.month.toString(), emojiDate.day.toString());
                 break;
         }
 
         return {
             src: imageSrc
         };
+    }
+
+    function getPlayerEmojiDate(date: Date): PlayerEmojiDate {
+        date = new Date(date.toDateString()); // zero-out the time segment
+
+        let currentYear: number = date.getFullYear();
+        let resultDate: number[];
+
+        for (let emojiDate of Constants.Numbers.playerEmojiDates) {
+            let emojiDateWithYear = new Date(currentYear, emojiDate[0] - 1, emojiDate[1]);
+            if (date === emojiDateWithYear) {
+                resultDate = emojiDate;
+                break;
+            } else if (date < emojiDateWithYear) {
+                break;
+            } else {
+                resultDate = emojiDate;
+            }
+        }
+
+        return {
+            month: resultDate[0],
+            day: resultDate[1]
+        }
     }
 
     export function getGifImage(characterType: BattleCharacter.Type, hidden: boolean = false): CharacterImage {

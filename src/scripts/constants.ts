@@ -123,6 +123,13 @@ export module Constants {
         export const maxSoCloseInMiles = 5;
         export const maxPrettyCloseInMiles = 30;
         export const maxPrettyFarInMiles = 2000;
+
+        export const playerEmojiDates = [
+            [1, 1], [1, 15], [2, 14], [3, 2], [3, 6],
+            [3, 17], [3, 20], [4, 16], [5, 5], [5, 6],
+            [6, 21], [8, 16], [9, 22], [10, 1], [11, 13],
+            [11, 23], [12, 1]
+        ];
     }
 
     export module Resources {
