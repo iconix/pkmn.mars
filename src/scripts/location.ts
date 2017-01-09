@@ -88,8 +88,8 @@ export module Location {
         }, (error) => {
             console.log(error);
 
-            // default to Kingston, WA on reject
-            return createCoordinates(Constants.Numbers.kingstonLatitude, Constants.Numbers.kingstonLongitude, Constants.unknownLocation);
+            // default to Bremerton, WA on reject
+            return createCoordinates(Constants.Numbers.bremertonLatitude, Constants.Numbers.bremertonLongitude, Constants.unknownLocation);
         });
     }
 

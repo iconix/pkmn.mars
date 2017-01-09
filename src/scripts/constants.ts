@@ -114,8 +114,8 @@ export module Constants {
     }
 
     export module Numbers {
-        export const kingstonLatitude = 47.7987;
-        export const kingstonLongitude = -122.4982;
+        export const bremertonLatitude = 47.5650;
+        export const bremertonLongitude = -122.6270;
         export const metersToMilesFactor = 0.000621371;
         export const seattleLatitude = 47.6257;
         export const seattleLongitude = -122.3445;
