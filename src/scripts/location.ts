@@ -116,10 +116,11 @@ export module Location {
                 if (parsedResults.administrative_area_level_1) {
                     friendlyName = parsedResults.administrative_area_level_1;
 
-                    if (parsedResults.neighborhood) {
-                        friendlyName = parsedResults.neighborhood + ", " + friendlyName;
-                    } else if (parsedResults.locality) {
+                    if (parsedResults.locality) {
                         friendlyName = parsedResults.locality + ", " + friendlyName;
+                    }
+                    if (parsedResults.neighborhood) {
+                        friendlyName += "\n(" + parsedResults.neighborhood + ")";
                     }
                 } else if (parsedResults.country) {
                     friendlyName = parsedResults.country;
