@@ -5,6 +5,9 @@
   "repository": {
     "type": "git"
   },
+  "engines": {
+    "node": "4.2.2"
+  },
   "scripts": {
     "build": "npm run webpack",
     "less": "lessc src/styles/styles.less target/static/css/styles.css",
