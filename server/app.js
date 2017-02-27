@@ -9,7 +9,7 @@ const app = express();
 app.use(compression());
 
 // Setup logger
-app.use(morgan('combined'));
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms ":referrer" ":user-agent"'));
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'target')));
