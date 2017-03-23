@@ -41,7 +41,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
         if (!this.props.battle) {
             return (
                 <div className={Constants.Classes.scene}>
-                    <p>Loading...</p> {/* TODO add loading icons of absol, gallade */}
+                    <p>Loading...</p> {/* TODO: add loading icons of absol, gallade */}
                 </div>
             );
         }

@@ -8,6 +8,7 @@ interface LabelProps {
 }
 
 export class Label extends React.Component<LabelProps, {}> {
+    // TODO: because this is just a render function, it can become a "stateless functional component"
     render() {
         return (
             <div className={Constants.Classes.label} id={this.props.id}>

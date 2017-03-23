@@ -32,7 +32,7 @@ export module Stage {
         }
 
         public getAction(actionIndex: number): Action {
-            // TODO check actionIndex bounds
+            // TODO: check actionIndex bounds
             return this.actions[actionIndex];
         }
 

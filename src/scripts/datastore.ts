@@ -59,7 +59,7 @@ export module Datastore {
 
     function getDb(): DynamoDB {
         return new DynamoDB({
-            region: 'us-west-1', // TODO choose based on browser location
+            region: 'us-west-1', // TODO: choose based on browser location
             credentials: {
                 accessKeyId: 'AKIAIYBFXD4AWCBP4TZA',
                 secretAccessKey: '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'

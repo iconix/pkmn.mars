@@ -10,7 +10,7 @@ import {Scene, SceneState, SceneProps} from "./scene";
 
 interface DialogBoxProps {
     dialog: Dialog;
-    scene: Scene;
+    scene: Scene; // TODO: instead of passing around the entire scene, the React way for "bi-directional data flow" would be to pass down a helper function that lives on the Scene that will update data on the scene
 }
 
 export class DialogBox extends React.Component<DialogBoxProps, {}> {

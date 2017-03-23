@@ -62,7 +62,7 @@ export module Location {
         let playerLocation: Promise<Location.Coordinates> = getBrowserLocation();
         let opponentLocation: Promise<Location.Coordinates> = getOpponentLocation();
 
-        // TODO this breaks if the datastore throws an AWSError, even though this code should never see that...
+        // TODO: this breaks if the datastore throws an AWSError, even though this code should never see that...
         // (try removing region in Datastore.getDb() to see this)
         return Promise.all([playerLocation, opponentLocation]).then((values: Location.Coordinates[]) => {
             return Promise.resolve({
