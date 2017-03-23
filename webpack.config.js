@@ -7,7 +7,7 @@ module.exports = {
         './src/styles/styles.less' // TODO: effect of having this as an entry point?
     ],
     output: {
-        path: __dirname + '/target',
+        path: `${__dirname}/target`,
         filename: 'static/js/bundle.js',
     },
 
@@ -16,21 +16,18 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+        enforceExtension: true
     },
 
     module: {
-        loaders: [
+        rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             { test: /\.tsx?$/, loader: 'ts-loader' },
-            { test: /\.json$/, loader: 'json' },
-            { test: /\.less$/, loader: 'style!css!less' },
-            { test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/, loader: 'url-loader' }
-        ],
-
-        preLoaders: [
+            { test: /\.less$/, use: [ 'style-loader', 'css-loader', 'less-loader' ] },
+            { test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/, loader: 'url-loader' },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { test: /\.js$/, loader: 'source-map-loader' }
+            { test: /\.js$/, enforce: 'pre', loader: 'source-map-loader' }
         ]
     },
     plugins: [
