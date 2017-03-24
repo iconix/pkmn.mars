@@ -8,7 +8,7 @@ module.exports = {
     ],
     output: {
         path: __dirname + '/target',
-        filename: 'static/js/bundle.js',
+        filename: 'bundle.js',
     },
 
     // Enable sourcemaps for debugging webpack's output.

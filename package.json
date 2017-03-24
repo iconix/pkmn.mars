@@ -11,7 +11,6 @@
   "scripts": {
     "build": "npm run webpack",
     "heroku-postbuild": "npm run build",
-    "less": "lessc src/styles/styles.less target/static/css/styles.css",
     "server": "node server",
     "start": "npm run server",
     "webpack": "webpack"
