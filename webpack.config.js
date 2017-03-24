@@ -1,10 +1,12 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
+// TODO: until https://github.com/webpack/webpack/pull/4533 is in stable branch, do not update webpack (>2.3.1)
+
 module.exports = {
     entry: [
-        './src/scripts/app.tsx',
-        './src/styles/styles.less' // TODO: effect of having this as an entry point?
+        `${__dirname}/src/scripts/app.tsx`,
+        `${__dirname}/src/styles/styles.less` // TODO: effect of having this as an entry point?
     ],
     output: {
         path: `${__dirname}/target`,
@@ -16,14 +18,14 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
-        enforceExtension: true
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
 
     module: {
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: 'ts-loader' },
+            // TODO: can remove babel* installs and usage once uglifyjs supports es6 (https://github.com/webpack/webpack/issues/2545)
+            { test: /\.tsx?$/, use: [ 'babel-loader?presets[]=es2015', 'ts-loader' ] },
             { test: /\.less$/, use: [ 'style-loader', 'css-loader', 'less-loader' ] },
             { test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/, loader: 'url-loader' },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
