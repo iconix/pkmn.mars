@@ -20,10 +20,13 @@ export module Location {
         distanceBetween: number;
     }
 
-    export function initLocationData(component: React.Component<{}, Location.State>): void {
+    export function initLocationData(component: React.Component<{ location?: any }, Location.State>): void {
         component.state = {};
 
-        getLocationPackage().then((locationPackage: Location.Package) => {
+        let overrideLat: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lat;
+        let overrideLng: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lng;
+
+        getLocationPackage(overrideLat, overrideLng).then((locationPackage: Location.Package) => {
             console.log({
                 playerLocation: {
                     latitude: locationPackage.playerLocation.latitude,
@@ -58,8 +61,8 @@ export module Location {
         });
     }
 
-    function getLocationPackage(): Promise<Location.Package> {
-        let playerLocation: Promise<Location.Coordinates> = getBrowserLocation();
+    function getLocationPackage(overrideLat?: string, overrideLng?:string): Promise<Location.Package> {
+        let playerLocation: Promise<Location.Coordinates> = getBrowserLocation(overrideLat, overrideLng);
         let opponentLocation: Promise<Location.Coordinates> = getOpponentLocation();
 
         // TODO: this breaks if the datastore throws an AWSError, even though this code should never see that...
@@ -82,15 +85,30 @@ export module Location {
         return Math.round(distanceInMeters * Constants.Numbers.metersToMilesFactor);
     }
 
-    function getBrowserLocation(): Promise<Location.Coordinates> {
-        return resolveCurrentPosition().then((pos: Position) => {
-            return createCoordinates(pos.coords.latitude, pos.coords.longitude);
-        }, (error) => {
-            console.log(error);
+    function createDefaultCoordinates(): Promise<Coordinates> {
+        // default: Bremerton, WA
+        return createCoordinates(Constants.Numbers.bremertonLatitude, Constants.Numbers.bremertonLongitude, Constants.unknownLocation);
+    }
 
-            // default to Bremerton, WA on reject
-            return createCoordinates(Constants.Numbers.bremertonLatitude, Constants.Numbers.bremertonLongitude, Constants.unknownLocation);
-        });
+    function getBrowserLocation(overrideLat?: string, overrideLng?:string): Promise<Location.Coordinates> {
+        // check first for override coordinates
+        if (overrideLat || overrideLng) {
+            if (isNaN(<any>overrideLat) || isNaN(<any>overrideLng)) {
+                console.warn({ warn: "Override coordinates invalid; using default" });
+                return createDefaultCoordinates();
+            }
+
+            console.log({ debug: "Using override coordinates" });
+            return createCoordinates(+overrideLat, +overrideLng);
+        } else {
+            return resolveCurrentPosition().then((pos: Position) => {
+                return createCoordinates(pos.coords.latitude, pos.coords.longitude);
+            }, (error) => {
+                console.log(error);
+
+                return createDefaultCoordinates();
+            });
+        }
     }
 
     function getOpponentLocation(): Promise<Location.Coordinates> {
