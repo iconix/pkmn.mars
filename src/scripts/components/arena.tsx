@@ -17,6 +17,7 @@ export class Arena extends React.Component<{}, Location.State> {
     }
 
     componentDidMount() {
+        // append viewport to head after mount
         let backgroundImgWidth = 250;
         let backgroundImgHeight = 198;
 

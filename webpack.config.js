@@ -27,7 +27,7 @@ module.exports = {
             { test: /\.less$/, use: [ 'style-loader', 'css-loader', 'less-loader' ] },
             { test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/, loader: 'url-loader' },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { test: /\.js$/, enforce: 'pre', loader: 'source-map-loader' }
+            { test: /\.js$/, exclude: /(node_modules)/, enforce: 'pre', loader: 'source-map-loader' }
         ]
     },
     plugins: [

@@ -4,6 +4,7 @@ import {VelocityComponent} from "velocity-react";
 import {BattleManager} from "../battles/battleManager";
 
 import {Animation} from "../animation";
+import {Utils} from "../utils";
 
 import {Scene, SceneState, SceneProps} from "./scene";
 
@@ -21,6 +22,20 @@ interface CharacterProps {
 }
 
 export class Character extends React.Component<CharacterProps, {}> {
+
+    componentDidUpdate() {
+        // add sharper, image-rendering style to 'pixel art' images/gifs, depending on browser
+        let pixelArtRenderStyle: string;
+        if (Utils.browserIsChrome()) {
+            pixelArtRenderStyle = 'image-rendering: pixelated';
+        } else {
+            pixelArtRenderStyle = 'image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; image-rendering: -webkit-optimize-contrast';
+        }
+
+        document.querySelector('.player>img').setAttribute('style', pixelArtRenderStyle);
+        document.querySelector('.opponent>img').setAttribute('style', pixelArtRenderStyle);
+    }
+
     private advanceState = (prevState: SceneState, props: SceneProps) => {
         return BattleManager.getNextState(prevState, this.props.numActions)
     };
