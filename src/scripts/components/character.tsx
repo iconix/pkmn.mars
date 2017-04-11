@@ -24,7 +24,7 @@ interface CharacterProps {
 export class Character extends React.Component<CharacterProps, {}> {
 
     componentDidUpdate() {
-        // add sharper, image-rendering style to 'pixel art' images/gifs, depending on browser
+        // add image-rendering style to sharpen 'pixel art' images/gifs, depending on browser
         let pixelArtRenderStyle: string;
         if (Utils.browserIsChrome()) {
             pixelArtRenderStyle = 'image-rendering: pixelated';
