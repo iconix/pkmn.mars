@@ -6,7 +6,8 @@
     "type": "git"
   },
   "engines": {
-    "node": "4.2.2"
+    "node": "6.10.1",
+    "npm": "3.10.10"
   },
   "scripts": {
     "build": "npm run webpack",
