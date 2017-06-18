@@ -1,5 +1,14 @@
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
+const fileExists = require('file-exists');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+const nodeEnv = require('node-env-file');
+const webpack = require('webpack');
+const webpackCleanupPlugin = require('webpack-cleanup-plugin');
+
+var envFile = `${__dirname}/.env`;
+if (fileExists.sync(envFile)) {
+    nodeEnv(envFile);
+}
 
 module.exports = {
     entry: [
@@ -31,15 +40,24 @@ module.exports = {
         ]
     },
     plugins: [
-        new WebpackCleanupPlugin(),
-        new CopyWebpackPlugin([
-            { from: 'src/index.html' },
+        new webpackCleanupPlugin(),
+        new copyWebpackPlugin([
             {
                 context: 'src/sprites',
                 from: '**/*',
                 to: 'assets'
             },
-        ])
+        ]),
+        new webpack.DefinePlugin({
+            // TODO: move some constants here to make app more generic on GitHub
+            DYNAMODB_ACCESS_KEY_ID: JSON.stringify(process.env.DYNAMODB_ACCESS_KEY_ID),
+            DYNAMODB_SECRET_ACCESS_KEY: JSON.stringify(process.env.DYNAMODB_SECRET_ACCESS_KEY)
+        }),
+        new htmlWebpackPlugin({
+            title: 'pkmn:mars',
+            template: 'src/index.template.html',
+            GOOGLEMAPS_JS_API_KEY: process.env.GOOGLEMAPS_JS_API_KEY
+        })
     ],
 
     // When importing a module whose path matches one of the following, just

@@ -61,8 +61,8 @@ export module Datastore {
         return new DynamoDB({
             region: 'us-west-1', // TODO: choose based on browser location
             credentials: {
-                accessKeyId: 'AKIAIYBFXD4AWCBP4TZA',
-                secretAccessKey: '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'
+                accessKeyId: DYNAMODB_ACCESS_KEY_ID,
+                secretAccessKey: DYNAMODB_SECRET_ACCESS_KEY
             }
         });
     }

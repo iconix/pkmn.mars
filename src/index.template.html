@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>pkmn:mars</title>
+        <title><%= htmlWebpackPlugin.options.title %></title>
         <link rel='shortcut icon' href='./assets/favicon.ico' type='image/x-icon'/ >
-    <head>
+    </head>
     <body>
         <div id="screen"></div>
 
@@ -17,9 +17,8 @@
         <!--<script src="./node_modules/velocity-animate/velocity.js"></script>
         <script src="./node_modules/velocity-animate/velocity.ui.js"></script>-->
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA29dv7QNJ_wXlcK-OD7oSrnZ0BfrR7t1k&libraries=geometry"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= htmlWebpackPlugin.options.GOOGLEMAPS_JS_API_KEY %>&libraries=geometry"></script>
 
-        <!-- Main -->
-        <script src="./bundle.js"></script>
+        <!-- Bundles -->
     </body>
 </html>
