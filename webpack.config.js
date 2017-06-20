@@ -56,6 +56,7 @@ module.exports = {
         new htmlWebpackPlugin({
             title: 'pkmn:mars',
             template: 'src/index.template.html',
+            minify: { removeComments: true, collapseWhitespace: true, ignoreCustomFragments: [/<%=[\s\S]*?%>/] },
             GOOGLEMAPS_JS_API_KEY: process.env.GOOGLEMAPS_JS_API_KEY
         })
     ],
