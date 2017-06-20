@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import {LogManager} from "./logging/logManager";
+
 import {Constants} from "./constants";
 import {Datastore} from "./datastore";
 
@@ -27,7 +29,7 @@ export module Location {
         let overrideLng: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lng;
 
         getLocationPackage(overrideLat, overrideLng).then((locationPackage: Location.Package) => {
-            console.log({
+            LogManager.getLogger().log({
                 playerLocation: {
                     latitude: locationPackage.playerLocation.latitude,
                     longitude: locationPackage.playerLocation.longitude,
@@ -41,7 +43,7 @@ export module Location {
                 distanceBetween: locationPackage.distanceBetween
             });
 
-            /*console.log({
+            /*LogManager.getLogger().log({
                 playerLocation: locationPackage.playerLocation.friendlyName + " (" + locationPackage.playerLocation.latitude + ", " + locationPackage.playerLocation.longitude + ")",
                 opponentLocation: locationPackage.opponentLocation.friendlyName + " (" + locationPackage.opponentLocation.latitude + ", " + locationPackage.opponentLocation.longitude + ")",
                 distanceBetween: locationPackage.distanceBetween
@@ -98,13 +100,13 @@ export module Location {
                 return createDefaultCoordinates();
             }
 
-            console.log({ debug: "Using override coordinates" });
+            LogManager.getLogger().log({ debug: "Using override coordinates" });
             return createCoordinates(+overrideLat, +overrideLng);
         } else {
             return resolveCurrentPosition().then((pos: Position) => {
                 return createCoordinates(pos.coords.latitude, pos.coords.longitude);
             }, (error) => {
-                console.log(error);
+                LogManager.getLogger().log(error);
 
                 return createDefaultCoordinates();
             });
@@ -146,7 +148,7 @@ export module Location {
 
                 resolve(friendlyName);
             }, ((error) => {
-                console.log(error);
+                LogManager.getLogger().log(error);
 
                 resolve(friendlyName);
             }));

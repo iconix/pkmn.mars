@@ -1,5 +1,7 @@
 import * as SunCalc from "suncalc";
 
+import {LogManager} from "./logging/logManager";
+
 import {Constants} from "./constants";
 import {Location} from "./location";
 
@@ -53,7 +55,7 @@ export module TimeOfDay {
             }
         }
 
-        console.log(date.toTimeString(), "at", Constants.TimeOfDay[timeOfDay]);
+        LogManager.getLogger().log(`${date.toTimeString()} at ${Constants.TimeOfDay[timeOfDay]}`);
 
         return timeOfDay;
     }

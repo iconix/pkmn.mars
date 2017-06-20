@@ -6,6 +6,12 @@ import routes from './routes';
 
 import {Constants} from "./constants";
 
+import {LogManager} from "./logging/logManager";
+
+window.onbeforeunload = (event) => {
+    LogManager.getLogger().send();
+}
+
 render(
     <Router history={browserHistory}>{routes}</Router>,
     document.getElementById(Constants.Ids.screen)

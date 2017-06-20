@@ -5,6 +5,8 @@ import {AWSError} from 'aws-sdk/lib/error';
 import {Constants} from './constants';
 import {Location} from './location';
 
+import {LogManager} from './logging/logManager';
+
 export module Datastore {
     export function saveLocation(coordinates: Location.Coordinates): Promise<string> {
         var db: DynamoDB = getDb();
@@ -52,7 +54,7 @@ export module Datastore {
                 friendlyName: data.Item['friendlyName'].S,
             });
         }, (err: AWSError) => {
-            console.log('Falling back to default location as last');
+            LogManager.getLogger().log('Falling back to default location as last');
             return Location.createCoordinates(Constants.Numbers.seattleLatitude, Constants.Numbers.seattleLongitude);
         });
     }
@@ -71,7 +73,7 @@ export module Datastore {
         return new Promise<{}>((resolve: (data: DynamoDB.Types.PutItemOutput) => void, reject: (err: AWSError) => void) => {
             db.putItem(params, function(err: AWSError, data: DynamoDB.Types.PutItemOutput) {
                 if (err) {
-                    console.log(err.message, err, err.stack);
+                    LogManager.getLogger().log(`${err.message} ${err} ${err.stack}`);
                     reject(err);
                 } else {
                     resolve(data);
@@ -84,7 +86,7 @@ export module Datastore {
         return new Promise<{}>((resolve: (data: DynamoDB.Types.GetItemOutput) => void, reject: (err: AWSError) => void) => {
             db.getItem(params, function(err: AWSError, data: DynamoDB.Types.GetItemOutput) {
                 if (err) {
-                    console.log(err.message, err, err.stack);
+                    LogManager.getLogger().log(`${err.message} ${err} ${err.stack}`);
                     reject(err);
                 } else {
                     resolve(data);

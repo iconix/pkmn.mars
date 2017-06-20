@@ -1,9 +1,13 @@
+const bodyParser = require('body-parser');
 const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
 const app = express();
+
+// Handle form data
+app.use(bodyParser.urlencoded({ limit: '50mb', type: 'application/x-www-form-urlencoded', extended: false }));
 
 // Compress all requests
 app.use(compression());
@@ -23,6 +27,12 @@ app.get('*', (req, res) => {
   } else {
     res.sendFile(path.resolve(__dirname, '..', 'target', 'index.html'));
   }
+});
+
+app.post('/log', (req, res) => {
+  // TODO: winston-papertrail
+  console.log(req.query, req.body);
+  res.sendStatus(202);
 });
 
 module.exports = app;
