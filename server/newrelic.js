@@ -10,11 +10,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['pkmn-mars-heroku'],
+  app_name: [process.env.NEWRELIC_APP_NAME],
   /**
    * Your New Relic license key.
    */
-  license_key: 'c82a2998884042f586881e379ce63957dfe218a3',
+  license_key: process.env.NEWRELIC_LICENCE_KEY,
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
