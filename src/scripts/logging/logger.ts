@@ -1,5 +1,6 @@
 import Tattletale = require('Tattletale');
 
+// TODO: consolidate with winston levels (.d.ts)
 export enum Level {
     Debug,
     Info,

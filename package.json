@@ -24,6 +24,7 @@
     "@types/react": "^0.14.49",
     "@types/react-dom": "^0.14.18",
     "@types/react-router": "^2.0.41",
+    "@types/winston": "^2.3.3",
     "Tattletale": "git+ssh://git@github.com/iconix/tattletale.js.git",
     "aws-sdk": "^2.7.19",
     "babel-core": "^6.24.0",
@@ -52,7 +53,9 @@
     "velocity-animate": "^1.3.1",
     "velocity-react": "^1.1.11",
     "webpack": "^2.3.2",
-    "webpack-cleanup-plugin": "^0.4.1"
+    "webpack-cleanup-plugin": "^0.4.1",
+    "winston": "^2.3.1",
+    "winston-papertrail": "^1.0.5"
   },
   "devDependencies": {
     "tslint": "^4.5.1"

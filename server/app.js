@@ -6,6 +6,8 @@ const path = require('path');
 
 const app = express();
 
+const winstonLogger = require('./winston').setup();
+
 // Handle form data
 app.use(bodyParser.urlencoded({ limit: '50mb', type: 'application/x-www-form-urlencoded', extended: false }));
 
@@ -30,9 +32,21 @@ app.get('*', (req, res) => {
 });
 
 app.post('/log', (req, res) => {
-  // TODO: winston-papertrail
-  console.log(req.query, req.body);
-  res.sendStatus(202);
+  if (winstonLogger) {
+    var console_logs = req.body; // TODO: check form data format
+
+    Object.keys(console_logs).forEach((k) => {
+      var log_object = JSON.parse(console_logs[k]);
+      var level = (log_object.level).toLowerCase();
+      delete log_object.level;
+
+      winstonLogger.log(level, JSON.stringify(log_object));
+    });
+
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(202);
+  }
 });
 
 module.exports = app;
