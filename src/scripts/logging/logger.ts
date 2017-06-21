@@ -1,40 +1,31 @@
 import Tattletale = require('Tattletale');
 
+export enum Level {
+    Debug,
+    Info,
+    Warn,
+    Error
+}
+
 export class Logger {
-    private logTale: Tattletale;
-    private warnTale: Tattletale;
-    private errorTale: Tattletale;
+    private tale: Tattletale;
     private currentBatchSize: number;
     private maxBatchSize: number;
 
     constructor(batchSize: number) {
-        this.logTale = new Tattletale('/log?level=log');
-        this.warnTale = new Tattletale('/log?level=warn');
-        this.errorTale = new Tattletale('/log?level=error');
+        this.tale = new Tattletale('/log');
 
         this.currentBatchSize = 0;
         this.maxBatchSize = batchSize;
     }
 
-    public log(data: string | number | boolean | {}): void {
-        this.logTale.log(this.sanitizeData(data));
+    public log(level: Level, data: string | number | boolean | {[ key: string]: any}): void {
+        this.tale.log(this.sanitizeData(level, data));
         this.endTale();
-    }
-
-    public warn(data: string | number | boolean): void {
-        this.warnTale.log(this.sanitizeData(data));
-        this.endTale();
-    }
-
-    public error(data: string | number | boolean): void {
-        this.errorTale.log(this.sanitizeData(data));
-        this.endTale()
     }
 
     public send(): void {
-        this.errorTale.send();
-        this.warnTale.send();
-        this.logTale.send();
+        this.tale.send();
     }
 
     private checkBatchSizeAndSend(): void {
@@ -49,10 +40,11 @@ export class Logger {
         this.checkBatchSizeAndSend();
     }
 
-    private sanitizeData(data: string | number | boolean | {}): string | number | boolean {
-        if (typeof data === "object") {
+    private sanitizeData(level: Level, data: string | number | boolean | {[ key: string]: any}): string | number | boolean {
+        if (typeof data === 'object') {
+            data['level'] = Level[level];
             return JSON.stringify(data);
         }
-        return data;
+        return JSON.stringify({ level: Level[level], message: data });
     }
 }

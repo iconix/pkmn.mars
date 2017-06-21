@@ -3,6 +3,7 @@ import {Location} from "./location";
 import {TimeOfDay} from "./timeOfDay";
 import {Utils} from "./utils";
 
+import {Level} from "./logging/logger";
 import {LogManager} from "./logging/logManager";
 
 export module Background {
@@ -37,7 +38,7 @@ export module Background {
         let randXIndex: number = randBackground % backgroundPositionX.length;
         let randYIndex: number = Math.floor(randBackground / backgroundPositionX.length);
 
-        LogManager.getLogger().log(`Selected ${Constants.TimeOfDay[Constants.Background.timeOfDayMapping[randBackground]]} background ${randBackground + 1} of ${numBackgrounds}`);
+        LogManager.getLogger().log(Level.Debug, `Selected ${Constants.TimeOfDay[Constants.Background.timeOfDayMapping[randBackground]]} background ${randBackground + 1} of ${numBackgrounds}`);
 
         let randXPos: number = backgroundPositionX[randXIndex];
         let randYPos: number = backgroundPositionY[randYIndex];

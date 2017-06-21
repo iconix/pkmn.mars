@@ -1,5 +1,6 @@
 import {CharacterImage} from "../components/character";
 
+import {Level} from "../logging/logger";
 import {LogManager} from "../logging/logManager";
 
 import {Attack} from "../stages/attack";
@@ -28,7 +29,7 @@ export class Battle {
         this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
         this.location = location;
 
-        LogManager.getLogger().log({
+        LogManager.getLogger().log(Level.Info, {
             attacker: this.attacker.getName() || "",
             defender: this.defender.getName() || "",
             attackReason: AttackReason.Type[this.attack.getAttackReasonType()] || "",

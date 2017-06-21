@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import {Level} from "./logging/logger";
 import {LogManager} from "./logging/logManager";
 
 import {Constants} from "./constants";
@@ -29,7 +30,7 @@ export module Location {
         let overrideLng: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lng;
 
         getLocationPackage(overrideLat, overrideLng).then((locationPackage: Location.Package) => {
-            LogManager.getLogger().log({
+            LogManager.getLogger().log(Level.Info, {
                 playerLocation: {
                     latitude: locationPackage.playerLocation.latitude,
                     longitude: locationPackage.playerLocation.longitude,
@@ -96,17 +97,17 @@ export module Location {
         // check first for override coordinates
         if (overrideLat || overrideLng) {
             if (isNaN(<any>overrideLat) || isNaN(<any>overrideLng)) {
-                console.warn({ warn: "Override coordinates invalid; using default" });
+                LogManager.getLogger().log(Level.Warn, "Override coordinates invalid; using default");
                 return createDefaultCoordinates();
             }
 
-            LogManager.getLogger().log({ debug: "Using override coordinates" });
+            LogManager.getLogger().log(Level.Debug, "Using override coordinates");
             return createCoordinates(+overrideLat, +overrideLng);
         } else {
             return resolveCurrentPosition().then((pos: Position) => {
                 return createCoordinates(pos.coords.latitude, pos.coords.longitude);
             }, (error) => {
-                LogManager.getLogger().log(error);
+                LogManager.getLogger().log(Level.Error, error);
 
                 return createDefaultCoordinates();
             });
@@ -148,7 +149,7 @@ export module Location {
 
                 resolve(friendlyName);
             }, ((error) => {
-                LogManager.getLogger().log(error);
+                LogManager.getLogger().log(Level.Error, error);
 
                 resolve(friendlyName);
             }));
