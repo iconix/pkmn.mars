@@ -5,7 +5,7 @@ const path = require('path');
 exports.setup = function() {
     // Add env vars from .env to current process, if .env exists
     var envFile = '../.env';
-    if (fileExists.sync(path.resolve(process.cwd(), envFile))) {
+    if (fileExists.sync(path.resolve(__dirname, envFile))) {
         nodeEnv(envFile);
     }
 
