@@ -19,12 +19,12 @@
     "webpack-debug": "webpack --display-error-details"
   },
   "dependencies": {
-    "@types/googlemaps": "3.25.38",
-    "@types/node": "6.0.52",
-    "@types/react": "0.14.49",
-    "@types/react-dom": "0.14.18",
-    "@types/react-router": "2.0.41",
-    "@types/winston": "2.3.3",
+    "@types/googlemaps": "^3.25.38",
+    "@types/node": "^6.0.52",
+    "@types/react": "^0.14.49",
+    "@types/react-dom": "^0.14.18",
+    "@types/react-router": "^2.0.41",
+    "@types/winston": "^2.3.3",
     "Tattletale": "git://github.com/iconix/tattletale.js.git",
     "aws-sdk": "^2.7.19",
     "babel-core": "^6.24.0",
