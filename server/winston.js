@@ -6,7 +6,7 @@ exports.setup = function() {
     // Add env vars from .env to current process, if .env exists
     var envFile = '../.env';
     if (fileExists.sync(path.resolve(__dirname, envFile))) {
-        nodeEnv(envFile);
+        nodeEnv(`${__dirname}/${envFile}`);
     }
 
     // if Papertrail host or port are not defined, skip setup
