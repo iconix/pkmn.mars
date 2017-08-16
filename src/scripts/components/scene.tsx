@@ -27,7 +27,7 @@ export interface SceneProps {
 }
 
 export class Scene extends React.Component<SceneProps, SceneState> {
-    constructor(props: {}) {
+    constructor(props: SceneProps) {
         super(props);
         this.state = {
             stage: Stage.Type.BattleStart,
