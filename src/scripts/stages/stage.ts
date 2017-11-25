@@ -45,7 +45,7 @@ export module Stage {
 
     export class BattleStartFactory extends Factory {
 
-        constructor(location: Location.Package, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
+        constructor(location: Location.Data, attacker: BattleCharacter, defender: BattleCharacter, attack: Attack) {
             let animations: { [target: number]: Animation } = {};
             animations[BattleCharacter.Type.Player] = BattleStart.getPlayerAnimation();
             animations[BattleCharacter.Type.Opponent] = BattleStart.getOpponentAnimation();

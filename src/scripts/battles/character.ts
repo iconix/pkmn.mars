@@ -35,7 +35,7 @@ export module BattleCharacter {
         Opponent
     }
 
-    export function getOtherBattleCharater(type: BattleCharacter.Type): BattleCharacter.Type {
+    export function getOtherBattleCharacter(type: BattleCharacter.Type): BattleCharacter.Type {
         return Math.abs(type - 1);
     }
 }

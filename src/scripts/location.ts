@@ -8,7 +8,7 @@ import {Datastore} from "./datastore";
 
 export module Location {
     export interface State {
-        locationPackage?: Location.Package;
+        locationData?: Location.Data;
     }
 
     export interface Coordinates {
@@ -17,7 +17,7 @@ export module Location {
         longitude: number;
     }
 
-    export interface Package {
+    export interface Data {
         playerLocation: Location.Coordinates;
         opponentLocation: Location.Coordinates;
         distanceBetween: number;
@@ -29,28 +29,28 @@ export module Location {
         let overrideLat: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lat;
         let overrideLng: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lng;
 
-        getLocationPackage(overrideLat, overrideLng).then((locationPackage: Location.Package) => {
+        getLocationData(overrideLat, overrideLng).then((locationData: Location.Data) => {
             LogManager.getLogger().log(Level.Info, {
                 playerLocation: {
-                    latitude: locationPackage.playerLocation.latitude,
-                    longitude: locationPackage.playerLocation.longitude,
-                    friendlyName: locationPackage.playerLocation.friendlyName
+                    latitude: locationData.playerLocation.latitude,
+                    longitude: locationData.playerLocation.longitude,
+                    friendlyName: locationData.playerLocation.friendlyName
                 },
                 opponentLocation: {
-                    latitude: locationPackage.opponentLocation.latitude,
-                    longitude: locationPackage.opponentLocation.longitude,
-                    friendlyName: locationPackage.opponentLocation.friendlyName
+                    latitude: locationData.opponentLocation.latitude,
+                    longitude: locationData.opponentLocation.longitude,
+                    friendlyName: locationData.opponentLocation.friendlyName
                 },
-                distanceBetween: locationPackage.distanceBetween
+                distanceBetween: locationData.distanceBetween
             });
 
             /*LogManager.getLogger().log({
-                playerLocation: locationPackage.playerLocation.friendlyName + " (" + locationPackage.playerLocation.latitude + ", " + locationPackage.playerLocation.longitude + ")",
-                opponentLocation: locationPackage.opponentLocation.friendlyName + " (" + locationPackage.opponentLocation.latitude + ", " + locationPackage.opponentLocation.longitude + ")",
-                distanceBetween: locationPackage.distanceBetween
+                playerLocation: locationData.playerLocation.friendlyName + " (" + locationData.playerLocation.latitude + ", " + locationData.playerLocation.longitude + ")",
+                opponentLocation: locationData.opponentLocation.friendlyName + " (" + locationData.opponentLocation.latitude + ", " + locationData.opponentLocation.longitude + ")",
+                distanceBetween: locationData.distanceBetween
             });*/
 
-            component.setState({ locationPackage: locationPackage })
+            component.setState({ locationData: locationData })
         });
     }
 
@@ -64,7 +64,7 @@ export module Location {
         });
     }
 
-    function getLocationPackage(overrideLat?: string, overrideLng?:string): Promise<Location.Package> {
+    function getLocationData(overrideLat?: string, overrideLng?:string): Promise<Location.Data> {
         let playerLocation: Promise<Location.Coordinates> = getBrowserLocation(overrideLat, overrideLng);
         let opponentLocation: Promise<Location.Coordinates> = getOpponentLocation();
 

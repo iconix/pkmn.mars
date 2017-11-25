@@ -11,11 +11,11 @@ import {Battle} from "./battle";
 import {BattleCharacter} from "./character";
 
 export module BattleManager {
-    export function getBattle(locationPackage: Location.Package): Battle {
-        if (locationPackage) {
+    export function getBattle(locationData: Location.Data): Battle {
+        if (locationData) {
             let attackerType: BattleCharacter.Type = getRandAttacker();
 
-            return new Battle(locationPackage, attackerType, getRandAttackReasonType(attackerType, locationPackage.distanceBetween));
+            return new Battle(locationData, attackerType, getRandAttackReasonType(attackerType, locationData.distanceBetween));
         }
     }
 

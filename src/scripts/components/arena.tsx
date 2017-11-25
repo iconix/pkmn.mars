@@ -35,8 +35,8 @@ export class Arena extends React.Component<{}, Location.State> {
 
     render() {
         let arenaStyle: React.CSSProperties;
-        if (this.state.locationPackage) {
-            let background: Background.Styles = Background.createArenaBackground(this.state.locationPackage.playerLocation);
+        if (this.state.locationData) {
+            let background: Background.Styles = Background.createArenaBackground(this.state.locationData.playerLocation);
 
             arenaStyle = {
                 background: background.Color + ", " + background.Image + ", " + background.Repeat,
@@ -48,7 +48,7 @@ export class Arena extends React.Component<{}, Location.State> {
 
         return (
             <div className={Constants.Classes.arena} style={arenaStyle}>
-                <Scene battle={BattleManager.getBattle(this.state.locationPackage)} />
+                <Scene battle={BattleManager.getBattle(this.state.locationData)} />
             </div>
         );
     }

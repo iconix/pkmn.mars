@@ -74,7 +74,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                     numActions={stageFactory.getNumActions()}
                     scene={this} />
 
-                <Label text={this.props.battle.getLocationPackage().opponentLocation.friendlyName} id={Constants.Ids.opponent} />
+                <Label text={this.props.battle.getLocationData().opponentLocation.friendlyName} id={Constants.Ids.opponent} />
 
                 <Field />
 
@@ -84,7 +84,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                     numActions={stageFactory.getNumActions()}
                     scene={this} />
 
-                <Label text={this.props.battle.getLocationPackage().playerLocation.friendlyName} id={Constants.Ids.player} />
+                <Label text={this.props.battle.getLocationData().playerLocation.friendlyName} id={Constants.Ids.player} />
 
                 { currentAction && currentAction.dialog ? <DialogBox dialog={currentAction.dialog} scene={this} /> : undefined }
             </div>

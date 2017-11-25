@@ -21,12 +21,12 @@ export class Battle {
     private attack: Attack;
     private attacker: BattleCharacter;
     private defender: BattleCharacter;
-    private location: Location.Package;
+    private location: Location.Data;
 
-    constructor(location: Location.Package, attackerType: BattleCharacter.Type, attackReasonType: AttackReason.Type) {
+    constructor(location: Location.Data, attackerType: BattleCharacter.Type, attackReasonType: AttackReason.Type) {
         this.attack = new Attack(attackReasonType, location.distanceBetween);
         this.attacker = new BattleCharacter(attackerType);
-        this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharater(attackerType));
+        this.defender = new BattleCharacter(BattleCharacter.getOtherBattleCharacter(attackerType));
         this.location = location;
 
         LogManager.getLogger().log(Level.Info, {
@@ -47,7 +47,7 @@ export class Battle {
         return this.defender;
     }
 
-    public getLocationPackage(): Location.Package {
+    public getLocationData(): Location.Data {
         return this.location;
     }
 
