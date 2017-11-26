@@ -6,11 +6,11 @@ import {Dialog} from "../battles/dialog";
 import {Constants} from "../constants";
 
 import {DialogText} from "./dialogText";
-import {Scene, SceneState, SceneProps} from "./scene";
+import {SceneState} from "./scene";
 
 interface DialogBoxProps {
     dialog: Dialog;
-    scene: Scene; // TODO: instead of passing around the entire scene, the React way for "bi-directional data flow" would be to pass down a helper function that lives on the Scene that will update data on the scene
+    setSceneStateCallback: (state: (prevState: SceneState) => SceneState) => void;
 }
 
 export function DialogBox(props: DialogBoxProps) {
@@ -27,7 +27,7 @@ export function DialogBox(props: DialogBoxProps) {
             bottom: ""
         },
         duration: 500,
-        complete: () => { props.scene.setState(getReadyForTouch); }
+        complete: () => { props.setSceneStateCallback(getReadyForTouch); }
     };
 
     const key = props.dialog.text;

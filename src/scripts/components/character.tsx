@@ -6,7 +6,7 @@ import {BattleManager} from "../battles/battleManager";
 import {Animation} from "../animation";
 import {Utils} from "../utils";
 
-import {Scene, SceneState, SceneProps} from "./scene";
+import {SceneState} from "./scene";
 
 export interface CharacterImage {
     src: string;
@@ -18,7 +18,7 @@ interface CharacterProps {
     image: CharacterImage;
     animation: Animation;
     numActions: number;
-    scene: Scene;
+    setSceneStateCallback: (state: (prevState: SceneState) => SceneState) => void;
 }
 
 export class Character extends React.Component<CharacterProps, {}> {
@@ -36,7 +36,7 @@ export class Character extends React.Component<CharacterProps, {}> {
         document.querySelector('.opponent>img').setAttribute('style', pixelArtRenderStyle);
     }
 
-    private advanceState = (prevState: SceneState, props: SceneProps) => {
+    private advanceState = (prevState: SceneState) => {
         return BattleManager.getNextState(prevState, this.props.numActions)
     };
 
@@ -61,7 +61,7 @@ export class Character extends React.Component<CharacterProps, {}> {
                         () => {
                             if (this.props.animation.advanceState) {
                                 setTimeout(() => {
-                                    this.props.scene.setState(this.advanceState);
+                                    this.props.setSceneStateCallback(this.advanceState);
                                 }, this.props.animation.advanceStateDelay || 0);
                             }
                         }

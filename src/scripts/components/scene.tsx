@@ -33,9 +33,16 @@ export class Scene extends React.Component<SceneProps, SceneState> {
             stage: Stage.Type.BattleStart,
             actionIndex: 0
         };
+
+        // bind setSceneState() to the Scene component (so that inside setSceneState(), 'this' refers to component)
+        this.setSceneState = this.setSceneState.bind(this);
     }
 
     private sceneTouchEvent: React.EventHandler<React.TouchEvent<HTMLDivElement>>;
+
+    private setSceneState(state: (prevState: SceneState) => SceneState) {
+        this.setState(state);
+    };
 
     render() {
         if (!this.props.battle) {
@@ -72,7 +79,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                     image={opponentImage}
                     animation={opponentAnimation}
                     numActions={stageFactory.getNumActions()}
-                    scene={this} />
+                    setSceneStateCallback={this.setSceneState} />
 
                 <Label text={this.props.battle.getLocationData().opponentLocation.friendlyName} id={Constants.Ids.opponent} />
 
@@ -82,11 +89,11 @@ export class Scene extends React.Component<SceneProps, SceneState> {
                     image={playerImage}
                     animation={playerAnimation}
                     numActions={stageFactory.getNumActions()}
-                    scene={this} />
+                    setSceneStateCallback={this.setSceneState} />
 
                 <Label text={this.props.battle.getLocationData().playerLocation.friendlyName} id={Constants.Ids.player} />
 
-                { currentAction && currentAction.dialog ? <DialogBox dialog={currentAction.dialog} scene={this} /> : undefined }
+                { currentAction && currentAction.dialog ? <DialogBox dialog={currentAction.dialog} setSceneStateCallback={this.setSceneState} /> : undefined }
             </div>
         );
     }
