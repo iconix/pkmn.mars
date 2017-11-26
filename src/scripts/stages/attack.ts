@@ -111,8 +111,8 @@ export class Attack {
             animation: animationName,
             duration: 500,
             runOnMount: true,
-            advanceStage: true,
-            advanceStageDelay: advanceStageDelay
+            advanceState: true,
+            advanceStateDelay: advanceStageDelay
         };
     }
 
@@ -126,8 +126,8 @@ export class Attack {
                     animation: "callout.flash",
                     duration: 500,
                     runOnMount: true,
-                    advanceStage: true,
-                    advanceStageDelay: 500
+                    advanceState: true,
+                    advanceStateDelay: 500
                 };
         }
 

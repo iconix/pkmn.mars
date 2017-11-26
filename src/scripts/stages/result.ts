@@ -43,7 +43,7 @@ export module Result {
             animation: animationName,
             duration: 500,
             runOnMount: true,
-            advanceStage: true
+            advanceState: true
         };
     }
 
@@ -80,7 +80,7 @@ export module Result {
             animation: animationName,
             duration: duration,
             runOnMount: true,
-            advanceStage: true
+            advanceState: true
         };
     }
 

@@ -33,7 +33,7 @@ export module FinalDialog {
             animation: animationName,
             duration: duration,
             runOnMount: true,
-            advanceStage: true
+            advanceState: true
         };
     }
 
@@ -44,7 +44,7 @@ export module FinalDialog {
                     animation: "callout.bounce",
                     duration: 500,
                     runOnMount: true,
-                    advanceStage: true
+                    advanceState: true
                 };
             default:
                 return;

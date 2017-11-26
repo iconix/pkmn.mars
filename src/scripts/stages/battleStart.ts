@@ -14,7 +14,7 @@ export module BattleStart {
             animation: "transition.slideLeftIn",
             duration: 500,
             runOnMount: true,
-            advanceStage: true
+            advanceState: true
         };
     }
 }

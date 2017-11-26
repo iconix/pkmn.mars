@@ -59,10 +59,10 @@ export class Character extends React.Component<CharacterProps, {}> {
                     runOnMount={this.props.animation.runOnMount}
                     complete={
                         () => {
-                            if (this.props.animation.advanceStage) {
+                            if (this.props.animation.advanceState) {
                                 setTimeout(() => {
                                     this.props.scene.setState(this.advanceState);
-                                }, this.props.animation.advanceStageDelay || 0);
+                                }, this.props.animation.advanceStateDelay || 0);
                             }
                         }
                     }>
