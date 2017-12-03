@@ -11,7 +11,7 @@ export module ImageHelper {
         alt: string;
     }
 
-    interface PlayerEmojiDate {
+    interface EmojiDate {
         month: number;
         day: number;
         emoji: string;
@@ -25,7 +25,7 @@ export module ImageHelper {
                 imageProps = {src: "", alt: Constants.Battle.Characters.Opponent.emoji};
                 break;
             case BattleCharacter.Type.Player:
-                let emojiDate: PlayerEmojiDate = getPlayerEmojiForDate(new Date());
+                let emojiDate: EmojiDate = getEmojiForDate(Constants.Numbers.playerEmojiDates, new Date());
                 imageProps = {src: "", alt: Utils.formatString(Constants.Battle.Characters.Player.emoji, emojiDate.emoji)};
                 break;
         }
@@ -35,13 +35,13 @@ export module ImageHelper {
         };
     }
 
-    function getPlayerEmojiForDate(date: Date): PlayerEmojiDate {
+    function getEmojiForDate(allDates: (string|number)[][], date: Date): EmojiDate {
         date = new Date(date.toDateString()); // zero-out the time segment
 
         let currentYear: number = date.getFullYear();
-        let resultDate: PlayerEmojiDate;
+        let resultDate: EmojiDate;
 
-        for (let emojiDate of Constants.Numbers.playerEmojiDates) {
+        for (let emojiDate of allDates) {
             let emojiDateWithYear = new Date(currentYear, (emojiDate[0] as number) - 1, emojiDate[1] as number);
             if (date === emojiDateWithYear) {
                 resultDate = { month: emojiDate[0] as number, day: emojiDate[1] as number, emoji: emojiDate[2] as string};
