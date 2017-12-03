@@ -33,12 +33,14 @@ export module Constants {
         export module Characters {
             export module Opponent {
                 export const name = "Boosie";
+                export const emoji = "🐧🎢🏈☀️";
                 export const evoStone = "Galladite";
                 export const trainer = "Nadja";
             }
 
             export module Player {
                 export const name = "Gotham";
+                export const emoji = "{0}👽🎮😽";
                 export const evoStone = "Absolite";
                 export const trainer = "Margaret";
             }
@@ -125,14 +127,15 @@ export module Constants {
         export const maxPrettyFarInMiles = 2000;
 
         export const playerEmojiDates = [
-            [1, 1], [1, 15], [2, 14], [3, 2], [3, 6],
-            [3, 17], [3, 20], [4, 16], [5, 5], [5, 6],
-            [6, 21], [8, 16], [9, 22], [10, 1], [11, 13],
-            [11, 23], [12, 1], [12, 31]
+            [1, 1, "🎆"], [1, 15, "☔"], [2, 14, "❤️"], [3, 2, "💬"], [3, 6, "☔"],
+            [3, 17, "🍀"], [3, 20, "🌸"], [4, 16, "🐰"], [5, 5, "💃🏾"], [5, 6, "🌺"],
+            [6, 21, "🌞"], [8, 16, "2️⃣"], [9, 22, "🍂"], [10, 1, "🎃"], [11, 13, "🎁"],
+            [11, 23, "🦃"], [12, 1, "🎄"], [12, 31, "🎆"]
         ];
     }
 
     export module Resources {
+        export const twemojiCDN = "//twemoji.maxcdn.com/36x36/{0}.png";
         export const opponentPokemonGif = "assets/gallade_norm_front.gif";
         export const opponentMegaImg = "assets/nadja_drawing.jpg"
         export const opponentEmojiImg = "assets/emoji/emoji_n.png";

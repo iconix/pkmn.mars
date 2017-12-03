@@ -53,8 +53,8 @@ export class Scene extends React.Component<SceneProps, SceneState> {
             );
         }
 
-        let opponentImage: CharacterImage = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Opponent, this.state.stage);
-        let playerImage: CharacterImage = this.props.battle.getCharacterImgSrc(BattleCharacter.Type.Player, this.state.stage);
+        let opponentImage: CharacterImage = this.props.battle.getCharacterImage(BattleCharacter.Type.Opponent, this.state.stage);
+        let playerImage: CharacterImage = this.props.battle.getCharacterImage(BattleCharacter.Type.Player, this.state.stage);
 
         let stageFactory: Stage.Factory = this.props.battle.getStageFactory(this.state.stage);
         let currentAction: Action = stageFactory.getAction(this.state.actionIndex);

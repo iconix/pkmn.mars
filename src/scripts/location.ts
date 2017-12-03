@@ -7,10 +7,6 @@ import {Constants} from "./constants";
 import {Datastore} from "./datastore";
 
 export module Location {
-    export interface State {
-        locationData?: Location.Data;
-    }
-
     export interface Coordinates {
         friendlyName: string;
         latitude: number;
@@ -21,6 +17,10 @@ export module Location {
         playerLocation: Location.Coordinates;
         opponentLocation: Location.Coordinates;
         distanceBetween: number;
+    }
+
+    export interface State {
+        locationData?: Location.Data;
     }
 
     export function initLocationData(component: React.Component<{ location?: any }, Location.State>): void {

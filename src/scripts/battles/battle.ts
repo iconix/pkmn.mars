@@ -51,11 +51,11 @@ export class Battle {
         return this.location;
     }
 
-    public getCharacterImgSrc(characterType: BattleCharacter.Type, stageType: Stage.Type): CharacterImage {
+    public getCharacterImage(characterType: BattleCharacter.Type, stageType: Stage.Type): CharacterImage {
         if (characterType === BattleCharacter.Type.Opponent) {
-            return this.attack.getOpponentImageSrc(stageType, this.attacker.getType());
+            return this.attack.getOpponentImage(stageType, this.attacker.getType());
         } else {
-            return this.attack.getPlayerImageSrc(stageType, this.attacker.getType());
+            return this.attack.getPlayerImage(stageType, this.attacker.getType());
         }
     }
 

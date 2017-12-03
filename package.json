@@ -48,6 +48,7 @@
     "style-loader": "^0.13.1",
     "suncalc": "^1.7.0",
     "ts-loader": "^2.2.1",
+    "twemoji-basename": "^1.0.0",
     "typescript": "^2.0.10",
     "url-loader": "^0.5.7",
     "velocity-animate": "^1.3.1",

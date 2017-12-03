@@ -4,12 +4,13 @@ import {VelocityComponent} from "velocity-react";
 import {BattleManager} from "../battles/battleManager";
 
 import {Animation} from "../animation";
+import {ImageHelper} from "../imageHelper";
 import {Utils} from "../utils";
 
 import {SceneState} from "./scene";
 
 export interface CharacterImage {
-    src: string;
+    imageProps: ImageHelper.ImageProperties[];
     hidden?: boolean;
 }
 
@@ -45,7 +46,11 @@ export class Character extends React.Component<CharacterProps, {}> {
 
         return (
             <div className={this.props.class} style={hiddenStyle}>
-                <img src={this.props.image.src} />
+                {this.props.image.imageProps.map(function(imgProp) {
+                    return (
+                        <img alt={imgProp.alt} src={imgProp.src} />
+                    );
+                })}
             </div>
         );
     }

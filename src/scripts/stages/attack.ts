@@ -48,15 +48,15 @@ export class Attack {
         return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
     }
 
-    public getOpponentImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
-        return this.getImageSrc(BattleCharacter.Type.Opponent, stageType, attackerType);
+    public getOpponentImage(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+        return this.getImage(BattleCharacter.Type.Opponent, stageType, attackerType);
     }
 
-    public getPlayerImageSrc(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
-        return this.getImageSrc(BattleCharacter.Type.Player, stageType, attackerType);
+    public getPlayerImage(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+        return this.getImage(BattleCharacter.Type.Player, stageType, attackerType);
     }
 
-    private getImageSrc(characterType: BattleCharacter.Type, stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+    private getImage(characterType: BattleCharacter.Type, stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
         // defender is always non-evo
         if (characterType !== attackerType) {
             switch (stageType) {
