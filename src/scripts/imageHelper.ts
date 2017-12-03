@@ -1,5 +1,3 @@
-import * as TwemojiBasename from "twemoji-basename";
-
 import {BattleCharacter} from "./battles/character";
 
 import {CharacterImage} from "./components/character";
@@ -20,15 +18,15 @@ export module ImageHelper {
     }
 
     export function getEmojiImage(characterType: BattleCharacter.Type): CharacterImage {
-        let imageProps: ImageProperties[] = [];
+        let imageProps: ImageProperties;
 
         switch(characterType) {
             case BattleCharacter.Type.Opponent:
-                imageProps = [{src: "", alt: Constants.Battle.Characters.Opponent.emoji}];
+                imageProps = {src: "", alt: Constants.Battle.Characters.Opponent.emoji};
                 break;
             case BattleCharacter.Type.Player:
                 let emojiDate: PlayerEmojiDate = getPlayerEmojiForDate(new Date());
-                imageProps = [{src: "", alt: Utils.formatString(Constants.Battle.Characters.Player.emoji, emojiDate.emoji)}];
+                imageProps = {src: "", alt: Utils.formatString(Constants.Battle.Characters.Player.emoji, emojiDate.emoji)};
                 break;
         }
 
@@ -73,7 +71,7 @@ export module ImageHelper {
         let altText = Utils.formatString("{0} gif", BattleCharacter.Type[characterType]);
 
         return {
-            imageProps: [{src: imageSrc, alt: altText}],
+            imageProps: {src: imageSrc, alt: altText},
             hidden: hidden
         };
     }
@@ -93,7 +91,7 @@ export module ImageHelper {
         let altText = Utils.formatString("{0} mega evolution image", BattleCharacter.Type[characterType]);
 
         return {
-            imageProps: [{src: imageSrc, alt: altText}]
+            imageProps: {src: imageSrc, alt: altText}
         };
     }
 }

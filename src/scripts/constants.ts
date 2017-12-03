@@ -135,7 +135,6 @@ export module Constants {
     }
 
     export module Resources {
-        export const twemojiCDN = "//twemoji.maxcdn.com/36x36/{0}.png";
         export const opponentPokemonGif = "assets/gallade_norm_front.gif";
         export const opponentMegaImg = "assets/nadja_drawing.jpg"
         export const opponentEmojiImg = "assets/emoji/emoji_n.png";

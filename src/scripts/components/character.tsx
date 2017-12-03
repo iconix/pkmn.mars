@@ -10,7 +10,7 @@ import {Utils} from "../utils";
 import {SceneState} from "./scene";
 
 export interface CharacterImage {
-    imageProps: ImageHelper.ImageProperties[];
+    imageProps: ImageHelper.ImageProperties;
     hidden?: boolean;
 }
 
@@ -46,11 +46,7 @@ export class Character extends React.Component<CharacterProps, {}> {
 
         return (
             <div className={this.props.class} style={hiddenStyle}>
-                {this.props.image.imageProps.map(function(imgProp) {
-                    return (
-                        <img alt={imgProp.alt} src={imgProp.src} />
-                    );
-                })}
+                <img alt={this.props.image.imageProps.alt} src={this.props.image.imageProps.src} />
             </div>
         );
     }
