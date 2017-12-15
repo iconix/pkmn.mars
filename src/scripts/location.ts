@@ -85,12 +85,12 @@ export module Location {
             new google.maps.LatLng(coord2.latitude, coord2.longitude)
         );
 
-        return Math.round(distanceInMeters * Constants.Numbers.metersToMilesFactor);
+        return Math.round(distanceInMeters * Constants._.Numbers.metersToMilesFactor);
     }
 
     function createDefaultCoordinates(): Promise<Coordinates> {
         // default: Bremerton, WA
-        return createCoordinates(Constants.Numbers.bremertonLatitude, Constants.Numbers.bremertonLongitude, Constants.unknownLocation);
+        return createCoordinates(Constants._.Numbers.bremertonLatitude, Constants._.Numbers.bremertonLongitude, Constants._.unknownLocation);
     }
 
     function getBrowserLocation(overrideLat?: string, overrideLng?:string): Promise<Location.Coordinates> {
@@ -126,7 +126,7 @@ export module Location {
     }
 
     function getFriendlyName(lat: number, lng: number): Promise<string> {
-        let friendlyName = Constants.unknownLocation;
+        let friendlyName = Constants._.unknownLocation;
 
         return new Promise<string>((resolve) => {
             var latlng: google.maps.LatLngLiteral = {lat: lat, lng: lng};

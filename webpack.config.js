@@ -49,9 +49,12 @@ module.exports = {
             },
         ]),
         new webpack.DefinePlugin({
-            // TODO: move some constants here to make app more generic on GitHub
             DYNAMODB_ACCESS_KEY_ID: JSON.stringify(process.env.DYNAMODB_ACCESS_KEY_ID),
-            DYNAMODB_SECRET_ACCESS_KEY: JSON.stringify(process.env.DYNAMODB_SECRET_ACCESS_KEY)
+            DYNAMODB_SECRET_ACCESS_KEY: JSON.stringify(process.env.DYNAMODB_SECRET_ACCESS_KEY),
+            FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
+            FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+            FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
+            FIREBASE_REFERENCE_APP: JSON.stringify(process.env.FIREBASE_REFERENCE_APP)
         }),
         new htmlWebpackPlugin({
             title: 'pkmn:mars',

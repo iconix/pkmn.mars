@@ -1,9 +1,9 @@
-import {BattleCharacter} from "./battles/character";
+import {BattleCharacter} from './battles/character';
 
-import {CharacterImage} from "./components/character";
+import {CharacterImage} from './components/character';
 
-import {Constants} from "./constants";
-import {Utils} from "./utils";
+import {Constants} from './constants';
+import {Utils} from './utils';
 
 export module ImageHelper {
     export interface ImageProperties {
@@ -22,11 +22,11 @@ export module ImageHelper {
 
         switch(characterType) {
             case BattleCharacter.Type.Opponent:
-                imageProps = {src: "", alt: Constants.Battle.Characters.Opponent.emoji};
+                imageProps = {src: '', alt: Constants._.Battle.Characters.Opponent.emoji};
                 break;
             case BattleCharacter.Type.Player:
-                let emojiDate: EmojiDate = getEmojiForDate(Constants.Numbers.playerEmojiDates, new Date());
-                imageProps = {src: "", alt: Utils.formatString(Constants.Battle.Characters.Player.emoji, emojiDate.emoji)};
+                let emojiDate: EmojiDate = getEmojiForDate(Constants._.Numbers.playerEmojiDates, new Date());
+                imageProps = {src: '', alt: Utils.formatString(Constants._.Battle.Characters.Player.emoji, emojiDate.emoji)};
                 break;
         }
 
@@ -61,14 +61,14 @@ export module ImageHelper {
 
         switch(characterType) {
             case BattleCharacter.Type.Opponent:
-                imageSrc = Constants.Resources.opponentPokemonGif;
+                imageSrc = Constants._.Resources.opponentPokemonGif;
                 break;
             case BattleCharacter.Type.Player:
-                imageSrc = Constants.Resources.playerPokemonGif;
+                imageSrc = Constants._.Resources.playerPokemonGif;
                 break;
         }
 
-        let altText = Utils.formatString("{0} gif", BattleCharacter.Type[characterType]);
+        let altText = Utils.formatString('{0} gif', BattleCharacter.Type[characterType]);
 
         return {
             imageProps: {src: imageSrc, alt: altText},
@@ -81,14 +81,14 @@ export module ImageHelper {
 
         switch(characterType) {
             case BattleCharacter.Type.Opponent:
-                imageSrc = Constants.Resources.opponentMegaImg;
+                imageSrc = Constants._.Resources.opponentMegaImg;
                 break;
             case BattleCharacter.Type.Player:
-                imageSrc = Constants.Resources.playerMegaImg;
+                imageSrc = Constants._.Resources.playerMegaImg;
                 break;
         }
 
-        let altText = Utils.formatString("{0} mega evolution image", BattleCharacter.Type[characterType]);
+        let altText = Utils.formatString('{0} mega evolution image', BattleCharacter.Type[characterType]);
 
         return {
             imageProps: {src: imageSrc, alt: altText}

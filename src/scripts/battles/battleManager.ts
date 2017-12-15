@@ -65,7 +65,7 @@ export module BattleManager {
             availableAttackReasonTypes.push(AttackReason.Type.TemperatureHot);
         }
 
-        if (distance < Constants.Numbers.maxPrettyCloseInMiles) {
+        if (distance < Constants._.Numbers.maxPrettyCloseInMiles) {
             availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
             availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);
             availableAttackReasonTypes.push(AttackReason.Type.DistanceClose);

@@ -60,7 +60,7 @@ export module Stage {
                 { animations: animations},
                 { animations: animations,
                     dialog: {
-                    text: Utils.formatString(Constants.Battle.DialogText.start, character.getName(), location.distanceBetween.toString()),
+                    text: Utils.formatString(Constants._.Battle.DialogText.start, character.getName(), location.distanceBetween.toString()),
                     waitForTouchAfter: true
                 }}
             ];
@@ -90,7 +90,7 @@ export module Stage {
             let defenderAnimation: { [target: number]: Animation } = {};
             defenderAnimation[defender.getType()] = attack.getDefenderAnimation();
 
-            let attackDialog: string = Utils.formatString(Constants.Battle.DialogText.attack, attacker.getName(), attack.getAttackName());
+            let attackDialog: string = Utils.formatString(Constants._.Battle.DialogText.attack, attacker.getName(), attack.getAttackName());
 
             let actions: Action[] = [];
 

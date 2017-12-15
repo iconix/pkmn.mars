@@ -39,7 +39,7 @@ export function DialogBox(props: DialogBoxProps) {
     const textToAnimate = React.cloneElement(textElement, { key });
 
     return (
-        <div className={Constants.Classes.dialogBox}>
+        <div className={Constants._.Classes.dialogBox}>
             <VelocityTransitionGroup enter={transitionEnterProps} runOnMount>
                 {textToAnimate}
             </VelocityTransitionGroup>

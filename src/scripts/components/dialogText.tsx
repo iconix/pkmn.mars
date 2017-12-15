@@ -10,7 +10,7 @@ export function DialogText(props: DialogTextProps) {
     // presentational component: functional, stateless
     // TODO: enforce max character limit of 64
     return (
-        <div id={Constants.Classes.dialogText}>
+        <div id={Constants._.Classes.dialogText}>
             {props.text.split("\n").map(function(item) {
                 return (
                     <span>

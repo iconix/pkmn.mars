@@ -23,14 +23,14 @@ export module Background {
         return {
             Position: randomizeBackground(),
             Color: TimeOfDay.getTint(coordinates),
-            Image: "url(\"" + Constants.Resources.arenaBackground + "\")",
+            Image: "url(\"" + Constants._.Resources.arenaBackground + "\")",
             Repeat: "no-repeat"
         };
     }
 
     function randomizeBackground(): Position {
-        const backgroundPositionX = Constants.Background.SpritePositions.XPositions;
-        const backgroundPositionY = Constants.Background.SpritePositions.YPositions;
+        const backgroundPositionX = Constants._.Background.SpritePositions.XPositions;
+        const backgroundPositionY = Constants._.Background.SpritePositions.YPositions;
 
         let numBackgrounds = backgroundPositionX.length * backgroundPositionY.length;
         let randBackground = Utils.getRandomInt(numBackgrounds - 1);
@@ -38,7 +38,7 @@ export module Background {
         let randXIndex: number = randBackground % backgroundPositionX.length;
         let randYIndex: number = Math.floor(randBackground / backgroundPositionX.length);
 
-        LogManager.getLogger().log(Level.Debug, `Selected ${Constants.TimeOfDay[Constants.Background.timeOfDayMapping[randBackground]]} background ${randBackground + 1} of ${numBackgrounds}`);
+        LogManager.getLogger().log(Level.Debug, `Selected ${Constants._.TimeOfDay[Constants._.Background.timeOfDayMapping[randBackground]]} background ${randBackground + 1} of ${numBackgrounds}`);
 
         let randXPos: number = backgroundPositionX[randXIndex];
         let randYPos: number = backgroundPositionY[randYIndex];

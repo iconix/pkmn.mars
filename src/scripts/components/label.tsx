@@ -10,7 +10,7 @@ interface LabelProps {
 export function Label(props: LabelProps) {
     // presentational component: functional, stateless
     return (
-        <div className={Constants.Classes.label} id={props.id}>
+        <div className={Constants._.Classes.label} id={props.id}>
             {props.text.split("\n").map(function(item) {
                 return (
                     <span>

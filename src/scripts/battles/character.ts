@@ -25,7 +25,7 @@ export class BattleCharacter {
 
     private getModuleForBattleCharacterType(): { name: string, trainer: string, evoStone: string } {
         let battleCharacterTypeAsKey: string = BattleCharacter.Type[this.type];
-        return (<any>Constants.Battle.Characters)[battleCharacterTypeAsKey];
+        return (<any>Constants._.Battle.Characters)[battleCharacterTypeAsKey];
     }
 }
 

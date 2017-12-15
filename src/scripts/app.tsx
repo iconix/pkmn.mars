@@ -1,18 +1,21 @@
-import * as React from "react";
-import { render } from "react-dom";
+import * as React from 'react';
+import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 
 import routes from './routes';
 
-import {Constants} from "./constants";
+import {Constants} from './constants';
+import {Datastore} from './datastore';
 
-import {LogManager} from "./logging/logManager";
+import {LogManager} from './logging/logManager';
 
 window.onbeforeunload = (event) => {
     LogManager.getLogger().send();
 }
 
-render(
-    <Router history={browserHistory}>{routes}</Router>,
-    document.getElementById(Constants.Ids.screen)
-);
+Datastore.loadConstants().then(() => {
+    render(
+        <Router history={browserHistory}>{routes}</Router>,
+        document.getElementById(Constants._.Ids.screen)
+    );
+});

@@ -47,7 +47,7 @@ export class Arena extends React.Component<{}, Location.State> {
         }
 
         return (
-            <div className={Constants.Classes.arena} style={arenaStyle}>
+            <div className={Constants._.Classes.arena} style={arenaStyle}>
                 <Scene battle={BattleManager.getBattle(this.state.locationData)} />
             </div>
         );

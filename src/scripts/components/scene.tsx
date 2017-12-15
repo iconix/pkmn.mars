@@ -47,7 +47,7 @@ export class Scene extends React.Component<SceneProps, SceneState> {
     render() {
         if (!this.props.battle) {
             return (
-                <div className={Constants.Classes.scene}>
+                <div className={Constants._.Classes.scene}>
                     <p>Loading...</p> {/* TODO: add loading icons of absol, gallade */}
                 </div>
             );
@@ -74,24 +74,24 @@ export class Scene extends React.Component<SceneProps, SceneState> {
         };
 
         return (
-            <div className={Constants.Classes.scene} onTouchEnd={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
-                <Character class={Constants.Classes.opponent}
+            <div className={Constants._.Classes.scene} onTouchEnd={this.state.waitingForTouch ? this.sceneTouchEvent : undefined}>
+                <Character class={Constants._.Classes.opponent}
                     image={opponentImage}
                     animation={opponentAnimation}
                     numActions={stageFactory.getNumActions()}
                     setSceneStateCallback={this.setSceneState} />
 
-                <Label text={this.props.battle.getLocationData().opponentLocation.friendlyName} id={Constants.Ids.opponent} />
+                <Label text={this.props.battle.getLocationData().opponentLocation.friendlyName} id={Constants._.Ids.opponent} />
 
                 <Field />
 
-                <Character class={Constants.Classes.player}
+                <Character class={Constants._.Classes.player}
                     image={playerImage}
                     animation={playerAnimation}
                     numActions={stageFactory.getNumActions()}
                     setSceneStateCallback={this.setSceneState} />
 
-                <Label text={this.props.battle.getLocationData().playerLocation.friendlyName} id={Constants.Ids.player} />
+                <Label text={this.props.battle.getLocationData().playerLocation.friendlyName} id={Constants._.Ids.player} />
 
                 { currentAction && currentAction.dialog ? <DialogBox dialog={currentAction.dialog} setSceneStateCallback={this.setSceneState} /> : undefined }
             </div>

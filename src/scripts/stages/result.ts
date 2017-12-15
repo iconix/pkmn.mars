@@ -86,7 +86,7 @@ export module Result {
 
     export function getResultDialog(type: Result.Type, defender: BattleCharacter): string {
         let typeToDialogTemplateKey: string = Utils.lowercaseFirstLetter(Result.Type[type]);
-        let dialogTemplate: string = ((<any>Constants.Battle.DialogText.Result)[typeToDialogTemplateKey]) as string;
+        let dialogTemplate: string = ((<any>Constants._.Battle.DialogText.Result)[typeToDialogTemplateKey]) as string;
 
         if (dialogTemplate) {
             return Utils.formatString(dialogTemplate, defender.getName());

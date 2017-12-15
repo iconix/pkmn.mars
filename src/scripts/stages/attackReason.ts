@@ -22,16 +22,16 @@ export module AttackReason {
 
     export function getModifiers(distance: number): Modifiers {
         let distanceMagnitude: string;
-        if (distance < Constants.Numbers.maxSoCloseInMiles || distance >= Constants.Numbers.maxPrettyFarInMiles) {
-            distanceMagnitude = Constants.Battle.DialogText.AttackReason.Modifiers.distanceExtreme;
+        if (distance < Constants._.Numbers.maxSoCloseInMiles || distance >= Constants._.Numbers.maxPrettyFarInMiles) {
+            distanceMagnitude = Constants._.Battle.DialogText.AttackReason.Modifiers.distanceExtreme;
         } else {
-            distanceMagnitude = Constants.Battle.DialogText.AttackReason.Modifiers.distanceModerate;
+            distanceMagnitude = Constants._.Battle.DialogText.AttackReason.Modifiers.distanceModerate;
         }
 
         let randHotModifier: number = Utils.getRandomInt(1);
         let hotModifiers: string[] = [
-            Constants.Battle.DialogText.AttackReason.Modifiers.hotness1,
-            Constants.Battle.DialogText.AttackReason.Modifiers.hotness2
+            Constants._.Battle.DialogText.AttackReason.Modifiers.hotness1,
+            Constants._.Battle.DialogText.AttackReason.Modifiers.hotness2
         ];
 
         return {
@@ -47,22 +47,22 @@ export module AttackReason {
         let extraReasonForWakeUpSlap: string = "";
         if (attack.getAttack() === Attack.Name.WakeUpSlap) {
             // has ExtraAttackReason
-            extraReasonForWakeUpSlap = Constants.Battle.DialogText.AttackReason.extraSleeping;
+            extraReasonForWakeUpSlap = Constants._.Battle.DialogText.AttackReason.extraSleeping;
         }
 
         switch(type) {
             case AttackReason.Type.DistanceClose:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.distanceClose, defender.getName(), distanceMagnitude, extraReasonForWakeUpSlap);
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.distanceClose, defender.getName(), distanceMagnitude, extraReasonForWakeUpSlap);
             case AttackReason.Type.DistanceFar:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.distanceFar, defender.getName(), distanceMagnitude);
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.distanceFar, defender.getName(), distanceMagnitude);
             case AttackReason.Type.EvolutionEmoji:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.evolutionEmoji, attacker.getName());
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.evolutionEmoji, attacker.getName());
             case AttackReason.Type.EvolutionMega:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.evolutionMega, attacker.getName(), attacker.getEvoStoneName(), attacker.getTrainer());
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.evolutionMega, attacker.getName(), attacker.getEvoStoneName(), attacker.getTrainer());
             case AttackReason.Type.TemperatureCold:
-                return Constants.Battle.DialogText.AttackReason.temperatureCold;
+                return Constants._.Battle.DialogText.AttackReason.temperatureCold;
             case AttackReason.Type.TemperatureHot:
-                return Utils.formatString(Constants.Battle.DialogText.AttackReason.temperatureHot, hotnessMagnitude);
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.temperatureHot, hotnessMagnitude);
         }
     }
 
