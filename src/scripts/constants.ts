@@ -110,11 +110,6 @@ export module Constants {
             export const scene = "scene";
         }
 
-        // TODO: to firebase
-        export module Datastore {
-            export const tableName = 'Location';
-        }
-
         export module Ids {
             export const opponent = Classes.opponent;
             export const player = Classes.player;
@@ -123,15 +118,15 @@ export module Constants {
 
         // TODO: most to firebase
         export module Numbers {
-            export const bremertonLatitude = 47.5650;
-            export const bremertonLongitude = -122.6270;
-            export const metersToMilesFactor = 0.000621371;
-            export const seattleLatitude = 47.6257;
-            export const seattleLongitude = -122.3445;
-
-            export const maxSoCloseInMiles = 5;
             export const maxPrettyCloseInMiles = 30;
             export const maxPrettyFarInMiles = 2000;
+            export const maxSoCloseInMiles = 5;
+            export const metersToMilesFactor = 0.000621371;
+
+            export const opponentDefaultLatitude = 47.6257;
+            export const opponentDefaultLongitude = -122.3445;
+            export const playerDefaultLatitude = 47.5650;
+            export const playerDefaultLongitude = -122.6270;
 
             // of the form: [<month>, <day>, <emoji>]
             export const playerEmojiDates = [

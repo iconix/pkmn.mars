@@ -88,8 +88,7 @@ export module Location {
     }
 
     function createDefaultCoordinates(): Promise<Coordinates> {
-        // default: Bremerton, WA
-        return createCoordinates(Constants._.Numbers.bremertonLatitude, Constants._.Numbers.bremertonLongitude, Constants._.unknownLocation);
+        return createCoordinates(Constants._.Numbers.playerDefaultLatitude, Constants._.Numbers.playerDefaultLongitude, Constants._.unknownLocation);
     }
 
     function getBrowserLocation(overrideLat?: string, overrideLng?:string): Promise<Location.Coordinates> {

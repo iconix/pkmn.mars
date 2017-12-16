@@ -41,7 +41,7 @@ export module Datastore {
             return Promise.resolve(data);
         }).catch((error) => {
             LogManager.getLogger().log(Level.Warn, { message: 'Falling back to default location as last', error: error.toString() });
-            return Location.createCoordinates(Constants._.Numbers.seattleLatitude, Constants._.Numbers.seattleLongitude);
+            return Location.createCoordinates(Constants._.Numbers.opponentDefaultLatitude, Constants._.Numbers.opponentDefaultLongitude);
         });
     }
 }
