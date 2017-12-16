@@ -51,8 +51,7 @@ module.exports = {
         new webpack.DefinePlugin({
             FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
             FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
-            FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
-            FIREBASE_REFERENCE_APP: JSON.stringify(process.env.FIREBASE_REFERENCE_APP)
+            FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL)
         }),
         new htmlWebpackPlugin({
             title: 'pkmn:mars',

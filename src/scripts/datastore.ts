@@ -1,30 +1,21 @@
-import * as Firebase from 'firebase';
 import _merge = require('lodash.merge');
 
 import {Constants} from './constants';
+import * as Firebase from './firebase-rest';
 import {Location} from './location';
 
 import {Level} from './logging/logger';
 import {LogManager} from './logging/logManager';
 
 export module Datastore {
-    var config = {
-        apiKey: FIREBASE_API_KEY,
-        authDomain: FIREBASE_AUTH_DOMAIN,
-        databaseURL: FIREBASE_DATABASE_URL
-    };
-    const app = Firebase.initializeApp(config);
-
-    var db: Firebase.database.Database = app.database();
-    var appRef: Firebase.database.Reference = db.ref(FIREBASE_REFERENCE_APP);
+    const client = new Firebase.Client(FIREBASE_DATABASE_URL);
 
     export function loadConstants(): Promise<void> {
-        return appRef.once('value').then((refSnapshot: Firebase.database.DataSnapshot) => {
-            var data = refSnapshot.val();
+        const dbLocation = '/App/constants/_';
+
+        return client.get(dbLocation).then((data: string) => {
             LogManager.getLogger().log(Level.Debug, data);
-            if (data && data.constants && data.constants._) {
-                _merge(Constants._, data.constants._);
-            }
+            _merge(Constants._, data);
             return Promise.resolve();
         }).catch((error) => {
             LogManager.getLogger().log(Level.Error, error);
@@ -33,9 +24,9 @@ export module Datastore {
     }
 
     export function saveLocation(coordinates: Location.Coordinates): Promise<string> {
-        return appRef.update({
-            location: { last: coordinates }
-        }).then(() => {
+        const dbLocation = '/App/location/last';
+
+        return client.put(dbLocation, coordinates).then(() => {
             return Promise.resolve(undefined);
         }).catch((error) => {
             return Promise.reject(error);
@@ -43,12 +34,13 @@ export module Datastore {
     }
 
     export function getLastLocation(): Promise<Location.Coordinates> {
-        return appRef.once('value').then((refSnapshot: Firebase.database.DataSnapshot) => {
-            var data = refSnapshot.val();
+        const dbLocation = '/App/location/last';
+
+        return client.get(dbLocation).then((data: Location.Coordinates) => {
             LogManager.getLogger().log(Level.Debug, data);
-            return Promise.resolve(data.location.last);
+            return Promise.resolve(data);
         }).catch((error) => {
-            LogManager.getLogger().log(Level.Warn, 'Falling back to default location as last');
+            LogManager.getLogger().log(Level.Warn, { message: 'Falling back to default location as last', error: error.toString() });
             return Location.createCoordinates(Constants._.Numbers.seattleLatitude, Constants._.Numbers.seattleLongitude);
         });
     }
