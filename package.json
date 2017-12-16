@@ -27,7 +27,6 @@
     "@types/react-router": "^2.0.41",
     "@types/winston": "^2.3.3",
     "Tattletale": "git://github.com/iconix/tattletale.js.git",
-    "aws-sdk": "^2.7.19",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
     "babel-preset-es2015": "^6.24.0",

@@ -11,6 +11,7 @@ export module Location {
         friendlyName: string;
         latitude: number;
         longitude: number;
+        timestamp: string;
     }
 
     export interface Data {
@@ -56,11 +57,11 @@ export module Location {
 
     export function createCoordinates(lat: number, lng: number, friendlyName?: string): Promise<Location.Coordinates> {
         if (friendlyName) {
-            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName });
+            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName, timestamp: new Date().toUTCString() });
         }
 
         return getFriendlyName(lat, lng).then((friendlyName: string) => {
-            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName });
+            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName, timestamp: new Date().toUTCString() });
         });
     }
 
@@ -68,8 +69,6 @@ export module Location {
         let playerLocation: Promise<Location.Coordinates> = getBrowserLocation(overrideLat, overrideLng);
         let opponentLocation: Promise<Location.Coordinates> = getOpponentLocation();
 
-        // TODO: this breaks if the datastore throws an AWSError, even though this code should never see that...
-        // (try removing region in Datastore.getDb() to see this)
         return Promise.all([playerLocation, opponentLocation]).then((values: Location.Coordinates[]) => {
             return Promise.resolve({
                 playerLocation: values[0],

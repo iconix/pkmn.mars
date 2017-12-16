@@ -49,8 +49,6 @@ module.exports = {
             },
         ]),
         new webpack.DefinePlugin({
-            DYNAMODB_ACCESS_KEY_ID: JSON.stringify(process.env.DYNAMODB_ACCESS_KEY_ID),
-            DYNAMODB_SECRET_ACCESS_KEY: JSON.stringify(process.env.DYNAMODB_SECRET_ACCESS_KEY),
             FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
             FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
             FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
