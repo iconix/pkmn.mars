@@ -1,5 +1,4 @@
 import Tattletale = require('Tattletale');
-import _cloneDeep = require('lodash.clonedeep');
 
 // TODO: consolidate with winston levels (.d.ts)
 export enum Level {
@@ -43,11 +42,18 @@ export class Logger {
     }
 
     private sanitizeData(level: Level, data: string | number | boolean | {[ key: string]: any}): string | number | boolean {
-        var cloneData = _cloneDeep(data);
-        if (typeof cloneData === 'object') {
+        if (typeof data === 'object') {
+            var cloneData: any;
+
+            if (Object.keys(data).length === 0) {
+                // stringify an Error: https://stackoverflow.com/a/26199752
+                cloneData = JSON.parse(JSON.stringify(data, Object.getOwnPropertyNames(data)));
+            } else {
+                cloneData = JSON.parse(JSON.stringify(data));
+            }
             cloneData['level'] = Level[level];
             return JSON.stringify(cloneData);
         }
-        return JSON.stringify({ level: Level[level], message: cloneData });
+        return JSON.stringify({ level: Level[level], message: data });
     }
 }
