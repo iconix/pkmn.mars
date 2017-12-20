@@ -14,7 +14,7 @@ export module Datastore {
         const dbLocation = '/App/constants/_';
 
         return client.get(dbLocation).then((data: string) => {
-            LogManager.getLogger().log(Level.Debug, data);
+            //LogManager.getLogger().log(Level.Debug, data);
             _merge(Constants._, data);
             return Promise.resolve();
         }).catch((error) => {
