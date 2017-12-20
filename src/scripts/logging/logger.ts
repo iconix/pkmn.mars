@@ -1,4 +1,5 @@
 import Tattletale = require('Tattletale');
+import serializeError = require('serialize-error');
 
 // TODO: consolidate with winston levels (.d.ts)
 export enum Level {
@@ -46,8 +47,8 @@ export class Logger {
             var cloneData: any;
 
             if (Object.keys(data).length === 0) {
-                // stringify an Error: https://stackoverflow.com/a/26199752
-                cloneData = JSON.parse(JSON.stringify(data, Object.getOwnPropertyNames(data)));
+                // Error objects require special serialization
+                cloneData = serializeError(data);
             } else {
                 cloneData = JSON.parse(JSON.stringify(data));
             }
