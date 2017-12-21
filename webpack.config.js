@@ -43,7 +43,7 @@ module.exports = {
         new webpackCleanupPlugin(),
         new copyWebpackPlugin([
             {
-                context: 'src/sprites',
+                context: 'src/img',
                 from: '**/*',
                 to: 'assets'
             },
