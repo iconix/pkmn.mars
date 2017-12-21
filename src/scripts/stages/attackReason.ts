@@ -60,9 +60,9 @@ export module AttackReason {
             case AttackReason.Type.EvolutionMega:
                 return Utils.formatString(Constants._.Battle.DialogText.AttackReason.evolutionMega, attacker.getName(), attacker.getEvoStoneName(), attacker.getTrainer());
             case AttackReason.Type.TemperatureCold:
-                return Constants._.Battle.DialogText.AttackReason.temperatureCold;
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.temperatureCold, Constants._.Battle.Characters.Opponent.name);
             case AttackReason.Type.TemperatureHot:
-                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.temperatureHot, hotnessMagnitude);
+                return Utils.formatString(Constants._.Battle.DialogText.AttackReason.temperatureHot, Constants._.Battle.Characters.Player.name, hotnessMagnitude);
         }
     }
 

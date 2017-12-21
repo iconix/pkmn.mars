@@ -55,12 +55,11 @@ export module Location {
         });
     }
 
-    export function createCoordinates(lat: number, lng: number, friendlyName?: string): Promise<Location.Coordinates> {
-        if (friendlyName) {
-            return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName, timestamp: new Date().toUTCString() });
-        }
-
+    export function createCoordinates(lat: number, lng: number, unknown?: boolean): Promise<Location.Coordinates> {
         return getFriendlyName(lat, lng).then((friendlyName: string) => {
+            if (unknown) {
+                friendlyName = `?? ${friendlyName} ??`;
+            }
             return Promise.resolve({ latitude: lat, longitude: lng, friendlyName: friendlyName, timestamp: new Date().toUTCString() });
         });
     }
@@ -88,7 +87,7 @@ export module Location {
     }
 
     function createDefaultCoordinates(): Promise<Coordinates> {
-        return createCoordinates(Constants._.Numbers.playerDefaultLatitude, Constants._.Numbers.playerDefaultLongitude, Constants._.unknownLocation);
+        return createCoordinates(Constants._.Numbers.playerDefaultLatitude, Constants._.Numbers.playerDefaultLongitude, true);
     }
 
     function getBrowserLocation(overrideLat?: string, overrideLng?:string): Promise<Location.Coordinates> {

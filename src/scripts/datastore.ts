@@ -8,10 +8,14 @@ import {Level} from './logging/logger';
 import {LogManager} from './logging/logManager';
 
 export module Datastore {
-    const client = new Firebase.Client(FIREBASE_DATABASE_URL);
+    const client = FIREBASE_DATABASE_URL ? new Firebase.Client(FIREBASE_DATABASE_URL) : undefined;
 
     export function loadConstants(): Promise<void> {
         const dbLocation = '/App/constants/_';
+
+        if (!client) {
+            return Promise.resolve(); // default constants
+        }
 
         return client.get(dbLocation).then((data: string) => {
             //LogManager.getLogger().log(Level.Debug, data);
@@ -26,6 +30,10 @@ export module Datastore {
     export function saveLocation(coordinates: Location.Coordinates): Promise<string> {
         const dbLocation = '/App/location/last';
 
+        if (!client) {
+            return Promise.resolve(undefined); // no-op
+        }
+
         return client.put(dbLocation, coordinates).then(() => {
             return Promise.resolve(undefined);
         }).catch((error) => {
@@ -35,6 +43,11 @@ export module Datastore {
 
     export function getLastLocation(): Promise<Location.Coordinates> {
         const dbLocation = '/App/location/last';
+
+        if (!client) {
+            // default opponent coordinates
+            return Location.createCoordinates(Constants._.Numbers.opponentDefaultLatitude, Constants._.Numbers.opponentDefaultLongitude);
+        }
 
         return client.get(dbLocation).then((data: Location.Coordinates) => {
             LogManager.getLogger().log(Level.Debug, data);

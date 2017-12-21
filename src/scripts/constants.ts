@@ -34,26 +34,25 @@ export module Constants {
         }
 
         export module Battle {
-            // TODO: to firebase
             export module Characters {
                 export module Opponent {
-                    export const name = "Boosie";
-                    export const emoji = "🐧🎢🏈☀️";
-                    export const evoStone = "Galladite";
-                    export const trainer = "Nadja";
+                    export const name = "Steelix";
+                    export const emoji = "🤘🌟💔😏";
+                    export const evoStone = "Steelixite";
+                    export const trainer = "Brock";
                 }
 
                 export module Player {
-                    export const name = "Gotham";
-                    export const emoji = "{0}👽🎮😽";
-                    export const evoStone = "Absolite";
-                    export const trainer = "Margaret";
+                    export const name = "Pikachu";
+                    export const emoji = "{0}⚡🎒💪";
+                    export const evoStone = "Pikite";
+                    export const trainer = "Ash";
                 }
             }
 
             export module DialogText {
                 // Stage.BattleStart
-                export const start = "{0} is {1} miles away."; // "[Defender] is [X] miles away."
+                export const start = "{0}'s {1} is {2} miles away."; // "[Trainer]'s [Defender] is [X] miles away."
 
                 export module AttackReason {
                     export const distanceClose = "{0} is {1} close{2}!"; // "[Defender] is [so/pretty] close!"
@@ -61,8 +60,8 @@ export module Constants {
                     export const evolutionEmoji = "{0} is reacting to the Internet!"; // "[Attacker] is reacting to the Internet!"
                     export const evolutionMega = "{0}'s {1} is reacting to {2}'s Mega Ring!"; // "[Attacker]'s [EvolutionStone] is reacting to [AttackerTrainer]'s Mega Ring!"
                     export const extraSleeping = "... and fast asleep";
-                    export const temperatureCold = _.Battle.Characters.Opponent.name + " looks a little cold..."; // "Boosie looks a little cold..."
-                    export const temperatureHot = _.Battle.Characters.Player.name + " looks {0}"; // "Gotham looks really warm!" / "Gotham looks super hot... ;)"
+                    export const temperatureCold = "{0} looks a little cold..."; // "Steelix looks a little cold..."
+                    export const temperatureHot = "{0} looks {1}"; // "Pikachu looks really warm!" / "Pikachu looks super hot... ;)"
 
                     export module Modifiers {
                         export const distanceExtreme = "so";
@@ -116,33 +115,33 @@ export module Constants {
             export const screen = "screen";
         }
 
-        // TODO: most to firebase
         export module Numbers {
             export const maxPrettyCloseInMiles = 30;
             export const maxPrettyFarInMiles = 2000;
             export const maxSoCloseInMiles = 5;
             export const metersToMilesFactor = 0.000621371;
 
-            export const opponentDefaultLatitude = 47.6257;
-            export const opponentDefaultLongitude = -122.3445;
-            export const playerDefaultLatitude = 47.5650;
-            export const playerDefaultLongitude = -122.6270;
+            // opponent default: Tokyo
+            export const opponentDefaultLatitude = 35.6895;
+            export const opponentDefaultLongitude = 139.6917;
+            // player default: Seattle
+            export const playerDefaultLatitude = 47.6147;
+            export const playerDefaultLongitude = -122.3448;
 
             // of the form: [<month>, <day>, <emoji>]
             export const playerEmojiDates = [
-                [1, 1, "🎆"], [1, 15, "☔"], [2, 14, "❤️"], [3, 1, "💬"], [3, 5, "☔"],
-                [3, 17, "🍀"], [3, 20, "🌸"], [4, 16, "🐰"], [5, 5, "💃🏾"], [5, 6, "🌺"],
-                [6, 21, "🌞"], [8, 16, "2️⃣"], [9, 22, "🍂"], [10, 1, "🎃"], [11, 13, "🎁"],
+                [1, 1, "🎆"], [1, 15, "❄️"], [2, 14, "❤️"], [3, 1, "☔"],
+                [3, 20, "🌸"], [4, 16, "🐰"], [5, 1, "🌺"],
+                [6, 21, "🌞"], [9, 22, "🍂"], [10, 1, "🎃"],
                 [11, 22, "🦃"], [12, 1, "🎄"], [12, 31, "🎆"]
             ];
         }
 
-        // TODO: most to firebase
         export module Resources {
-            export const opponentPokemonGif = "assets/gallade_norm_front.gif";
-            export const opponentMegaImg = "assets/nadja_drawing.jpg"
-            export const playerPokemonGif = "assets/absol_shiny_back.gif";
-            export const playerMegaImg = "assets/velma_dinkley.png";
+            export const opponentPokemonGif = "assets/steelix_front.gif";
+            export const opponentMegaImg = "assets/steelix_mega.gif";
+            export const playerPokemonGif = "assets/pikachu_back.gif";
+            export const playerMegaImg = "assets/pikachu_megaman.gif";
             export const arenaBackground = "assets/background.png";
         }
 

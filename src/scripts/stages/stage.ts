@@ -60,7 +60,7 @@ export module Stage {
                 { animations: animations},
                 { animations: animations,
                     dialog: {
-                    text: Utils.formatString(Constants._.Battle.DialogText.start, character.getName(), location.distanceBetween.toString()),
+                    text: Utils.formatString(Constants._.Battle.DialogText.start, character.getTrainer(), character.getName(), location.distanceBetween.toString()),
                     waitForTouchAfter: true
                 }}
             ];
