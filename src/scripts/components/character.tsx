@@ -4,19 +4,15 @@ import {VelocityComponent} from "velocity-react";
 import {BattleManager} from "../battles/battleManager";
 
 import {Animation} from "../animation";
-import {ImageHelper} from "../imageHelper";
+import {Image} from "../image";
 import {Utils} from "../utils";
 
 import {SceneState} from "./scene";
 
-export interface CharacterImage {
-    imageProps: ImageHelper.ImageProperties;
-    hidden?: boolean;
-}
 
 interface CharacterProps {
     class: string;
-    image: CharacterImage;
+    image: Image.Image;
     animation: Animation;
     numActions: number;
     setSceneStateCallback: (state: (prevState: SceneState) => SceneState) => void;

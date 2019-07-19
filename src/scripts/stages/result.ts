@@ -4,8 +4,6 @@ import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {Utils} from "../utils";
 
-import {Stage} from "./stage";
-
 export module Result {
     export enum Type {
         AttackFell,

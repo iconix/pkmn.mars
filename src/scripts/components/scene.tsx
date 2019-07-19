@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Action} from "../battles/action";
+import {Action} from "../action/action";
 import {Battle} from "../battles/battle";
 import {BattleManager} from "../battles/battleManager";
 import {BattleCharacter} from "../battles/character";
@@ -9,9 +9,9 @@ import {Stage} from "../stages/stage";
 
 import {Animation} from "../animation";
 import {Constants} from "../constants";
-import {Utils} from "../utils";
+import {Image} from "../image";
 
-import {Character, CharacterImage} from "./character";
+import {Character} from "./character";
 import {DialogBox} from "./dialogBox";
 import {Field} from "./field";
 import {Label} from "./label";
@@ -53,8 +53,8 @@ export class Scene extends React.Component<SceneProps, SceneState> {
             );
         }
 
-        let opponentImage: CharacterImage = this.props.battle.getCharacterImage(BattleCharacter.Type.Opponent, this.state.stage);
-        let playerImage: CharacterImage = this.props.battle.getCharacterImage(BattleCharacter.Type.Player, this.state.stage);
+        let opponentImage: Image.Image = this.props.battle.getCharacterImage(BattleCharacter.Type.Opponent, this.state.stage);
+        let playerImage: Image.Image = this.props.battle.getCharacterImage(BattleCharacter.Type.Player, this.state.stage);
 
         let stageFactory: Stage.Factory = this.props.battle.getStageFactory(this.state.stage);
         let currentAction: Action = stageFactory.getAction(this.state.actionIndex);

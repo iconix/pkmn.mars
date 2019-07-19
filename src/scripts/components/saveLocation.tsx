@@ -10,7 +10,7 @@ interface SaveLocationState extends Location.State {
 export class SaveLocation extends React.Component<{}, SaveLocationState> {
     constructor(props: {}) {
         super(props);
-        Location.initLocationData(this);
+        Location.initLocationState(this);
     }
 
     render() {

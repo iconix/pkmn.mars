@@ -1,24 +1,26 @@
 import {BattleCharacter} from './battles/character';
 
-import {CharacterImage} from './components/character';
-
 import {Constants} from './constants';
 import {Utils} from './utils';
 
-export module ImageHelper {
-    export interface ImageProperties {
+export module Image {
+    export interface Image {
+        imageProps: ImageProps;
+        hidden?: boolean;
+    }
+
+    export interface ImageProps {
         src: string;
         alt: string;
     }
-
     interface EmojiDate {
         month: number;
         day: number;
         emoji: string;
     }
 
-    export function getEmojiImage(characterType: BattleCharacter.Type): CharacterImage {
-        let imageProps: ImageProperties;
+    export function getEmojiImage(characterType: BattleCharacter.Type): Image {
+        let imageProps: ImageProps;
 
         switch(characterType) {
             case BattleCharacter.Type.Opponent:
@@ -56,7 +58,7 @@ export module ImageHelper {
         return resultDate;
     }
 
-    export function getGifImage(characterType: BattleCharacter.Type, hidden: boolean = false): CharacterImage {
+    export function getGifImage(characterType: BattleCharacter.Type, hidden: boolean = false): Image {
         let imageSrc: string;
 
         switch(characterType) {
@@ -76,7 +78,7 @@ export module ImageHelper {
         };
     }
 
-    export function getMegaImage(characterType: BattleCharacter.Type): CharacterImage {
+    export function getMegaImage(characterType: BattleCharacter.Type): Image {
         let imageSrc: string;
 
         switch(characterType) {

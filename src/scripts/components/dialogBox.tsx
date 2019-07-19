@@ -1,11 +1,11 @@
 import * as React from "react";
 import {VelocityTransitionGroup} from "velocity-react";
 
-import {Dialog} from "../battles/dialog";
+import {Dialog} from "../action/dialog";
 
 import {Constants} from "../constants";
 
-import {DialogText} from "./dialogText";
+import {Label} from "./label";
 import {SceneState} from "./scene";
 
 interface DialogBoxProps {
@@ -31,7 +31,7 @@ export function DialogBox(props: DialogBoxProps) {
     };
 
     const key = props.dialog.text;
-    const textElement = <DialogText text={key} />;
+    const textElement = <Label text={key} />;
 
     // add a unique key prop to the element to animate,
     // so that the transition group recognizes that the components are changing

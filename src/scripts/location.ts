@@ -24,7 +24,7 @@ export module Location {
         locationData?: Location.Data;
     }
 
-    export function initLocationData(component: React.Component<{ location?: any }, Location.State>): void {
+    export function initLocationState(component: React.Component<{ location?: any }, Location.State>): void {
         component.state = {};
 
         let overrideLat: string = component && component.props && component.props.location && component.props.location.query && component.props.location.query.lat;

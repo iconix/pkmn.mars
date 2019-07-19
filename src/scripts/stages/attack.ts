@@ -1,11 +1,7 @@
-import {Action} from "../battles/action";
 import {BattleCharacter} from "../battles/character";
 
-import {CharacterImage} from "../components/character";
-
 import {Animation} from "../animation";
-import {Constants} from "../constants";
-import {ImageHelper} from "../imageHelper";
+import {Image} from "../image";
 import {Utils} from "../utils";
 
 import {AttackReason} from "./attackReason";
@@ -48,27 +44,27 @@ export class Attack {
         return Attack.Name[this.name].match(/[A-Z][^A-Z]+/g).join(" ");
     }
 
-    public getOpponentImage(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+    public getOpponentImage(stageType: Stage.Type, attackerType: BattleCharacter.Type): Image.Image {
         return this.getImage(BattleCharacter.Type.Opponent, stageType, attackerType);
     }
 
-    public getPlayerImage(stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+    public getPlayerImage(stageType: Stage.Type, attackerType: BattleCharacter.Type): Image.Image {
         return this.getImage(BattleCharacter.Type.Player, stageType, attackerType);
     }
 
-    private getImage(characterType: BattleCharacter.Type, stageType: Stage.Type, attackerType: BattleCharacter.Type): CharacterImage {
+    private getImage(characterType: BattleCharacter.Type, stageType: Stage.Type, attackerType: BattleCharacter.Type): Image.Image {
         // defender is always non-evo
         if (characterType !== attackerType) {
             switch (stageType) {
                 case Stage.Type.BattleStart:
                 case Stage.Type.AttackReason:
                 case Stage.Type.Attack:
-                    return ImageHelper.getGifImage(characterType);
+                    return Image.getGifImage(characterType);
                 default:
                     if (this.resultType === Result.Type.Fainted) {
-                        return ImageHelper.getGifImage(characterType, true);
+                        return Image.getGifImage(characterType, true);
                     }
-                    return ImageHelper.getGifImage(characterType);
+                    return Image.getGifImage(characterType);
             }
         }
 
@@ -77,7 +73,7 @@ export class Attack {
             case Stage.Type.BattleStart:
             case Stage.Type.AttackReason:
             case Stage.Type.Attack:
-                return ImageHelper.getGifImage(characterType);
+                return Image.getGifImage(characterType);
             default:
                 break;
         }
@@ -85,11 +81,11 @@ export class Attack {
         // only the Emoji and Mego Evolution attacks can provide evo
         switch (this.getAttack()) {
             case Attack.Name.Emoji:
-                return ImageHelper.getEmojiImage(characterType);
+                return Image.getEmojiImage(characterType);
             case Attack.Name.Mega:
-                return ImageHelper.getMegaImage(characterType);
+                return Image.getMegaImage(characterType);
             default:
-                return ImageHelper.getGifImage(characterType);
+                return Image.getGifImage(characterType);
         }
     }
 

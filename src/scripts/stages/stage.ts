@@ -1,6 +1,6 @@
-import {Action} from "../battles/action";
+import {Action} from "../action/action";
+
 import {BattleCharacter} from "../battles/character";
-import {Dialog} from "../battles/dialog";
 
 import {Attack} from "../stages/attack";
 import {AttackReason} from "../stages/attackReason";
@@ -12,6 +12,8 @@ import {Animation} from "../animation";
 import {Constants} from "../constants";
 import {Location} from "../location";
 import {Utils} from "../utils";
+
+// TODO: move stages/ under battle/ (formerly battles/)
 
 export module Stage {
     export enum Type {

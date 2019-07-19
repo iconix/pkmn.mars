@@ -1,5 +1,3 @@
-import {CharacterImage} from "../components/character";
-
 import {Level} from "../logging/logger";
 import {LogManager} from "../logging/logManager";
 
@@ -9,12 +7,9 @@ import {FinalDialog} from "../stages/finalDialog";
 import {Result} from "../stages/result";
 import {Stage} from "../stages/stage";
 
-import {Animation} from "../animation";
-import {Constants} from "../constants";
+import {Image} from "../image";
 import {Location} from "../location";
-import {Utils} from "../utils";
 
-import {Action} from "./action";
 import {BattleCharacter} from "./character";
 
 export class Battle {
@@ -51,7 +46,7 @@ export class Battle {
         return this.location;
     }
 
-    public getCharacterImage(characterType: BattleCharacter.Type, stageType: Stage.Type): CharacterImage {
+    public getCharacterImage(characterType: BattleCharacter.Type, stageType: Stage.Type): Image.Image {
         if (characterType === BattleCharacter.Type.Opponent) {
             return this.attack.getOpponentImage(stageType, this.attacker.getType());
         } else {
@@ -62,6 +57,7 @@ export class Battle {
     public getStageFactory(stage: Stage.Type): Stage.Factory {
         let factory: Stage.Factory;
 
+        // TODO: avoid passing in this.attack at every stage
         switch(stage) {
             case Stage.Type.BattleStart:
                 factory = new Stage.BattleStartFactory(this.location, this.attacker, this.defender, this.attack);
